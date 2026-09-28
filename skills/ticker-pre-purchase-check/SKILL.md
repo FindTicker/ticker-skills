@@ -9,7 +9,7 @@ description: Pre-purchase check on one event with Ticker, before the user buys: 
 
 ## Steps
 
-1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`). Pick the row by date and venue; if two rows fit, ask.
+1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC, and an evening show in the Americas falls on the next UTC day. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
 2. **Read the event** with `get_event_analytics`:
@@ -31,13 +31,14 @@ description: Pre-purchase check on one event with Ticker, before the user buys: 
 5. **Check open seats** with `get_event_sections_live` `{"event_id": "<id>", "limit": 60}`. `available: false` means the event has no live seat data: say so and skip. Otherwise report how many seats are open on the primary market (`open_count`) in the sections from step 4, and in the whole house. On Max, `percent_taken` is the share of the section's seats not open on the primary market; it is not a sold count.
    Done when you have the open count for the step 4 sections, or you know there is no live seat data.
 
-6. **Give the verdict** in four lines: trend, cheapest way in, primary against resale (Max) or the resale spread (Pro), and one risk (few days to go, thin listings, a low `data_quality_score`, an old read). End with the event link. Say what the numbers show and which way they lean; the decision is the user's. On Pro the `tm_*` columns come back absent: that is the plan, not missing data.
+6. **Give the verdict** in four lines: trend, cheapest way in, primary against resale (Max, or on Pro the line "The primary market (box office) side of this check needs the Max plan."), and one risk (few days to go, thin listings, a low `data_quality_score`, an old read). End with the event link. Say what the numbers show and which way they lean; the decision is the user's. On Pro the `tm_*` columns come back absent: that is the plan, not missing data.
    Done when every number in the verdict has its read age.
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `last_price_snapshot_date` for daily prices, `tm_asof_at` for primary, `as_of` for live seats, `as_of` inside each section source.
+- The tools call each side of the market a "book". In the answer, say the primary market and resale.
 - Say primary and resale. Name sources only by their code (`vs`, `tm`, `tmr`); name no marketplace.
 - All-in (`lowest_aip_price_current`) is the buyer's final price with fees. Label which one you quote.
 - `percent_taken` and anything that "left" the market are seats no longer on sale. Never call them sold.

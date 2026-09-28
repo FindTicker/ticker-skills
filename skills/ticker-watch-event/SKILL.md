@@ -9,7 +9,7 @@ description: Watch an event on Ticker with the alert the user actually wants: st
 
 ## Steps
 
-1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`). Pick the row by date and venue; if two rows fit, ask.
+1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC, and an evening show in the Americas falls on the next UTC day. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
 2. **Read the trigger catalogue** with `list_watch_triggers` `{}` (free). Each trigger has a `key`, its `params` with `min`, `max` and `default`, and sometimes a `caveat`. A value outside the range is clamped, not refused, so check the range before you write.

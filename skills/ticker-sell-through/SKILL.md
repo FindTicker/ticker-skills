@@ -11,7 +11,7 @@ Taken is the share of a section's counted seats that are not open for sale on th
 
 ## Steps
 
-1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`). Pick the row by date and venue; if two rows fit, ask.
+1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC, and an evening show in the Americas falls on the next UTC day. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
 2. **Read the house** with `get_event_sections_live` `{"event_id": "<id>", "limit": 650}`. If `available` is false, the event has no live seat data: say so and go to step 3. Otherwise add up, over sections with a `capacity`: capacity, `open_count`, and taken = capacity minus open. General admission sections (`is_general_admission: true`) hold a declared allocation; list them apart. `sections_total` is the true section count.
@@ -28,9 +28,10 @@ Taken is the share of a section's counted seats that are not open for sale on th
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `as_of` on live section counts, `tm_asof_at` and `meta.lastMeasuredAt` for primary, `last_price_snapshot_date` for resale.
-- Never write sold, sold out, or percent sold. Write taken, open, available.
+- The tools call each side of the market a "book". In the answer, say the primary market and resale.
+- Write taken, open and available. Never write sold, unsold, sold out or percent sold.
 - `sold_or_pulled` counts resale listings that left the market, sold or withdrawn; its average is an asking price. Never a sales count.
 - Link the event with `event_url`. Say primary and resale; name no marketplace.
 

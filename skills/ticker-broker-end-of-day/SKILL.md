@@ -29,7 +29,7 @@ description: End-of-day review on Ticker of the user's own watchlist and saved V
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `last_price_snapshot_date` on analytics rows, `matched_at` on Matches.
 - Delivery truth: an alert went out only when a Match has `delivery_status: "sent"`. Never infer it from a timestamp.
 - Absorbed or delisted listings are listings that left the market, not sales.

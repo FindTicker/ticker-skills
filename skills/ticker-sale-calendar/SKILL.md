@@ -20,7 +20,7 @@ Only events that state a sale date can be on the calendar. Most events state non
    - A city: no tool filters the catalogue by city, and the screener only sees events that already have prices, so this branch pages the whole catalogue and costs many calls. Say so, and offer a venue or an act first. If the user still wants the city: `search_events` `{"onsale_from": from, "onsale_to": to, "sort_by": "onsale_date", "limit": 40, "page": n}` for n = 1 to 5, keeping rows whose `venue.city` is the city or its metro (Chicago is also Rosemont and Evanston); the same for presales. After 5 pages each, stop and say the calendar is partial.
    Done when you hold the list of events with a presale or on-sale inside the window, or know it is empty.
 
-3. **Read the named windows** with `get_event_sale_windows` `{"event_id": "<id>"}` for each event, at most 15 (the soonest first). `presales` are the event's own named windows, oldest first; `end: null` means the window runs to the event. `onsale` is the public window.
+3. **Read the named windows** with `get_event_sale_windows` `{"event_id": "<id>"}` for each event, at most 15 (the soonest first); past 15, list the rest with their dates from step 2 and say their named windows were not read. `presales` are the event's own named windows, oldest first; `end: null` means the window runs to the event. `onsale` is the public window.
    Done when each listed event has its windows, or you have said which ones you did not read.
 
 4. **Report a calendar** ordered by start time: date and time with timezone, window name quoted exactly as the event states it (for example "Artist Presale"), event, venue, link. Put presales and the public on-sale on separate lines.

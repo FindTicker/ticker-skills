@@ -38,7 +38,7 @@ Demand on Ticker is shopping pressure: people viewing listings (Interest) and re
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `rank_asof_date` for ranks, `demand_asof_date` for Interest and Sales, `last_price_snapshot_date` for prices.
 - Interest and Sales are levels of a rolling window. Read day-over-day change as momentum; never write "X tickets sold today".
 - Performer Interest is its own reading across the catalogue, not a sum of its events.
