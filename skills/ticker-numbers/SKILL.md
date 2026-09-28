@@ -12,7 +12,7 @@ description: How Ticker's numbers are made, so an answer never overstates freshn
 1. **Name the number.** Find which figure the question is about (a price, a count, a rank, a seat state) and which event, performer or View it belongs to.
    Done when you can name the field or term.
 
-2. **Fetch its stamp** when the question is about one event: `get_event_analytics` `{"event_id": "<id>", "columns": ["<field>", "last_price_snapshot_date", "computed_at", "demand_asof_date", "tm_asof_at"]}`, or the tool that produced the number. Every figure has a stamp beside it; the read age is now minus that stamp.
+2. **Fetch its stamp** when the question is about one event: `get_event_analytics` `{"event_id": "<id>", "columns": ["<field>", "last_price_snapshot_date", "computed_at", "demand_asof_date", "tm_asof_at"]}`, or the tool that produced the number. Every figure has a stamp beside it. Quote the stamp itself ("computed 05:30 UTC today"); state an age in hours only when you know the current time.
    Done when you hold the stamp, or the question is general.
 
 3. **Answer from the reference below**: what the number is, where it comes from, its read age, and what it cannot tell.
@@ -35,7 +35,7 @@ description: How Ticker's numbers are made, so an answer never overstates freshn
 
 A row whose `last_price_snapshot_date` is more than a day old is not a move today. `partial_row: true` means a hollow row: its nulls are unknown, not zero.
 
-**Prices.** List prices exclude fees; all-in (`*_aip_*`) is the buyer's final price. Median, lowest, p25 and p75 are over the listings of the latest reading. Never blend a primary and a resale series.
+**Prices.** List prices exclude fees; all-in (`*_aip_*`) is the buyer's final price. On an analytics row, median, lowest, p25 and p75 are over the listings of the day's latest reading. On a daily chart row, median and p25/p75 are the mean of that day's readings and lowest is the day's low. Never blend a primary and a resale series.
 
 **Words that must not become "sold".**
 - Taken: the share of a section's seats not open on the primary market now. Sold, held back, killed and not yet released all count the same.
