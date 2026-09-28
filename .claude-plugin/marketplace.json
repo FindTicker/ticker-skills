@@ -1,0 +1,12 @@
+{
+  "name": "ticker",
+  "description": "Ticker's skills and MCP server for AI assistants.",
+  "owner": { "name": "Ticker", "url": "https://findticker.com" },
+  "plugins": [
+    {
+      "name": "ticker",
+      "source": "./",
+      "description": "Skills for Ticker's workflows, bundled with the Ticker MCP server."
+    }
+  ]
+}

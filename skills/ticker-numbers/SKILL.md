@@ -1,6 +1,6 @@
 ---
 name: ticker-numbers
-description: How Ticker's numbers are made, so an answer never overstates freshness or certainty: sources, read ages, and what taken, absorbed, Gone and Not seen mean. Use when the user asks how fresh a number is, where it comes from, whether something sold, or what a Ticker term means.
+description: How Ticker's numbers are made: sources, read ages, and what taken, absorbed, Gone and Not seen mean. Use when the user asks how fresh a number is, where it comes from, or whether seats sold.
 ---
 
 # How Ticker's numbers are made

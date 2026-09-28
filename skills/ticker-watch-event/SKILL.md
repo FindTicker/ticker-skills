@@ -1,6 +1,6 @@
 ---
 name: ticker-watch-event
-description: Watch an event on Ticker with the alert the user actually wants: star it, arm the right triggers at the right thresholds, and say where alerts will go. Use when the user asks to watch, track or star an event, or to be told when its price or inventory moves.
+description: Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go. Use when the user asks to watch or track an event, or to hear when it moves.
 ---
 
 # Watch an event

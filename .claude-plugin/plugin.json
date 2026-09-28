@@ -1,0 +1,10 @@
+{
+  "name": "ticker",
+  "displayName": "Ticker",
+  "version": "0.1.0",
+  "description": "Ticker's ticket-market workflows for AI assistants: skills that drive the Ticker MCP tools, bundled with the Ticker MCP server.",
+  "author": { "name": "Ticker", "url": "https://findticker.com" },
+  "homepage": "https://findticker.com",
+  "repository": "https://github.com/FindTicker/ticker-skills",
+  "keywords": ["tickets", "events", "ticket prices", "mcp"]
+}
