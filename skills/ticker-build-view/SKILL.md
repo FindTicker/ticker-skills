@@ -26,18 +26,21 @@ A View is a saved screen that runs on a schedule. A Match is one event entering 
 3. **Pick the cadence.** For one event or a narrow screen, `notification_mode: "instant"` (an email per Match). For a broad screen, `notification_mode: "digest"` (one daily email). Bound volume with `max_firings_per_eval` (default 25). Say which you chose and why.
    Done when mode and cap are fixed.
 
-4. **Create it** with `create_view`:
+4. **Check for a twin** with `list_views` `{"limit": 100}`. A View with the same aim or the same predicate already exists: offer `update_view` on it instead of a second one, and stop there unless the user wants both.
+   Done when you know there is no twin, or the user chose.
+
+5. **Create it** with `create_view`:
    ```json
    {"name": "<short name the user will recognise>", "predicate": <p>, "channels": ["email"],
     "notification_mode": "digest", "max_firings_per_eval": 25}
    ```
-   A validation error names the bad leg: fix that leg and call again.
+   A validation error names the bad leg: fix that leg and call again. A refusal for the plan's View allowance is final: tell the user the allowance, and leave any delete to them.
    Done when you hold the new View's `id` and `view_url`.
 
-5. **Read back what it will send** with `get_view_alert_preview` `{"view_id": "<id>"}`. A new View shows 0: its first contents are baseline Matches. `paused: true` means the account has alert email switched off; say so.
+6. **Read back what it will send** with `get_view_alert_preview` `{"view_id": "<id>"}`. A new View shows 0: its first contents are baseline Matches. `paused: true` means the account has alert email switched off; say so.
    Done when you have told the user what the preview says.
 
-6. **Only if the user wants a channel:** `list_destinations`, then `set_view_target` `{"view_id", "delivery_target_id", "cadence": "instant" | "hourly" | "daily"}`. With no destination yet, the user adds one in the app or gives you the channel's posting URL for `create_destination`, which sends a live test message first.
+7. **Only if the user wants a channel:** `list_destinations`, then `set_view_target` `{"view_id", "delivery_target_id", "cadence": "instant" | "hourly" | "daily"}`. With no destination yet, the user adds one in the app or gives you the channel's posting URL for `create_destination`, which sends a live test message first.
    Done when `list_view_targets` shows the destination on this View.
 
 ## Reporting rules

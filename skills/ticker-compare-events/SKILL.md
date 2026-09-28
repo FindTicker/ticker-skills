@@ -9,7 +9,7 @@ description: Compare two events side by side on Ticker, or two dates of the same
 
 ## Steps
 
-1. **Find both events.** Use ids you already have. Otherwise call `search_events` with `search` set to ONE name (the act, the team or the venue, never two together) and `date_from`/`date_to` as full ISO date-times spanning both dates (`2026-10-09T00:00:00Z`). For two dates of one tour, one search lists them all; pick the two named.
+1. **Find both events.** Use ids you already have. Otherwise call `search_events` with `search` set to ONE name (the act, the team or the venue, never two together) and `date_from`/`date_to` as full ISO date-times spanning both dates plus one day after the last (`2026-10-09T00:00:00Z` to `2026-10-11T23:59:59Z`): the filter reads UTC, and an evening show in the Americas falls on the next UTC day. For two dates of one tour, one search lists them all; pick the two named.
    Done when you hold two `event_id`s and each one's name, date and venue.
 
 2. **Read both** with `get_event_analytics`, one call each, the same columns:
@@ -34,8 +34,9 @@ description: Compare two events side by side on Ticker, or two dates of the same
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `last_price_snapshot_date`, `tm_asof_at`, and `as_of` inside each section source. If the two reads have different dates, say so; do not compare a stale row with a fresh one as if they were the same day.
+- The tools call each side of the market a "book". In the answer, say the primary market and resale.
 - Never blend price bases: list price before fees, all-in with fees, primary face value. Label each row.
 - Link both events with `event_url`. Name no marketplace.
 

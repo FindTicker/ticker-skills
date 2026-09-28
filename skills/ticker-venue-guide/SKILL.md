@@ -31,9 +31,10 @@ Get-in is the lowest price to enter an event: the lowest listed resale price bef
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read age: `as_of` on live sections and inside each section source, and the date on each schedule row.
 - A capacity is seats in the room this event sells. Stage layouts differ, so two events at one venue can differ.
+- The tools call each side of the market a "book". In the answer, say the primary market and resale.
 - Say primary and resale; name sources only by their code (`vs`, `tm`); name no marketplace. Link events with `event_url`.
 
 ## Example

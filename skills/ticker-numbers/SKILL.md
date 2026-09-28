@@ -12,15 +12,15 @@ description: How Ticker's numbers are made, so an answer never overstates freshn
 1. **Name the number.** Find which figure the question is about (a price, a count, a rank, a seat state) and which event, performer or View it belongs to.
    Done when you can name the field or term.
 
-2. **Fetch its stamp** when the question is about one event: `get_event_analytics` `{"event_id": "<id>", "columns": ["<field>", "last_price_snapshot_date", "computed_at", "demand_asof_date", "tm_asof_at"]}`, or the tool that produced the number. Every figure has a stamp beside it. Quote the stamp itself ("computed 05:30 UTC today"); state an age in hours only when you know the current time.
+2. **Fetch its stamp** when the question is about one event. Find the event with `search_events` and ONE name in `search` (the act, team or venue, never two together), then call `get_event_analytics` `{"event_id": "<id>", "columns": ["<field>", "last_price_snapshot_date", "computed_at", "demand_asof_date", "tm_asof_at"]}`, or the tool that produced the number. Every figure has a stamp beside it. Quote the stamp itself ("computed 05:30 UTC today"). Give the stamp, not an age in hours: you do not know the current time.
    Done when you hold the stamp, or the question is general.
 
-3. **Answer from the reference below**: what the number is, where it comes from, its read age, and what it cannot tell.
+3. **Answer from the reference below**: what the number is, where it comes from, its stamp, and what it cannot tell.
    Done when the answer states all four.
 
 ## Reference
 
-**Sources.** Two sides of the market: primary (the box office) and resale. Tools name sources by code: `vs` and `tp` resale, `tm` primary, `tmr` primary's resale twin, `gt` and `sg` resale quoted all-in. Pro reads `vs` and `tp`; Max adds `tm`, `tmr`, `gt` and `sg`; Ultra adds one more. A source above the plan is refused by name or left out of the answer. Name no marketplace; say primary or resale, or the code.
+**Sources.** Two sides of the market: primary (the box office) and resale. The tools call each side a "book"; in the answer, say the primary market and resale. Tools name sources by code: `vs` and `tp` resale, `tm` primary, `tmr` primary's resale twin, `gt` and `sg` resale quoted all-in. Pro reads `vs` and `tp`; Max adds `tm`, `tmr`, `gt` and `sg`; Ultra adds one more. A source above the plan is refused by name or left out of the answer. Name no marketplace; say primary or resale, or the code.
 
 **Stamps.** How often a number is read differs by event (coverage tier 1 is read most often), so never assume a cadence: read the stamp.
 

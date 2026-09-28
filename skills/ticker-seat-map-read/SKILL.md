@@ -11,7 +11,7 @@ The seat map reads the primary market's seat log. Many events have none; then ev
 
 ## Steps
 
-1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`). Pick the row by date and venue; if two rows fit, ask.
+1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC, and an evening show in the Americas falls on the next UTC day. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
 2. **Read the house now** with `get_event_sections_at` `{"event_id": "<id>"}`. If `available` is false, stop and say this event has no live seat data. Keep each section's `open_count` and `observed_at`.
@@ -23,16 +23,19 @@ The seat map reads the primary market's seat log. Many events have none; then ev
 4. **Read what just moved** with `get_event_seats_recent` `{"event_id": "<id>", "minutes": 120, "limit": 100}`. `kind: "open"` is a seat that came on sale, `close` one that left sale (sold or held back; the row does not say which). `republish: true` is a re-listing at a new price, so a burst of them is a price move, not demand.
    Done when you can name the sections where seats opened in the last two hours, or say none did.
 
-5. **On Max, draw the biggest mover** (skip on Pro) with `get_event_section_series` `{"event_id": "<id>", "section": "<code>", "bucket": "1h"}`. `open_count` is exact at every point; the prices are exact only on the newest point, so quote only that one.
-   Done when you can say whether the drain was steady or one step.
+5. **On Max, add the share taken** of the drained sections with `get_event_sections_live` `{"event_id": "<id>", "sections": ["<code>", ...]}` (the five from step 3). `percent_taken` is capacity minus open seats as a share of capacity; on Pro the field is absent, so skip this step.
+   Done when each drained section has its share taken, or you are on Pro.
 
-6. **Report**: drained sections (before, now, change), filled sections, where seats opened recently, and on Max the share taken per drained section from `get_event_sections_live`. Close with the event link.
+   When the user asks how one section moved over time, `get_event_section_series` `{"event_id": "<id>", "section": "<code>", "bucket": "1h"}` draws it (Max): `open_count` is exact at every point, the prices only on the newest point.
+
+6. **Report**: drained sections (before, now, change, and on Max the share taken), filled sections, where seats opened recently. Close with the event link.
    Done when every count carries its read age.
 
 ## Reporting rules
 
-- Quote each stamp as the tool gave it ("observed 04:55 UTC"). State an age in hours only when you know the current time.
+- Quote each stamp as the tool gave it ("observed 04:55 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every count carries its read age: `observed_at` on each section from `get_event_sections_at` (a count is carried forward from that reading), `at` on each recent seat move, `as_of` on live section counts.
+- The tools call each side of the market a "book". In the answer, say the primary market and resale.
 - Taken is the share of a section's seats not open on the primary market right now. A seat held back, withdrawn or sold all count the same. Never write "sold".
 - On the app's seat map, "Gone" is a seat seen leaving sale in the last six hours; "Not seen" is one whose last sighting off sale is older than that. Use the same words.
 - Link the event with its `event_url` (`https://findticker.com/events/<event_id>`). Name no marketplace.
