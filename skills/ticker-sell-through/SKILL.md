@@ -1,6 +1,6 @@
 ---
 name: ticker-sell-through
-description: Sell-through read for one event on Ticker, for a promoter or venue: the share of seats taken on the primary market, primary against resale supply, and pace against days to go. Use when the user asks how an event is selling through, how full a house is, or how the box office compares with resale.
+description: Sell-through read for one event on Ticker: share of seats taken on the primary market, primary against resale, pace against days to go. Use when a promoter or venue asks how a show is selling.
 ---
 
 # Sell-through read

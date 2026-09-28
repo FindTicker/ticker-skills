@@ -1,6 +1,6 @@
 ---
 name: ticker-performer-demand
-description: Performer demand read on Ticker: rank and its trend, upcoming dates, and which cities are hot for one act or team. Use when the user asks how an artist or team is selling, whether demand is rising, or where their shows are hottest.
+description: Performer demand read on Ticker: rank and trend, upcoming dates and hottest cities for one act or team. Use when the user asks how an artist or team is selling, or where demand is rising.
 ---
 
 # Performer demand read

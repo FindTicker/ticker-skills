@@ -1,6 +1,6 @@
 ---
 name: ticker-pre-purchase-check
-description: Pre-purchase check on one event with Ticker, before the user buys: price trend, get-in by section, primary against resale, and how many seats are open. Use when the user asks whether to buy now, whether a price is fair, or where the cheapest way in is.
+description: Pre-purchase check on one event with Ticker: price trend, get-in by section, primary against resale, open seats. Use when the user asks whether to buy now or wait, or for the cheapest way in.
 ---
 
 # Pre-purchase check

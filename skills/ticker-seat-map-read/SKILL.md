@@ -1,6 +1,6 @@
 ---
 name: ticker-seat-map-read
-description: Seat map read for one event on Ticker: which sections drained or filled in the last 24 hours and where seats just opened. Use when the user asks what moved on the seat map, which sections are selling down, or where new seats appeared.
+description: Seat map read for one event on Ticker: sections that drained or filled in 24 hours and where seats just opened. Use when the user asks what moved on the seat map or which sections are selling down.
 ---
 
 # Seat map read

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ticker": {
+      "type": "http",
+      "url": "https://api.findticker.com/mcp"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ---
 name: ticker-venue-guide
-description: Venue guide from Ticker for one room: its capacity, how its sections are named, where the get-in price sits, and what is on there next. Use when the user asks about a venue, its sections or seating, or what the cheapest way into that room usually is.
+description: Venue guide from Ticker for one room: capacity, how sections are named, where the get-in price sits, what is on next. Use when the user asks about a venue, its seating or its cheapest way in.
 ---
 
 # Venue guide
