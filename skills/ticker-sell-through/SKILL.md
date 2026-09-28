@@ -33,7 +33,7 @@ Taken is the share of a section's counted seats that are not open for sale on th
 - The tools call each side of the market a "book". In the answer, say the primary market and resale.
 - Write taken, open and available. Never write sold, unsold, sold out or percent sold.
 - `sold_or_pulled` counts resale listings that left the market, sold or withdrawn; its average is an asking price. Never a sales count.
-- Link the event with `event_url`. Say primary and resale; name no marketplace.
+- Link the event with `event_url`. Name no marketplace.
 
 ## Example
 
