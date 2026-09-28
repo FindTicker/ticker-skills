@@ -12,7 +12,7 @@ description: End-of-day review on Ticker of the user's own watchlist and saved V
 1. **Read the watchlist** with `list_watchlist` `{"limit": 100, "sort": "last_matched_at", "order": "desc"}`. Each row carries the event's current numbers, its armed triggers and how many alerts it produced. An empty watchlist is an answer; say so.
    Done when you hold every watched event, or know there are none.
 
-2. **Read today's Matches** with `list_matches` `{"since": "<start of the user's day, ISO 8601 with offset>", "limit": 100}`. `origin: "live"` is an event that entered a View through a market change; `origin: "baseline"` was recorded when a View learned its contents and is never an alert. Count live Matches per View.
+2. **Read today's Matches** with `list_matches` `{"since": "<start of the user's day in UTC, e.g. 2026-09-28T04:00:00Z>", "limit": 25}`. `since` takes UTC with a `Z` only; an offset such as `-04:00` is refused. A busy account has hundreds of Matches a day and one large page overflows the answer, so page with `page` or narrow with `view_id`, and stop after 4 pages. `origin: "live"` is an event that entered a View through a market change; `origin: "baseline"` was recorded when a View learned its contents and is never an alert. Count live Matches per View. Each Match row carries `signals` (the numbers that made it match); use them before reading anything else.
    Done when you hold the live Matches of the day by View, or know there are none.
 
 3. **Read the Views** with `list_views` `{"limit": 100}` for their names, whether each is `enabled`, and `recent_match_count` (live Matches in 7 days). A View with a large `member_count` and zero recent Matches is holding steady, not broken.
@@ -29,6 +29,7 @@ description: End-of-day review on Ticker of the user's own watchlist and saved V
 
 ## Reporting rules
 
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
 - Every number carries its read age: `last_price_snapshot_date` on analytics rows, `matched_at` on Matches.
 - Delivery truth: an alert went out only when a Match has `delivery_status: "sent"`. Never infer it from a timestamp.
 - Absorbed or delisted listings are listings that left the market, not sales.

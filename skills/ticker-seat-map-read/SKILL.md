@@ -11,19 +11,19 @@ The seat map reads the primary market's seat log. Many events have none; then ev
 
 ## Steps
 
-1. **Find the event.** Use the `event_id` the user or an earlier tool gave you; otherwise `search_events` with `search` and `status: "active"`.
+1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`). Pick the row by date and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
 2. **Read the house now** with `get_event_sections_at` `{"event_id": "<id>"}`. If `available` is false, stop and say this event has no live seat data. Keep each section's `open_count` and `observed_at`.
    Done when you hold the current open count per section, or you stopped.
 
-3. **Read the house 24 hours ago** with `get_event_sections_at` `{"event_id": "<id>", "at": "<now minus 24 hours, ISO 8601>"}`. Subtract per section: a fall in `open_count` is a section that drained, a rise is a section that filled. A section absent at one time has no reading then; leave it out of the subtraction. `total` is null when some sections were not read; add the read sections yourself if you need a house total, and say it is partial.
+3. **Read the house 24 hours ago** with `get_event_sections_at` `{"event_id": "<id>", "at": "<the at from step 2, minus 24 hours>"}`. Step 2 returns `at`, the instant it read; subtract exactly 24 hours from it. Subtract per section: a fall in `open_count` is a section that drained, a rise is a section that filled. A section absent at one time has no reading then; leave it out of the subtraction. `total` is null when some sections were not read; add the read sections yourself if you need a house total, and say it is partial.
    Done when you hold the five largest drains and the five largest fills.
 
 4. **Read what just moved** with `get_event_seats_recent` `{"event_id": "<id>", "minutes": 120, "limit": 100}`. `kind: "open"` is a seat that came on sale, `close` one that left sale (sold or held back; the row does not say which). `republish: true` is a re-listing at a new price, so a burst of them is a price move, not demand.
    Done when you can name the sections where seats opened in the last two hours, or say none did.
 
-5. **On Max only, draw the biggest mover** with `get_event_section_series` `{"event_id": "<id>", "section": "<code>", "bucket": "1h"}`. `open_count` is exact at every point; the prices are exact only on the newest point, so quote only that one.
+5. **On Max, draw the biggest mover** (skip on Pro) with `get_event_section_series` `{"event_id": "<id>", "section": "<code>", "bucket": "1h"}`. `open_count` is exact at every point; the prices are exact only on the newest point, so quote only that one.
    Done when you can say whether the drain was steady or one step.
 
 6. **Report**: drained sections (before, now, change), filled sections, where seats opened recently, and on Max the share taken per drained section from `get_event_sections_live`. Close with the event link.
@@ -31,6 +31,7 @@ The seat map reads the primary market's seat log. Many events have none; then ev
 
 ## Reporting rules
 
+- Quote each stamp as the tool gave it ("observed 04:55 UTC"). State an age in hours only when you know the current time.
 - Every count carries its read age: `observed_at` on each section from `get_event_sections_at` (a count is carried forward from that reading), `at` on each recent seat move, `as_of` on live section counts.
 - Taken is the share of a section's seats not open on the primary market right now. A seat held back, withdrawn or sold all count the same. Never write "sold".
 - On the app's seat map, "Gone" is a seat seen leaving sale in the last six hours; "Not seen" is one whose last sighting off sale is older than that. Use the same words.

@@ -42,6 +42,7 @@ description: Underpriced events on Ticker, found by screening a city, a date win
 
 ## Reporting rules
 
+- Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). State an age in hours only when you know the current time.
 - Every number carries its read age: the `last_price_snapshot_date` on the row. Write "median $142, priced 2026-09-28".
 - Link each event with the `event_url` on its row. Every row already carries `event_id` and `event_url`; never search again to find them.
 - Prices here are resale list prices before fees. Name no marketplace.

@@ -1,6 +1,6 @@
 ---
 name: ticker-sale-calendar
-description: Presale and on-sale calendar from Ticker for one performer or one city: what goes on sale when, and the named presale windows before it. Use when the user asks when tickets go on sale, about presales, or what drops this week.
+description: Presale and on-sale calendar from Ticker for one act, venue or city: what goes on sale when, and the named presale windows before it. Use when the user asks when tickets go on sale, about presales, or what drops this week.
 ---
 
 # Sale calendar
@@ -11,12 +11,13 @@ Only events that state a sale date can be on the calendar. Most events state non
 
 ## Steps
 
-1. **Fix the window.** Default: today through 14 days out for a performer, 7 days for a city. Write both ends as ISO 8601 with the user's timezone offset when you know it.
+1. **Fix the window.** Default: today through 14 days out; 7 days for a city. Write both ends as ISO 8601 with the user's timezone offset when you know it.
    Done when you hold `from` and `to`.
 
-2. **Find the events.**
+2. **Find the events.** All dates below are full ISO date-times; a bare date is refused.
    - A performer: `search_events` `{"search": "<act>", "onsale_from": from, "onsale_to": to, "sort_by": "onsale_date", "limit": 50}`, then again with `presale_from`/`presale_to` and `"sort_by": "presale1_date"`. Merge the two lists by `event_id`.
-   - A city: `search_events` has no city filter and the screener only sees events that already have prices, so page the catalogue by sale window and keep the city yourself. Call `search_events` `{"onsale_from": from, "onsale_to": to, "sort_by": "onsale_date", "limit": 40, "page": n}` for n = 1, 2, 3... and keep rows whose `venue.city` is the city (a metro spans several cities: Chicago is also Rosemont and Evanston). A page cut short says `meta.truncated`; lower `limit` rather than repeat it. Stop at the last page or after 10 pages; past 10, say the calendar is partial and offer a shorter window. Do the same with `presale_from`/`presale_to` when the user asked about presales.
+   - A venue: the same two calls with `venue_id` from `find_venue` in place of `search`.
+   - A city: no tool filters the catalogue by city, and the screener only sees events that already have prices, so this branch pages the whole catalogue and costs many calls. Say so, and offer a venue or an act first. If the user still wants the city: `search_events` `{"onsale_from": from, "onsale_to": to, "sort_by": "onsale_date", "limit": 40, "page": n}` for n = 1 to 5, keeping rows whose `venue.city` is the city or its metro (Chicago is also Rosemont and Evanston); the same for presales. After 5 pages each, stop and say the calendar is partial.
    Done when you hold the list of events with a presale or on-sale inside the window, or know it is empty.
 
 3. **Read the named windows** with `get_event_sale_windows` `{"event_id": "<id>"}` for each event, at most 15 (the soonest first). `presales` are the event's own named windows, oldest first; `end: null` means the window runs to the event. `onsale` is the public window.
@@ -27,16 +28,17 @@ Only events that state a sale date can be on the calendar. Most events state non
 
 ## Reporting rules
 
-- Quote window names verbatim; they are the event's words, not a Ticker category.
+- Quote window names verbatim, as the tool served them, even when a name carries a brand; they are the event's words, not a Ticker category. Add no marketplace name of your own.
 - Times from the tools are UTC (`Z`). Convert to the venue's local time, which `local_date` shows with its offset, and say which zone you used.
+- Check each weekday against today's date before you write it.
 - Say how many events you found and that events stating no date cannot appear.
-- Name no marketplace; link with `event_url`.
+- Link each event with `event_url`.
 
 ## Example
 
-User: "What's going on sale in Chicago this week?"
+User: "When do Lizzy McAlpine tickets go on sale? Any presales?"
 
-`search_events` pages over the 7-day on-sale window, rows kept where `venue.city` is Chicago, `get_event_sale_windows` for each, then:
+`search_events` with the act and the 14-day on-sale window, then with the presale window; `get_event_sale_windows` for each hit, then:
 
-- Tue Sep 29, 10:00 CT: "Artist Presale", Event A at Venue B ([link](https://findticker.com/events/ev...))
-- Fri Oct 2, 10:00 CT: public on-sale, Event A
+- Wed Sep 30, 10:00 CT: "Artist Presale Wave 1", Lizzy McAlpine at United Center, Chicago ([link](https://findticker.com/events/ev...))
+- Fri Oct 2, 10:00 CT: public on-sale, same event
