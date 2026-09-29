@@ -58,7 +58,7 @@ docs/distribution.md              this page
 - One `skills/` folder is the single source. `npx skills`, Codex, Cursor, Copilot and Gemini read it as it is, and the OpenAI Skills step takes a ZIP of it.
 - The Claude plugin manifests are the only bundle format tested here, and Claude is where a plugin brings the MCP server with it in one install.
 - No Agent Plugins `plugin.json` or `mcp.json` at the root yet: it is untested, and no vendor documents the two manifests side by side. OpenAI converts `.claude-plugin/plugin.json` when a Claude plugin is submitted.
-- The skill names carry a `ticker-` prefix, so a user who installs them next to other skills with `npx skills` sees no name clash.
+- The skill names carry no product prefix: each name says what the skill does. The product is in two other places. Each description names Ticker, and the description is what an assistant reads to pick a skill. A Claude plugin shows each skill under the plugin's name (`ticker:numbers`), so there it cannot clash with a skill of another maker. Where skills are copied as bare folders (`npx skills`, `.claude/skills/`, `.agents/skills/`), one directory cannot hold two folders with one name, so a short name such as `numbers` can meet a skill of another maker with the same name. Decision 5 below lists those names.
 
 ## Decisions for alim
 
@@ -70,3 +70,13 @@ docs/distribution.md              this page
 2. **A licence.** The Claude directory needs one; none is in the repository yet.
 3. **The day the repository goes public.** Needed before any directory listing goes live and before `npx skills add` or the Claude Code marketplace works for people outside the organisation.
 4. **Where skills show in the app.** Not decided and not in this work.
+5. **Names that another maker may also use.** The names stay plain unless alim picks a second name. These six are common words in other fields; each has a second name ready:
+
+   | Name | Where else it is used | Second name |
+   |---|---|---|
+   | `numbers` | GitHub code search finds four public skills with exactly this name (2026-09-29) | `how-numbers-are-made` |
+   | `build-view` | Building a UI view or a database view | `build-alert-view` |
+   | `venue-guide` | Travel, weddings, conference venues | `venue-seating-guide` |
+   | `sell-through` | Retail stock; GitHub code search finds two public retail skills whose names start with it | `event-sell-through` |
+   | `watch-event` | Error and log events; GitHub code search finds a public skill named `watch-events` | `watch-event-price` |
+   | `compare-events` | Product analytics events | `compare-event-prices` |
