@@ -1,5 +1,5 @@
 ---
-name: ticker-watch-event
+name: watch-event
 description: Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go. Use when the user asks to watch or track an event, or to hear when it moves.
 ---
 
@@ -16,7 +16,7 @@ description: Watch an event on Ticker with the alert the user wants: star it, ar
    Done when you know which keys and params express the user's wish.
 
 3. **Map the wish to triggers.** Common asks:
-   - "price drops 10%": `pct_move` enabled, `params: {"metric": "lowest", "window": "1d", "threshold": 10}` (use `median` when the user means the typical price, `7d` for a weekly move). It fires on a move either way; there is no drop-only setting, so tell the user a 10% rise alerts too. For drops only, offer a saved View on this event instead (the `ticker-build-view` skill).
+   - "price drops 10%": `pct_move` enabled, `params: {"metric": "lowest", "window": "1d", "threshold": 10}` (use `median` when the user means the typical price, `7d` for a weekly move). It fires on a move either way; there is no drop-only setting, so tell the user a 10% rise alerts too. For drops only, offer a saved View on this event instead (the `build-view` skill).
    - "anything unusual": `price_z` enabled (on by default, `threshold` is the sensitivity).
    - "tickets disappearing": `absorption`; say its caveat: listings leaving are not confirmed sales.
    - "on-sale, presale, event week, low inventory": `lifecycle` (on by default).

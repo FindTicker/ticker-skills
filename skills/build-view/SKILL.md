@@ -1,5 +1,5 @@
 ---
-name: ticker-build-view
+name: build-view
 description: Build a saved View on Ticker that alerts on a price drop or listing collapse, tested on today's market, at the right cadence. Use when the user wants alerts whenever events match a condition.
 ---
 

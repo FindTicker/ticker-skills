@@ -1,5 +1,5 @@
 ---
-name: ticker-underpriced-events
+name: underpriced-events
 description: Underpriced events on Ticker: screen a city, date window or category for prices falling against their peers. Use for cheap, undervalued or below-peer events, or deals this weekend.
 ---
 

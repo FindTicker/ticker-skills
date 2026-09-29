@@ -32,7 +32,7 @@ One string on the ticket, "Drop a skill ZIP or folder here", is from the OpenAI 
 
 ## Limits that shaped the files
 
-- **Name:** lowercase letters, digits and hyphens, at most 64 characters, equal to the folder name (the open format). OpenAI also caps `plugin-name:skill-name` at 64: `ticker:ticker-underpriced-events` is 32.
+- **Name:** lowercase letters, digits and hyphens, at most 64 characters, equal to the folder name (the open format). OpenAI also caps `plugin-name:skill-name` at 64: the longest here, `ticker:underpriced-events`, is 25.
 - **Description:** at most 1,024 characters in the open format, claude.com and OpenAI. An older Claude help article still says 200, so every description here is 200 or fewer.
 - **Body:** under 500 lines is the open format's advice. Ours run 42 to 60 lines.
 - **Claude plugin:** no top-level `bin/` (chat and Cowork refuse the whole plugin); a README of at least 40 words and a LICENSE to be listed; the repository must be public before the listing goes live.
@@ -41,7 +41,7 @@ One string on the ticket, "Drop a skill ZIP or folder here", is from the OpenAI 
 ## What was tested here
 
 - Each skill was run by Claude Code in print mode, from one user prompt, with the 12 skills in `.claude/skills/` and the Ticker MCP server as the only tools. Reads ran as test accounts on the development deployment; writes ran on a private local copy of the backend. Transcripts are in `evidence/`.
-- `claude --plugin-dir .` on this repository loaded all 12 skills as `ticker:ticker-...`. The plugin's MCP half (`.mcp.json`) was not started in that test, because starting it would also start the tester's own MCP servers; Claude Code's documentation says a plugin's MCP servers start when the plugin is enabled.
+- `claude --plugin-dir .` on this repository loaded all 12 skills under the plugin's name, from `ticker:broker-end-of-day` to `ticker:watch-event` (Claude Code 2.1.284, 2026-09-29). The plugin's MCP half (`.mcp.json`) was not started in that test, because starting it would also start the tester's own MCP servers; Claude Code's documentation says a plugin's MCP servers start when the plugin is enabled.
 - Not tested: a claude.ai upload, the OpenAI portal, Cursor, Codex, Copilot and Gemini.
 
 ## The layout chosen, and why

@@ -1,5 +1,5 @@
 ---
-name: ticker-sale-calendar
+name: sale-calendar
 description: Presale and on-sale calendar from Ticker for one act, venue or city, with the named presale windows. Use when the user asks when tickets go on sale, about presales, or what drops this week.
 ---
 

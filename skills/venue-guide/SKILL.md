@@ -1,5 +1,5 @@
 ---
-name: ticker-venue-guide
+name: venue-guide
 description: Venue guide from Ticker for one room: capacity, how sections are named, where the get-in price sits, what is on next. Use when the user asks about a venue, its seating or its cheapest way in.
 ---
 

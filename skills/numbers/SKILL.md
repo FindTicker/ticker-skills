@@ -1,5 +1,5 @@
 ---
-name: ticker-numbers
+name: numbers
 description: How Ticker's numbers are made: sources, read ages, and what taken, absorbed, Gone and Not seen mean. Use when the user asks how fresh a number is, where it comes from, or whether seats sold.
 ---
 

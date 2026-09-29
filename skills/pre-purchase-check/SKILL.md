@@ -1,5 +1,5 @@
 ---
-name: ticker-pre-purchase-check
+name: pre-purchase-check
 description: Pre-purchase check on one event with Ticker: price trend, get-in by section, primary against resale, open seats. Use when the user asks whether to buy now or wait, or for the cheapest way in.
 ---
 

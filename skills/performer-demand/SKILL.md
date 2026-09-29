@@ -1,5 +1,5 @@
 ---
-name: ticker-performer-demand
+name: performer-demand
 description: Performer demand read on Ticker: rank and trend, upcoming dates and hottest cities for one act or team. Use when the user asks how an artist or team is selling, or where demand is rising.
 ---
 
