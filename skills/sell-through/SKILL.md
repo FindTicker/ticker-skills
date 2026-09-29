@@ -1,5 +1,5 @@
 ---
-name: ticker-sell-through
+name: sell-through
 description: Sell-through read for one event on Ticker: share of seats taken on the primary market, primary against resale, pace against days to go. Use when a promoter or venue asks how a show is selling.
 ---
 

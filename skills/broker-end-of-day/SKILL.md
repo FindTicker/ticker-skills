@@ -1,5 +1,5 @@
 ---
-name: ticker-broker-end-of-day
+name: broker-end-of-day
 description: End-of-day review on Ticker of the user's watchlist and saved Views: what moved, what matched, what to act on. Use for a daily recap, or when the user asks what needs attention today.
 ---
 

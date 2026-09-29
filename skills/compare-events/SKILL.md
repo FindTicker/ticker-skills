@@ -1,5 +1,5 @@
 ---
-name: ticker-compare-events
+name: compare-events
 description: Compare two events on Ticker side by side, or two dates of one tour: price, trend, supply, cheapest way in. Use when the user asks which of two shows, games or nights is the better buy.
 ---
 
