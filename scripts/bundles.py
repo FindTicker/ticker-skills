@@ -35,7 +35,9 @@ def skills():
     for f in sorted((ROOT / "skills").glob("*/SKILL.md")):
         text = f.read_text()
         name = re.search(r"^name: (.+)$", text, re.M).group(1).strip()
-        desc = re.search(r"^description: (.+)$", text, re.M).group(1).strip()
+        # quoted in the file: an unquoted ": " is invalid YAML, and strict parsers
+        # (npx skills) skip the whole skill
+        desc = re.search(r"^description: (.+)$", text, re.M).group(1).strip().strip('"')
         plan = re.search(r"^\*\*Plan:\*\* (\w+)$", text, re.M).group(1)
         if plan not in PLANS or name != f.parent.name:
             sys.exit(f"{f}: plan {plan!r} or name {name!r} is wrong")
@@ -68,6 +70,52 @@ def marketplace():
     }
 
 
+def free_readme():
+    """The README inside the two Free ZIPs, the public download.
+
+    Not the repository README: that one names every paid skill and installs from
+    this private repository, which fails for anyone outside the organization.
+    """
+    rows = "\n".join(
+        f"| `{s['name']}` | {s['desc'].split(' Use ')[0].rstrip('.')} |"
+        for s in skills() if s["plan"] == "Free"
+    )
+    return f"""# Ticker skills
+
+Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) MCP tools. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
+
+| Skill | What it does |
+|---|---|
+{rows}
+
+More skills come with a plan: findticker.com/plans
+
+## Install
+
+Every skill needs the Ticker MCP server: `https://api.findticker.com/mcp`. You sign in with your Ticker account the first time; there is no key to paste.
+
+**Claude Code**, from `ticker-plugin.zip` (the skills and the Ticker server as one plugin):
+
+```
+mkdir -p ~/.claude/skills/ticker
+unzip -o ticker-plugin.zip -d ~/.claude/skills/ticker
+```
+
+Then start Claude Code, run `/mcp`, and sign in to Ticker.
+
+**Codex, Cursor, GitHub Copilot, Gemini CLI and others**, from `ticker-skills.zip`:
+
+```
+unzip -o ticker-skills.zip -d ticker-skills
+npx skills add ./ticker-skills
+```
+
+Then add the Ticker MCP server in that assistant's MCP settings.
+
+Every step, and Claude on claude.ai: https://docs.findticker.com/docs/skills
+"""
+
+
 def build():
     dist = ROOT / "dist"
     dist.mkdir(exist_ok=True)
@@ -80,13 +128,19 @@ def build():
         with zipfile.ZipFile(dist / f"{PLUGIN[p]}-plugin.zip", "w", zipfile.ZIP_DEFLATED) as z:
             z.writestr(".claude-plugin/plugin.json", json.dumps(manifest, indent=2) + "\n")
             z.writestr(".mcp.json", json.dumps({"mcpServers": MCP}, indent=2) + "\n")
-            z.write(ROOT / "README.md", "README.md")
+            # the free bundle is public: its own README, never the repository's
+            if p == "Free":
+                z.writestr("README.md", free_readme())
+            else:
+                z.write(ROOT / "README.md", "README.md")
             for n in names:
                 for f in sorted((ROOT / "skills" / n).rglob("*")):
                     if f.is_file():
                         z.write(f, str(f.relative_to(ROOT)))
         # skills only, no .mcp.json: the form a skills upload takes
         with zipfile.ZipFile(dist / f"{PLUGIN[p]}-skills.zip", "w", zipfile.ZIP_DEFLATED) as z:
+            if p == "Free":
+                z.writestr("README.md", free_readme())
             for n in names:
                 for f in sorted((ROOT / "skills" / n).rglob("*")):
                     if f.is_file():

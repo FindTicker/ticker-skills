@@ -1,6 +1,6 @@
 ---
 name: momentum
-description: Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before. Use when a broker asks what is breaking out or has momentum.
+description: "Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before. Use when a broker asks what is breaking out or has momentum."
 ---
 
 # Momentum

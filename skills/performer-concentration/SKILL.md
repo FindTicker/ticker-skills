@@ -1,6 +1,6 @@
 ---
 name: performer-concentration
-description: Seller concentration across one act's upcoming dates on Ticker: which nights a few sellers control and which are spread out. Use when the user asks where sellers hold an act's tour, date by date.
+description: "Seller concentration across one act's upcoming dates on Ticker: which nights a few sellers control and which are spread out. Use when the user asks where sellers hold an act's tour, date by date."
 ---
 
 # Concentration across an act

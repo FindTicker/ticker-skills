@@ -1,6 +1,6 @@
 ---
 name: market-sweep
-description: Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked. Use when a broker asks for the day's full market read.
+description: "Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked. Use when a broker asks for the day's full market read."
 ---
 
 # Market sweep

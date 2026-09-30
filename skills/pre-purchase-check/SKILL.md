@@ -1,6 +1,6 @@
 ---
 name: pre-purchase-check
-description: Pre-purchase check on one event with Ticker: price trend, cheapest sections, primary against resale. Use when the user asks whether to buy now or wait, or for the cheapest way in.
+description: "Pre-purchase check on one event with Ticker: price trend, cheapest sections, primary against resale. Use when the user asks whether to buy now or wait, or for the cheapest way in."
 ---
 
 # Pre-purchase check
