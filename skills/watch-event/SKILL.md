@@ -1,6 +1,6 @@
 ---
 name: watch-event
-description: Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go. Use when the user asks to watch or track an event, or to hear when it moves.
+description: "Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go. Use when the user asks to watch or track an event, or to hear when it moves."
 ---
 
 # Watch an event

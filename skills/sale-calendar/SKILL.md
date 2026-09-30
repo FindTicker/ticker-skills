@@ -1,6 +1,6 @@
 ---
 name: sale-calendar
-description: On-sale and presale calendar on Ticker for one city or one act: which events go on sale or open a presale in the coming days. Use when the user asks when tickets go on sale or when a presale starts.
+description: "On-sale and presale calendar on Ticker for one city or one act: which events go on sale or open a presale in the coming days. Use when the user asks when tickets go on sale or when a presale starts."
 ---
 
 # Sale calendar

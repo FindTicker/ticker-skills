@@ -1,6 +1,6 @@
 ---
 name: numbers
-description: How Ticker's numbers are made: sources, read times, and what taken, absorbed and Gone mean. Use when the user asks how fresh a number is, where it comes from, or whether a count means sales.
+description: "How Ticker's numbers are made: sources, read times, and what taken, absorbed and Gone mean. Use when the user asks how fresh a number is, where it comes from, or whether a count means sales."
 ---
 
 # How Ticker's numbers are made

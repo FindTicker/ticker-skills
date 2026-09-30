@@ -1,6 +1,6 @@
 ---
 name: cooling
-description: Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or which on-sales are soft.
+description: "Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or which on-sales are soft."
 ---
 
 # Cooling

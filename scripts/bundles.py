@@ -35,7 +35,9 @@ def skills():
     for f in sorted((ROOT / "skills").glob("*/SKILL.md")):
         text = f.read_text()
         name = re.search(r"^name: (.+)$", text, re.M).group(1).strip()
-        desc = re.search(r"^description: (.+)$", text, re.M).group(1).strip()
+        # quoted in the file: an unquoted ": " is invalid YAML, and strict parsers
+        # (npx skills) skip the whole skill
+        desc = re.search(r"^description: (.+)$", text, re.M).group(1).strip().strip('"')
         plan = re.search(r"^\*\*Plan:\*\* (\w+)$", text, re.M).group(1)
         if plan not in PLANS or name != f.parent.name:
             sys.exit(f"{f}: plan {plan!r} or name {name!r} is wrong")

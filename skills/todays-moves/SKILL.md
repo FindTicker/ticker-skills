@@ -1,6 +1,6 @@
 ---
 name: todays-moves
-description: Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick. Use when a broker asks what moved today or what their alerts caught.
+description: "Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick. Use when a broker asks what moved today or what their alerts caught."
 ---
 
 # Today's moves

@@ -1,6 +1,6 @@
 ---
 name: primary-gone-and-rising
-description: Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing. Use when only resale is left and the get-in keeps rising.
+description: "Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing. Use when only resale is left and the get-in keeps rising."
 ---
 
 # Primary gone and rising
