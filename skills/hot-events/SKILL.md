@@ -1,6 +1,6 @@
 ---
 name: hot-events
-description: Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling. Use when a broker asks what is hot, where demand runs ahead of supply, or what to buy before it climbs.
+description: "Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling. Use when a broker asks what is hot, where demand runs ahead of supply, or what to buy before it climbs."
 ---
 
 # Hot events

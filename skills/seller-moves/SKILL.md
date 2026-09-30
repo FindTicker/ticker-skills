@@ -1,6 +1,6 @@
 ---
 name: seller-moves
-description: Seller moves on Ticker: which sellers of one event are unloading or loading tickets, hour by hour, over a window you pick. Use when the user asks if a big seller is dumping or stocking up.
+description: "Seller moves on Ticker: which sellers of one event are unloading or loading tickets, hour by hour, over a window you pick. Use when the user asks if a big seller is dumping or stocking up."
 ---
 
 # Seller moves

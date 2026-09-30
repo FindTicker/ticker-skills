@@ -1,6 +1,6 @@
 ---
 name: city-under-price
-description: Events in one city on Ticker, in a date window, that a buyer can get into under a price, fees included. Use when the user asks what is on in a city this weekend or this month under a budget.
+description: "Events in one city on Ticker, in a date window, that a buyer can get into under a price, fees included. Use when the user asks what is on in a city this weekend or this month under a budget."
 ---
 
 # City under a price

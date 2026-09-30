@@ -1,6 +1,6 @@
 ---
 name: who-holds-the-inventory
-description: Who holds one event's resale inventory on Ticker: how many sellers, the largest one's share, and how that moved. Use when the user asks if a few sellers control an event.
+description: "Who holds one event's resale inventory on Ticker: how many sellers, the largest one's share, and how that moved. Use when the user asks if a few sellers control an event."
 ---
 
 # Who holds the inventory

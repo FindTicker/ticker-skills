@@ -1,6 +1,6 @@
 ---
 name: interest-rising
-description: Interest rising on Ticker: events where shopper attention grew over the week and again today. Use when the user asks what people are starting to look at before prices move.
+description: "Interest rising on Ticker: events where shopper attention grew over the week and again today. Use when the user asks what people are starting to look at before prices move."
 ---
 
 # Interest rising

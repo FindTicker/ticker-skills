@@ -1,6 +1,6 @@
 ---
 name: last-week-squeeze
-description: Last-week squeeze on Ticker: events in their final week where resale listings are being absorbed and the lowest price is climbing. Use for late demand, events heating up near the date, or a squeeze.
+description: "Last-week squeeze on Ticker: events in their final week where resale listings are being absorbed and the lowest price is climbing. Use for late demand, events heating up near the date, or a squeeze."
 ---
 
 # Last-week squeeze

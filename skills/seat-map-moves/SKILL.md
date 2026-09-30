@@ -1,6 +1,6 @@
 ---
 name: seat-map-moves
-description: Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day. Use when the user asks where an event is moving or which sections are going.
+description: "Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day. Use when the user asks where an event is moving or which sections are going."
 ---
 
 # Seat map moves

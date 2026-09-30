@@ -1,6 +1,6 @@
 ---
 name: price-drop
-description: Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up. Use when the user asks what is getting cheaper, where prices are falling, or where to buy low.
+description: "Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up. Use when the user asks what is getting cheaper, where prices are falling, or where to buy low."
 ---
 
 # Price drop
