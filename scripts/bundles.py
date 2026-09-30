@@ -10,6 +10,7 @@ usage:
   python3 scripts/bundles.py marketplace      rewrite .claude-plugin/marketplace.json from the plan lines
   python3 scripts/bundles.py check            exit 1 if marketplace.json does not match the plan lines
   python3 scripts/bundles.py build            write dist/<plugin>-plugin.zip and dist/<plugin>-skills.zip for each bundle
+  python3 scripts/bundles.py readme <plan>    the README inside one bundle's two ZIPs
 """
 import json
 import pathlib
@@ -116,6 +117,80 @@ Every step, and Claude on claude.ai: https://docs.findticker.com/docs/skills
 """
 
 
+def paid_readme(plan):
+    """The README inside a paid plan's two ZIPs, which the app serves to accounts on that plan.
+
+    Like free_readme(): only this bundle's skills, no skill of a higher plan, and no
+    install from this private repository.
+    """
+    names = bundle(plan)
+    zips = f"{PLUGIN[plan]}-plugin.zip"
+    below = [PLUGIN[p] for p in PLANS[: PLANS.index(plan)]]
+    rows = "\n".join(
+        f"| {s['plan']} | `{s['name']}` | {s['desc'].split(' Use ')[0].rstrip('.')} |"
+        for s in skills() if s["name"] in names
+    )
+    lows = PLANS[: PLANS.index(plan)]
+    lower = lows[0] if len(lows) == 1 else ", ".join(lows[:-1]) + " and " + lows[-1]
+    more = "" if plan == PLANS[-1] else "\nMore skills come with a higher plan: findticker.com/plans\n"
+    remove = " ".join(f"~/.claude/skills/{b}" for b in below)
+    return f"""# Ticker skills for the {plan} plan
+
+Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) MCP tools. This bundle holds the {len(names)} skills of the {plan} plan: its own and those of the {lower} {"plan" if len(below) == 1 else "plans"}. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
+
+| Plan | Skill | What it does |
+|---|---|---|
+{rows}
+{more}
+## Install
+
+Every skill needs the Ticker MCP server: `https://api.findticker.com/mcp`. You sign in with your Ticker account the first time; there is no key to paste. The Ticker tools follow that account's plan.
+
+**Claude Code**, from `{zips}` (the skills and the Ticker server as one plugin):
+
+```
+rm -rf {remove}
+mkdir -p ~/.claude/skills/{PLUGIN[plan]}
+unzip -o {zips} -d ~/.claude/skills/{PLUGIN[plan]}
+```
+
+The first line removes a Ticker plugin of a lower plan, if you installed one: this bundle holds its skills. Then start Claude Code, run `/mcp`, and sign in to Ticker.
+
+**Claude (claude.ai and the desktop app).** On a paid Claude plan, go to Customize, Plugins, Add, Upload plugin, and pick `{zips}`. The plugin carries the Ticker connector: connect it and sign in to Ticker when Claude asks. On the free Claude plan, upload each folder of `{PLUGIN[plan]}-skills.zip` as its own ZIP under Customize, Skills, and add Ticker as your custom connector.
+
+**Codex, Cursor, GitHub Copilot, Gemini CLI and others**, from `{PLUGIN[plan]}-skills.zip`:
+
+```
+unzip -o {PLUGIN[plan]}-skills.zip -d {PLUGIN[plan]}-skills
+npx skills add ./{PLUGIN[plan]}-skills
+```
+
+Then add the Ticker MCP server in that assistant's MCP settings.
+
+Each assistant, step by step: https://docs.findticker.com/docs/skills
+"""
+
+
+def readme(plan):
+    return free_readme() if plan == "Free" else paid_readme(plan)
+
+
+# a fixed date and mode on every entry: the same commit builds the same bytes, so a
+# vendored ZIP can be checked against a rebuild at the commit it names
+def _put(z, arcname, data):
+    info = zipfile.ZipInfo(arcname, date_time=(1980, 1, 1, 0, 0, 0))
+    info.compress_type = zipfile.ZIP_DEFLATED
+    info.external_attr = 0o644 << 16
+    z.writestr(info, data)
+
+
+def _put_skills(z, names):
+    for n in names:
+        for f in sorted((ROOT / "skills" / n).rglob("*")):
+            if f.is_file():
+                _put(z, str(f.relative_to(ROOT)), f.read_bytes())
+
+
 def build():
     dist = ROOT / "dist"
     dist.mkdir(exist_ok=True)
@@ -125,26 +200,17 @@ def build():
                     "version": "0.2.0", "description": TAGLINE[p],
                     "author": {"name": "Ticker", "url": "https://findticker.com"},
                     "homepage": "https://findticker.com"}
-        with zipfile.ZipFile(dist / f"{PLUGIN[p]}-plugin.zip", "w", zipfile.ZIP_DEFLATED) as z:
-            z.writestr(".claude-plugin/plugin.json", json.dumps(manifest, indent=2) + "\n")
-            z.writestr(".mcp.json", json.dumps({"mcpServers": MCP}, indent=2) + "\n")
-            # the free bundle is public: its own README, never the repository's
-            if p == "Free":
-                z.writestr("README.md", free_readme())
-            else:
-                z.write(ROOT / "README.md", "README.md")
-            for n in names:
-                for f in sorted((ROOT / "skills" / n).rglob("*")):
-                    if f.is_file():
-                        z.write(f, str(f.relative_to(ROOT)))
+        # every ZIP carries its own plan's README, never the repository's: that one names
+        # every skill and installs from this private repository
+        with zipfile.ZipFile(dist / f"{PLUGIN[p]}-plugin.zip", "w") as z:
+            _put(z, ".claude-plugin/plugin.json", json.dumps(manifest, indent=2) + "\n")
+            _put(z, ".mcp.json", json.dumps({"mcpServers": MCP}, indent=2) + "\n")
+            _put(z, "README.md", readme(p))
+            _put_skills(z, names)
         # skills only, no .mcp.json: the form a skills upload takes
-        with zipfile.ZipFile(dist / f"{PLUGIN[p]}-skills.zip", "w", zipfile.ZIP_DEFLATED) as z:
-            if p == "Free":
-                z.writestr("README.md", free_readme())
-            for n in names:
-                for f in sorted((ROOT / "skills" / n).rglob("*")):
-                    if f.is_file():
-                        z.write(f, str(f.relative_to(ROOT)))
+        with zipfile.ZipFile(dist / f"{PLUGIN[p]}-skills.zip", "w") as z:
+            _put(z, "README.md", readme(p))
+            _put_skills(z, names)
         print(f"{PLUGIN[p]}: {len(names)} skills")
 
 
@@ -159,9 +225,18 @@ elif cmd == "list":
     print("\n".join(bundle(sys.argv[2].capitalize())))
 elif cmd == "marketplace":
     path.write_text(json.dumps(marketplace(), indent=2) + "\n")
+elif cmd == "readme":
+    print(readme(sys.argv[2].capitalize()), end="")
 elif cmd == "check":
     ok = json.loads(path.read_text()) == marketplace()
     print("marketplace.json matches the plan lines" if ok else "marketplace.json is stale: run `python3 scripts/bundles.py marketplace`")
+    # a bundle's README names no skill outside the bundle and no install from this repository
+    for p in PLANS:
+        text, inside = readme(p), set(bundle(p))
+        leaks = [s["name"] for s in skills() if s["name"] not in inside and f"`{s['name']}`" in text]
+        if leaks or "FindTicker/ticker-skills" in text:
+            ok = False
+            print(f"{p} README names {leaks or 'this repository'}")
     sys.exit(0 if ok else 1)
 elif cmd == "build":
     build()

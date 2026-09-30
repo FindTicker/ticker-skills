@@ -13,7 +13,7 @@ A skill's plan lives in one place: the `**Plan:**` line of its `SKILL.md`. A bun
 | Max | `ticker-max` | 18 (Pro + 6) | Max accounts |
 | Ultra | `ticker-ultra` | 24 (Max + 6) | Ultra accounts |
 
-`python3 scripts/bundles.py list max` prints the Max bundle. `python3 scripts/bundles.py marketplace` writes the four plugins into `.claude-plugin/marketplace.json`, and `check` fails when that file and the plan lines disagree. `python3 scripts/bundles.py build` writes, for each bundle, a plugin ZIP and a skills-only ZIP into `dist/` (not committed). The two Free ZIPs are the public download (docs.findticker.com/docs/skills) and carry a README of their own, written by `bundles.py`: the six Free skills, the install lines, and no paid skill or private install line.
+`python3 scripts/bundles.py list max` prints the Max bundle. `python3 scripts/bundles.py marketplace` writes the four plugins into `.claude-plugin/marketplace.json`, and `check` fails when that file and the plan lines disagree. `python3 scripts/bundles.py build` writes, for each bundle, a plugin ZIP and a skills-only ZIP into `dist/` (not committed). The two Free ZIPs are the public download (docs.findticker.com/docs/skills); the Ticker app serves the paid ones (ENG-1829). Every ZIP carries a README of its own plan, written by `bundles.py`: that plan's skills, the install lines, and no skill of a higher plan or install from this private repository.
 
 Every skill still checks the account's plan through the tools, because a person can copy a skill folder by hand: a skill run on a lower plan says which plan opens it and runs the closest skill of that plan. The tools enforce the plan either way.
 

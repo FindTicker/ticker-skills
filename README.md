@@ -60,6 +60,15 @@ For a paid plan, name that plan's skills: `python3 scripts/bundles.py list max` 
 
 How each client takes a bundle, and where a client can not do it per plan, is in [`docs/distribution.md`](docs/distribution.md).
 
+## Where the ZIPs are served
+
+`python3 scripts/bundles.py build` writes two ZIPs per plan into `dist/`, each with a README of its own plan (`python3 scripts/bundles.py readme pro` prints one): that plan's skills and install lines, no skill of a higher plan, no install from this repository. The same commit builds the same bytes.
+
+- The two Free ZIPs are public, on docs.findticker.com/docs/skills (`ticker-docs`, `public/skills/`).
+- The six paid ZIPs are served by the Ticker app, Settings, Connect AI, to an account on that plan or above. The backend holds them in `ticker-backend/assets/skills/`, with a `SOURCE` file that names the commit of this repository they were built from.
+
+A change to a skill is not live until the ZIPs are rebuilt and replaced there: a backend PR for the paid ZIPs, a `ticker-docs` PR for the Free ones.
+
 ## How the skills were tested
 
 Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan. The transcripts are in [`evidence/`](evidence/), one folder per skill, with the method and the grades in [`evidence/README.md`](evidence/README.md).
