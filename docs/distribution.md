@@ -1,5 +1,7 @@
 # How the skills reach people, plan by plan
 
+**Replaced on 2026-09-30.** alim decided that the skills go out from this repository, public, installed by link, and that the plan is checked by the Ticker tools, not by the skill files. The marketplace now holds one plugin, `ticker`, with all 24 skills; the README says how each app installs it. The rest of this page is the per-plan design it replaced, kept for its vendor research and its limits.
+
 alim, 2026-09-29: "per plan the skills, need to see which ones go where". Each plan gets its own bundle. This page says, client by client, how an account on each plan gets its bundle today, and where a client can not do it per plan. Vendor documentation read on 2026-09-28 and 2026-09-29; links at the end.
 
 ## The bundles
@@ -45,7 +47,7 @@ Every skill still checks the account's plan through the tools, because a person 
 ## What was tested here
 
 - The four plugins installed from this repository's marketplace into a throwaway Claude Code configuration (Claude Code 2.1.284): `ticker` loaded the Free skills, `ticker-pro` the Pro bundle, `ticker-max` the Max bundle and `ticker-ultra` all of them, each with one MCP server, `ticker`. `claude plugin validate` passed on the marketplace.
-- Each skill was run by Claude Code in print mode from one user prompt, with this repository's skills as the only skills and the Ticker MCP server as the only tools, as the test account of each plan. Transcripts are in `evidence/`.
+- Each skill was run by Claude Code in print mode from one user prompt, with this repository's skills as the only skills and the Ticker MCP server as the only tools, as the test account of each plan.
 - Not tested: a claude.ai upload, the OpenAI portal, Cursor, Codex, Copilot and Gemini.
 
 ## Decisions for alim

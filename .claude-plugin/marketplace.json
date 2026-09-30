@@ -1,6 +1,6 @@
 {
   "name": "ticker",
-  "description": "Ticker's skills and MCP server for AI assistants, one bundle per plan.",
+  "description": "Ticker's skills and MCP server for AI assistants.",
   "owner": {
     "name": "Ticker",
     "url": "https://findticker.com"
@@ -9,89 +9,8 @@
     {
       "name": "ticker",
       "source": "./",
-      "description": "Ticker's free skills: price-drop and last-week screens, a pre-purchase check, and how the numbers are made.",
-      "version": "0.2.0",
-      "homepage": "https://findticker.com",
-      "skills": [
-        "./skills/city-under-price",
-        "./skills/last-week-squeeze",
-        "./skills/numbers",
-        "./skills/pre-purchase-check",
-        "./skills/price-drop",
-        "./skills/sale-calendar"
-      ],
-      "mcpServers": {
-        "ticker": {
-          "type": "http",
-          "url": "https://api.findticker.com/mcp"
-        }
-      }
-    },
-    {
-      "name": "ticker-pro",
-      "source": "./",
-      "description": "Ticker skills for the Pro plan: the free skills, plus watching events and saving screens as Views that alert.",
-      "version": "0.2.0",
-      "homepage": "https://findticker.com",
-      "skills": [
-        "./skills/city-under-price",
-        "./skills/last-week-squeeze",
-        "./skills/numbers",
-        "./skills/pre-purchase-check",
-        "./skills/price-drop",
-        "./skills/sale-calendar",
-        "./skills/build-view",
-        "./skills/interest-rising",
-        "./skills/momentum",
-        "./skills/todays-moves",
-        "./skills/tour-dates",
-        "./skills/watch-event"
-      ],
-      "mcpServers": {
-        "ticker": {
-          "type": "http",
-          "url": "https://api.findticker.com/mcp"
-        }
-      }
-    },
-    {
-      "name": "ticker-max",
-      "source": "./",
-      "description": "Ticker skills for the Max plan: the Pro skills, plus the screens that read the primary market beside resale.",
-      "version": "0.2.0",
-      "homepage": "https://findticker.com",
-      "skills": [
-        "./skills/city-under-price",
-        "./skills/last-week-squeeze",
-        "./skills/numbers",
-        "./skills/pre-purchase-check",
-        "./skills/price-drop",
-        "./skills/sale-calendar",
-        "./skills/build-view",
-        "./skills/interest-rising",
-        "./skills/momentum",
-        "./skills/todays-moves",
-        "./skills/tour-dates",
-        "./skills/watch-event",
-        "./skills/cooling",
-        "./skills/hot-events",
-        "./skills/primary-gone-and-rising",
-        "./skills/resale-above-primary",
-        "./skills/resale-below-primary",
-        "./skills/seat-map-moves"
-      ],
-      "mcpServers": {
-        "ticker": {
-          "type": "http",
-          "url": "https://api.findticker.com/mcp"
-        }
-      }
-    },
-    {
-      "name": "ticker-ultra",
-      "source": "./",
-      "description": "Ticker skills for the Ultra plan: every skill, including who holds an event's inventory.",
-      "version": "0.2.0",
+      "description": "Ticker's broker skills: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. The Ticker tools answer on your plan.",
+      "version": "0.3.0",
       "homepage": "https://findticker.com",
       "skills": [
         "./skills/city-under-price",

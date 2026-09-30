@@ -1,10 +1,8 @@
 # Ticker skills
 
-Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) MCP tools: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
+Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) tools: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other apps that read that format.
 
-## One bundle per plan
-
-Each skill belongs to one plan, named on the `**Plan:**` line of its file. A plan's bundle holds its own six skills and every skill of the plans below it: Free 6, Pro 12, Max 18, Ultra 24. The Free bundle is the public one. The Ticker tools behind the skills follow the account's plan, so a skill run on a lower plan says which plan opens it and runs the closest skill of that plan instead.
+Install all 24. Your Ticker plan decides what the tools answer, not which skills you have: a skill of a higher plan than yours tells you which plan opens it and runs the closest skill your plan has.
 
 | Plan | Skill | What it does |
 |---|---|---|
@@ -37,38 +35,49 @@ Every skill has a Parameters table at the top of its file: a city, a category, d
 
 ## Install
 
-Every skill needs the Ticker MCP server: `https://api.findticker.com/mcp`. You sign in with your Ticker account the first time; there is no key to paste.
+Every skill works through the Ticker MCP server, `https://api.findticker.com/mcp`. You sign in with your Ticker account the first time. There is no key to paste.
 
-**Claude Code** installs a bundle and the MCP server together:
-
-```
-/plugin marketplace add FindTicker/ticker-skills
-/plugin install ticker@ticker
-```
-
-That is the Free bundle. On a paid plan, install `ticker-pro@ticker`, `ticker-max@ticker` or `ticker-ultra@ticker` instead. Then run `/mcp` once to sign in. The skills appear under the plugin's name: `ticker:price-drop`, `ticker-max:hot-events` and so on.
-
-**Claude (claude.ai and the desktop app).** Build the bundles with `python3 scripts/bundles.py build`, then upload your plan's `dist/<plugin>-plugin.zip` under Customize, Plugins, Upload plugin, and connect Ticker from the plugin's Connectors tab.
-
-**Codex, Cursor, GitHub Copilot, Gemini CLI and other clients:**
+### Claude Code
 
 ```
-npx skills add FindTicker/ticker-skills --skill city-under-price --skill last-week-squeeze --skill numbers --skill pre-purchase-check --skill price-drop --skill sale-calendar
+claude plugin marketplace add FindTicker/ticker-skills
+claude plugin install ticker@ticker
 ```
 
-For a paid plan, name that plan's skills: `python3 scripts/bundles.py list max` prints them. Then add the Ticker MCP server in that client's own MCP settings.
+That installs one plugin, `ticker`: all 24 skills and the Ticker server. Start Claude Code, run `/mcp`, and sign in to Ticker. The skills show as `ticker:price-drop`, `ticker:hot-events` and so on. Inside Claude Code, `/plugin marketplace add FindTicker/ticker-skills` and `/plugin install ticker@ticker` do the same.
 
-How each client takes a bundle, and where a client can not do it per plan, is in [`docs/distribution.md`](docs/distribution.md).
+### Claude (claude.ai and the desktop app)
 
-## Where the ZIPs are served
+Open Customize, Plugins, Add, Add marketplace, and enter `FindTicker/ticker-skills`. Add the `ticker` plugin, then open its Connectors tab, connect Ticker and sign in. The plugin also reaches Claude Code on the same account.
 
-`python3 scripts/bundles.py build` writes two ZIPs per plan into `dist/`, each with a README of its own plan (`python3 scripts/bundles.py readme pro` prints one): that plan's skills and install lines, no skill of a higher plan, no install from this repository. The same commit builds the same bytes.
+### Codex, Cursor, GitHub Copilot, Gemini CLI and others
 
-- The two Free ZIPs are public, on docs.findticker.com/docs/skills (`ticker-docs`, `public/skills/`).
-- The six paid ZIPs are served by the Ticker app, Settings, Connect AI, to an account on that plan or above. The backend holds them in `ticker-backend/assets/skills/`, with a `SOURCE` file that names the commit of this repository they were built from.
+```
+npx skills add FindTicker/ticker-skills
+```
 
-A change to a skill is not live until the ZIPs are rebuilt and replaced there: a backend PR for the paid ZIPs, a `ticker-docs` PR for the Free ones.
+The [skills CLI](https://github.com/vercel-labs/skills) asks which skills to install and for which apps. Then add the Ticker MCP server in that app's MCP settings.
+
+### ChatGPT
+
+ChatGPT has no way to install skills. Connect the Ticker MCP server instead, and the Ticker tools work on their own: https://docs.findticker.com/docs/connect
+
+Every app, step by step: https://docs.findticker.com/docs/skills
+
+## For maintainers
+
+A skill's plan lives on the `**Plan:**` line of its `SKILL.md`. `scripts/bundles.py` reads those lines:
+
+- `python3 scripts/bundles.py marketplace` writes `.claude-plugin/marketplace.json` (one plugin, every skill); `check` fails when that file and the skill folders disagree, or when a plan README names a skill outside its plan.
+- `python3 scripts/bundles.py list <plan>` prints one plan's skills, and `table` the table above.
+- `python3 scripts/bundles.py build` still writes a plugin ZIP and a skills-only ZIP per plan into `dist/`, each with a README of its own plan. Nothing links to them now. The same commit builds the same bytes.
+
+How each app takes skills, and the per-plan design this replaced, is in [`docs/distribution.md`](docs/distribution.md).
 
 ## How the skills were tested
 
-Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan. The transcripts are in [`evidence/`](evidence/), one folder per skill, with the method and the grades in [`evidence/README.md`](evidence/README.md).
+Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan, before it was published here.
+
+## License
+
+Source-available: free to install and use with a Ticker account. See [`LICENSE.md`](LICENSE.md).
