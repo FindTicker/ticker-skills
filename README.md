@@ -66,4 +66,8 @@ Every app, step by step: https://docs.findticker.com/docs/skills
 
 ## How the skills were tested
 
-Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan.
+Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan, before it was published here.
+
+## License
+
+Source-available: free to install and use with a Ticker account. See [`LICENSE.md`](LICENSE.md).
