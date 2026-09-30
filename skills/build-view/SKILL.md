@@ -1,6 +1,6 @@
 ---
 name: build-view
-description: Build a saved View on Ticker that alerts when events enter a screen, tested on today's market, at the right cadence. Use when the user wants alerts whenever events match a condition or a screen.
+description: "Build a saved View on Ticker that alerts when events enter a screen, tested on today's market, at the right cadence. Use when the user wants alerts whenever events match a condition or a screen."
 ---
 
 # Build a View

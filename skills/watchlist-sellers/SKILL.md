@@ -1,6 +1,6 @@
 ---
 name: watchlist-sellers
-description: Seller concentration across your watched events on Ticker: which of the events you watch a few sellers control. Use when a broker asks who holds the inventory of the events they are tracking.
+description: "Seller concentration across your watched events on Ticker: which of the events you watch a few sellers control. Use when a broker asks who holds the inventory of the events they are tracking."
 ---
 
 # Watchlist sellers

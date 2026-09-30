@@ -1,6 +1,6 @@
 ---
 name: hot-and-concentrated
-description: Hot events on Ticker checked for who holds them: the hot-events screen, then each event's seller concentration. Use when a broker asks if the heat is demand or a few sellers holding back.
+description: "Hot events on Ticker checked for who holds them: the hot-events screen, then each event's seller concentration. Use when a broker asks if the heat is demand or a few sellers holding back."
 ---
 
 # Hot and concentrated

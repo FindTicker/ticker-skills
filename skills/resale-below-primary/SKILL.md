@@ -1,6 +1,6 @@
 ---
 name: resale-below-primary
-description: Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling. Use when resale beats face value.
+description: "Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling. Use when resale beats face value."
 ---
 
 # Resale below primary

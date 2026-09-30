@@ -1,6 +1,6 @@
 ---
 name: tour-dates
-description: Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour. Use when the user asks which night of a tour to buy or sell.
+description: "Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour. Use when the user asks which night of a tour to buy or sell."
 ---
 
 # Two tour dates
