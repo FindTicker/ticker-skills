@@ -76,4 +76,8 @@ How each app takes skills, and the per-plan design this replaced, is in [`docs/d
 
 ## How the skills were tested
 
-Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan. The transcripts are in [`evidence/`](evidence/), one folder per skill, with the method and the grades in [`evidence/README.md`](evidence/README.md).
+Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan, before it was published here.
+
+## License
+
+Source-available: free to install and use with a Ticker account. See [`LICENSE.md`](LICENSE.md).

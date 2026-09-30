@@ -47,7 +47,7 @@ Every skill still checks the account's plan through the tools, because a person 
 ## What was tested here
 
 - The four plugins installed from this repository's marketplace into a throwaway Claude Code configuration (Claude Code 2.1.284): `ticker` loaded the Free skills, `ticker-pro` the Pro bundle, `ticker-max` the Max bundle and `ticker-ultra` all of them, each with one MCP server, `ticker`. `claude plugin validate` passed on the marketplace.
-- Each skill was run by Claude Code in print mode from one user prompt, with this repository's skills as the only skills and the Ticker MCP server as the only tools, as the test account of each plan. Transcripts are in `evidence/`.
+- Each skill was run by Claude Code in print mode from one user prompt, with this repository's skills as the only skills and the Ticker MCP server as the only tools, as the test account of each plan.
 - Not tested: a claude.ai upload, the OpenAI portal, Cursor, Codex, Copilot and Gemini.
 
 ## Decisions for alim
