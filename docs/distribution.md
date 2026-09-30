@@ -1,5 +1,7 @@
 # How the skills reach people, plan by plan
 
+**Replaced on 2026-09-30.** alim decided that the skills go out from this repository, public, installed by link, and that the plan is checked by the Ticker tools, not by the skill files. The marketplace now holds one plugin, `ticker`, with all 24 skills; the README says how each app installs it. The rest of this page is the per-plan design it replaced, kept for its vendor research and its limits.
+
 alim, 2026-09-29: "per plan the skills, need to see which ones go where". Each plan gets its own bundle. This page says, client by client, how an account on each plan gets its bundle today, and where a client can not do it per plan. Vendor documentation read on 2026-09-28 and 2026-09-29; links at the end.
 
 ## The bundles

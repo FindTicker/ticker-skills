@@ -7,7 +7,7 @@ is a list: the skills of its plan and of every plan below it. Nothing is copied.
 usage:
   python3 scripts/bundles.py table            the README table of skills
   python3 scripts/bundles.py list <plan>      the skill folders of one bundle (free, pro, max, ultra)
-  python3 scripts/bundles.py marketplace      rewrite .claude-plugin/marketplace.json from the plan lines
+  python3 scripts/bundles.py marketplace      rewrite .claude-plugin/marketplace.json: one plugin, every skill
   python3 scripts/bundles.py check            exit 1 if marketplace.json does not match the plan lines
   python3 scripts/bundles.py build            write dist/<plugin>-plugin.zip and dist/<plugin>-skills.zip for each bundle
   python3 scripts/bundles.py readme <plan>    the README inside one bundle's two ZIPs
@@ -51,22 +51,26 @@ def bundle(plan):
     return [s["name"] for s in skills() if PLANS.index(s["plan"]) <= top]
 
 
+# alim, 2026-09-30: the skills go out from this public repository, installed by
+# link, and the plan is checked by the Ticker tools, not by the skill files. So
+# the marketplace holds ONE plugin with every skill: one install line for every
+# plan, nothing to reinstall on an upgrade, and no two plan plugins loading the
+# same skills side by side. The per-plan bundles stay for `build`.
 def marketplace():
     return {
         "name": "ticker",
-        "description": "Ticker's skills and MCP server for AI assistants, one bundle per plan.",
+        "description": "Ticker's skills and MCP server for AI assistants.",
         "owner": {"name": "Ticker", "url": "https://findticker.com"},
         "plugins": [
             {
-                "name": PLUGIN[p],
+                "name": "ticker",
                 "source": "./",
-                "description": TAGLINE[p],
-                "version": "0.2.0",
+                "description": "Ticker's broker skills: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. The Ticker tools answer on your plan.",
+                "version": "0.3.0",
                 "homepage": "https://findticker.com",
-                "skills": [f"./skills/{n}" for n in bundle(p)],
+                "skills": [f"./skills/{n}" for n in bundle(PLANS[-1])],
                 "mcpServers": MCP,
             }
-            for p in PLANS
         ],
     }
 
