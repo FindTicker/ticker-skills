@@ -1,82 +1,58 @@
-# How these skills reach people
+# How the skills reach people, plan by plan
 
-Question: when someone installs the Ticker MCP server, how do they get these skills with it? Answered from each vendor's own documentation, read on 2026-09-28. Links are at the end of each section.
+alim, 2026-09-29: "per plan the skills, need to see which ones go where". Each plan gets its own bundle. This page says, client by client, how an account on each plan gets its bundle today, and where a client can not do it per plan. Vendor documentation read on 2026-09-28 and 2026-09-29; links at the end.
 
-## The answer in five lines
+## The bundles
 
-1. One unchanged `skills/<name>/SKILL.md` folder works in every client below. They all read the open Agent Skills format.
-2. A skill cannot carry an MCP connection. What bundles skills with an MCP server is a **plugin**, and each vendor has its own plugin manifest.
-3. "Installed with the MCP" is one step only in Claude Code: installing the plugin starts its MCP server. In claude.ai it is one plugin install, then one Connect click. In ChatGPT it is one plugin that holds both the server and the skills. Everywhere else, skills and the MCP server are two installs.
-4. The MCP server itself can now carry skills (the MCP "Skills over MCP" extension, final since 2026-09-13). Today only ChatGPT reads it (partly, as a snapshot taken at submission), plus two developer tools. Claude does not read it yet. Our server serves tools only: `prompts/list` and `resources/list` answer "Method not found" (measured on the development deployment, 2026-09-28).
-5. This repo is laid out so the same `skills/` folder feeds all of these routes. Which routes to use is alim's decision; the options are at the end.
+A skill's plan lives in one place: the `**Plan:**` line of its `SKILL.md`. A bundle is a list, built from those lines by `scripts/bundles.py`: the skills of its plan and of every plan below it. No skill file is copied.
+
+| Bundle | Plugin name | Skills | Who gets it |
+|---|---|---|---|
+| Free | `ticker` | 6 | everyone; the public bundle, the only one in the Claude and ChatGPT listings |
+| Pro | `ticker-pro` | 12 (Free + 6) | Pro accounts |
+| Max | `ticker-max` | 18 (Pro + 6) | Max accounts |
+| Ultra | `ticker-ultra` | 24 (Max + 6) | Ultra accounts |
+
+`python3 scripts/bundles.py list max` prints the Max bundle. `python3 scripts/bundles.py marketplace` writes the four plugins into `.claude-plugin/marketplace.json`, and `check` fails when that file and the plan lines disagree. `python3 scripts/bundles.py build` writes, for each bundle, a plugin ZIP and a skills-only ZIP into `dist/` (not committed).
+
+Every skill still checks the account's plan through the tools, because a person can copy a skill folder by hand: a skill run on a lower plan says which plan opens it and runs the closest skill of that plan. The tools enforce the plan either way.
 
 ## Client by client
 
-| Client | How it takes a skill | One SKILL.md unchanged? | What "installed with the MCP" can honestly mean |
+| Client | Free | Pro, Max, Ultra | Per plan today? |
 |---|---|---|---|
-| Claude Code | `.claude/skills/`, `~/.claude/skills/`, or a plugin's `skills/` | Yes | One install: `/plugin install` adds the skills and starts the plugin's MCP server; `/mcp` signs in |
-| claude.ai, Claude desktop, Cowork | A skill ZIP under Customize, Skills; or a plugin (ZIP upload or a GitHub marketplace) | Yes | One plugin install; the skills load at once; the user clicks Connect on the plugin's Connectors tab to sign in |
-| Claude directory | Connectors and plugins are separate listings; "Skills aren't a submission type on their own" | Yes, inside a plugin | Two submissions (the connector, then a plugin whose `.mcp.json` points at the same URL), paired as one listing |
-| Claude API | Upload with `POST /v1/skills`, then name the skill in `container.skills` | Yes | No bundle. The MCP connector (`mcp_servers`) sits beside skills in a request; the docs do not show the two together |
-| ChatGPT (apps and plugins directory) | Portal submission: "Skills only", or "With MCP" with an uploaded skill bundle, or skills imported from the MCP server at submission | Yes (same open format) | One plugin holding the server and the skills. A server already live in ChatGPT is submitted again from scratch as a new MCP-backed plugin |
-| Codex, ChatGPT desktop | `.agents/skills/`, `$HOME/.agents/skills/`, or a Codex plugin | Yes | A plugin (`codex plugin marketplace add owner/repo`) carries both; a bare skill can only name the server it needs |
-| Cursor | `.agents/skills/`, `.cursor/skills/`, `.claude/skills/` | Yes | A Cursor plugin, or the vendor-neutral Agent Plugins format, carries both |
-| GitHub Copilot, VS Code | `.github/skills/`, `.claude/skills/`, `.agents/skills/` | Yes | An Agent Plugins plugin; bare skill folders carry no MCP |
-| Gemini CLI | `.gemini/skills/`, `.agents/skills/`, `gemini skills install <git url>` | Yes | A Gemini extension (`gemini-extension.json`) carries both |
-| `npx skills` (open installer, 50+ agents) | Reads a GitHub repo's `skills/` folder; `--skill <name>` for one | Yes | Skills only; it never configures an MCP server |
-| The MCP server itself | Skills served as resources under the Skills over MCP extension (`skills/list`, `skills/get`, `skill://` resources) | Yes | The real "attached everywhere" answer, once clients read it. Today: ChatGPT partly (a snapshot at submission), fast-agent, MCP Inspector |
+| Claude Code | `/plugin marketplace add FindTicker/ticker-skills`, then `/plugin install ticker@ticker` | the same marketplace, then `/plugin install ticker-max@ticker` (or `ticker-pro`, `ticker-ultra`) | Yes, four plugins in one marketplace. Tested: each installs its own list of skills and the Ticker MCP server. Nothing stops a Free person installing `ticker-max`: the skills then say which plan opens them, and the tools refuse what the plan does not hold |
+| claude.ai, Claude desktop, Cowork | the Claude directory listing (connector plus the Free plugin), or upload of `dist/ticker-plugin.zip` | upload of the plan's ZIP (`dist/ticker-max-plugin.zip`) under Customize, Plugins, Upload plugin; or add this repository as a marketplace and pick the plan's plugin | Partly. A person can install any plugin by hand. An organization owner can install one for everyone, but for the whole organization, not by plan. There is no hook that gives a person a plugin because of their Ticker plan |
+| ChatGPT (apps and plugins directory) | the listing, submitted "With MCP" with the Free skills only | no route | No. One submission carries one skill bundle, and skills imported from an MCP server are a snapshot taken at submission, not read per person. A paid bundle in ChatGPT has no route today |
+| Codex, Cursor, GitHub Copilot, Gemini CLI | `npx skills add FindTicker/ticker-skills --skill <name>` once per Free skill name (several `--skill` flags in one command) | the same, with the names that `bundles.py list <plan>` prints | By hand only. The installer copies what it is told to; nothing checks the plan |
+| The MCP server itself | not served | not served | Not built. The MCP "Skills over MCP" extension could serve each account its plan's skills, since the server knows the plan. Claude does not read that extension yet, and ChatGPT reads it only as a snapshot at submission |
 
-Sources: [agentskills.io specification](https://agentskills.io/specification), [Claude skills how-to](https://claude.com/docs/skills/how-to), [Claude plugins overview](https://claude.com/docs/plugins/overview), [build a Claude plugin](https://claude.com/docs/plugins/build), [Claude directory publishing](https://claude.com/docs/directory/publish), [Claude Code plugins reference](https://code.claude.com/docs/en/plugins-reference), [Claude Code marketplaces](https://code.claude.com/docs/en/plugins/marketplace-reference), [Claude API skills guide](https://platform.claude.com/docs/en/build-with-claude/skills-guide), [OpenAI plugin submission](https://developers.openai.com/plugins/deploy/submission), [OpenAI submission errors](https://developers.openai.com/plugins/deploy/submission-errors), [OpenAI MCP server skills import](https://developers.openai.com/plugins/build/mcp-server), [Codex skills](https://developers.openai.com/codex/skills), [Cursor skills](https://cursor.com/docs/context/skills), [Copilot agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Gemini CLI skills](https://geminicli.com/docs/cli/skills/), [vercel-labs/skills](https://github.com/vercel-labs/skills), [SEP-2640 Skills extension](https://modelcontextprotocol.io/seps/2640-skills-extension), [MCP extension support matrix](https://modelcontextprotocol.io/extensions/client-matrix), [Agent Plugins](https://agent-plugins.org/).
+## What does not exist, and the one piece that would close it
 
-One string on the ticket, "Drop a skill ZIP or folder here", is from the OpenAI portal, which needs a login. The public docs describe the same step as "Upload the final skill bundle"; the exact wording was not checked.
+- **A per-plan download in the app.** A paid account has no place in Ticker to get its bundle: it has to find this repository. A page in the app (Settings or Connect AI) that serves the plan's ZIP and its install lines would give each plan its bundle in every client that takes a ZIP or a folder. Not built here; a ticket draft is in the pull request.
+- **Per-person gating in Claude and ChatGPT.** Neither vendor documents a way for a third-party product to give different skills to different users by their plan. Only the product can: through its own download, or later through Skills over MCP.
+- **A private paid bundle.** When this repository goes public, every skill file is readable by anyone, the Ultra ones too. The data stays behind the plan; the instructions do not. Keeping paid skills private means serving them from the app instead of from a public repository.
 
 ## Limits that shaped the files
 
-- **Name:** lowercase letters, digits and hyphens, at most 64 characters, equal to the folder name (the open format). OpenAI also caps `plugin-name:skill-name` at 64: the longest here, `ticker:underpriced-events`, is 25.
-- **Description:** at most 1,024 characters in the open format, claude.com and OpenAI. An older Claude help article still says 200, so every description here is 200 or fewer.
-- **Body:** under 500 lines is the open format's advice. Ours run 42 to 60 lines.
-- **Claude plugin:** no top-level `bin/` (chat and Cowork refuse the whole plugin); a README of at least 40 words and a LICENSE to be listed; the repository must be public before the listing goes live.
-- **OpenAI:** each skill an immediate child of `skills/`; a skills-only ZIP must not contain `.mcp.json`; up to 5 skills can be imported from an MCP server.
+- **Name:** lowercase letters, digits and hyphens, at most 64 characters, equal to the folder name. OpenAI also caps `plugin-name:skill-name` at 64: the longest here, `ticker-ultra:performer-concentration`, is 36.
+- **Description:** at most 1,024 characters in the open format; an older Claude help article says 200, so every description here is 200 or fewer.
+- **Body:** under 500 lines is the open format's advice. Ours run 50 to 95 lines.
+- **Claude plugin:** no top-level `bin/`; a README of at least 40 words and a LICENSE to be listed; the repository public before a listing goes live.
+- **Claude Code marketplace:** a plugin entry whose `source` is the marketplace root and which lists `skills` loads only those folders, and the entry is the plugin's manifest when the plugin has no `plugin.json`. That is why the repository has no `.claude-plugin/plugin.json`: each bundle's manifest is its entry in `marketplace.json`.
+- **OpenAI:** each skill an immediate child of `skills/`; a skills-only ZIP must not contain `.mcp.json` (the `-skills.zip` files do not).
 
 ## What was tested here
 
-- Each skill was run by Claude Code in print mode, from one user prompt, with the 12 skills in `.claude/skills/` and the Ticker MCP server as the only tools. Reads ran as test accounts on the development deployment; writes ran on a private local copy of the backend. Transcripts are in `evidence/`.
-- `claude --plugin-dir .` on this repository loaded all 12 skills under the plugin's name, from `ticker:broker-end-of-day` to `ticker:watch-event` (Claude Code 2.1.284, 2026-09-29). The plugin's MCP half (`.mcp.json`) was not started in that test, because starting it would also start the tester's own MCP servers; Claude Code's documentation says a plugin's MCP servers start when the plugin is enabled.
+- The four plugins installed from this repository's marketplace into a throwaway Claude Code configuration (Claude Code 2.1.284): `ticker` loaded the Free skills, `ticker-pro` the Pro bundle, `ticker-max` the Max bundle and `ticker-ultra` all of them, each with one MCP server, `ticker`. `claude plugin validate` passed on the marketplace.
+- Each skill was run by Claude Code in print mode from one user prompt, with this repository's skills as the only skills and the Ticker MCP server as the only tools, as the test account of each plan. Transcripts are in `evidence/`.
 - Not tested: a claude.ai upload, the OpenAI portal, Cursor, Codex, Copilot and Gemini.
-
-## The layout chosen, and why
-
-```
-skills/<name>/SKILL.md            one folder per skill: the unit every client reads
-.claude-plugin/plugin.json        makes the repository a Claude plugin named "ticker"
-.claude-plugin/marketplace.json   makes the same repository its own marketplace (source "./")
-.mcp.json                         the Ticker MCP server, bundled with the plugin
-evidence/<skill>/                 the transcripts that prove each skill
-docs/distribution.md              this page
-```
-
-- One `skills/` folder is the single source. `npx skills`, Codex, Cursor, Copilot and Gemini read it as it is, and the OpenAI Skills step takes a ZIP of it.
-- The Claude plugin manifests are the only bundle format tested here, and Claude is where a plugin brings the MCP server with it in one install.
-- No Agent Plugins `plugin.json` or `mcp.json` at the root yet: it is untested, and no vendor documents the two manifests side by side. OpenAI converts `.claude-plugin/plugin.json` when a Claude plugin is submitted.
-- The skill names carry no product prefix: each name says what the skill does. The product is in two other places. Each description names Ticker, and the description is what an assistant reads to pick a skill. A Claude plugin shows each skill under the plugin's name (`ticker:numbers`), so there it cannot clash with a skill of another maker. Where skills are copied as bare folders (`npx skills`, `.claude/skills/`, `.agents/skills/`), one directory cannot hold two folders with one name, so a short name such as `numbers` can meet a skill of another maker with the same name. Decision 5 below lists those names.
 
 ## Decisions for alim
 
-1. **Which bundling routes.** The options, cheapest first:
-   - a. Publish this repository and list it as a Claude plugin, paired with the Ticker connector in the Claude directory.
-   - b. Submit a new "With MCP" plugin in the OpenAI portal with the `skills/` bundle (the existing ChatGPT listing cannot be referenced; the server is submitted again).
-   - c. Serve the skills from the MCP server itself (Skills over MCP). One copy, every client that reads it, no second install; today only ChatGPT reads it, as a snapshot.
-   Recommendation: a and b now from this repository, c when Claude reads the extension.
-2. **A licence.** The Claude directory needs one; none is in the repository yet.
-3. **The day the repository goes public.** Needed before any directory listing goes live and before `npx skills add` or the Claude Code marketplace works for people outside the organisation.
-4. **Where skills show in the app.** Not decided and not in this work.
-5. **Names that another maker may also use.** The names stay plain unless alim picks a second name. These six are common words in other fields; each has a second name ready:
+1. **The plugin names.** `ticker` for the public Free bundle, and `ticker-pro`, `ticker-max`, `ticker-ultra`. In Claude Code a skill shows as `ticker-max:hot-events`.
+2. **The per-plan download in the app** (the ticket draft), or leave paid bundles to this repository.
+3. **Public or private paid skills.** A public repository shows every skill's instructions; the data behind them stays gated.
+4. **A licence** (the Claude directory needs one) and **the day the repository goes public**.
 
-   | Name | Where else it is used | Second name |
-   |---|---|---|
-   | `numbers` | GitHub code search finds four public skills with exactly this name (2026-09-29) | `how-numbers-are-made` |
-   | `build-view` | Building a UI view or a database view | `build-alert-view` |
-   | `venue-guide` | Travel, weddings, conference venues | `venue-seating-guide` |
-   | `sell-through` | Retail stock; GitHub code search finds two public retail skills whose names start with it | `event-sell-through` |
-   | `watch-event` | Error and log events; GitHub code search finds a public skill named `watch-events` | `watch-event-price` |
-   | `compare-events` | Product analytics events | `compare-event-prices` |
+Sources: [agentskills.io specification](https://agentskills.io/specification), [Claude Code plugins reference](https://code.claude.com/docs/en/plugins-reference), [Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces), [Claude plugins overview](https://claude.com/docs/plugins/overview), [Claude skills how-to](https://claude.com/docs/skills/how-to), [Claude directory publishing](https://claude.com/docs/directory/publish), [OpenAI plugin submission](https://developers.openai.com/plugins/deploy/submission), [OpenAI skills](https://developers.openai.com/plugins/build/skills), [Codex skills](https://developers.openai.com/codex/skills), [Cursor skills](https://cursor.com/docs/context/skills), [Copilot agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills), [Gemini CLI skills](https://geminicli.com/docs/cli/skills/), [vercel-labs/skills](https://github.com/vercel-labs/skills), [SEP-2640 Skills extension](https://modelcontextprotocol.io/seps/2640-skills-extension).
