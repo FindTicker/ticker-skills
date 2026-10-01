@@ -34,7 +34,7 @@ Fixed leaves, always in the screen:
 | Priced as of, within a day | `{"col": "ea.last_price_snapshot_date", "op": ">=", "val": {"days_ago": 1}}` |
 | Primary read, within 2 days | `{"col": "ea.tm_asof_at", "op": ">=", "val": {"days_ago": 2}}` |
 
-Sort: Median 7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir": "asc"}`.
+Sort: Median %Δ7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir": "asc"}`.
 
 ## Steps
 
@@ -64,7 +64,7 @@ Sort: Median 7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir": 
 4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. Primary data covers only part of the events; say so with that number. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
    Done when you hold the match count and the primary coverage count.
 
-5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, median fall 10%, primary remaining over 50%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median 7d down more than 10%, Tickets Δ7d up, Primary remaining over 50%". Then the counts ("230 events match, of 21,645 with a fresh primary reading"), then a table of the rows: event (linked), date, city, Median, Median 7d, Lowest, Primary remaining, Tickets, Tickets Δ7d. Close with the time of the numbers: resale priced on the `last_price_snapshot_date` values, primary read between the earliest and the latest `tm_asof_at` on the page.
+5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, median fall 10%, primary remaining over 50%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median %Δ7d down more than 10%, Tickets Δ7d up, Primary remaining over 50%". Then the counts ("230 events match, of 21,645 with a fresh primary reading"), then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Lowest, Primary remaining, Tickets, Tickets Δ7d. Close with the time of the numbers: resale priced on the `last_price_snapshot_date` values, primary read between the earliest and the latest `tm_asof_at` on the page.
    Done when every row is in the table and the answer says when each side was read.
 
 ## Reporting rules
@@ -81,4 +81,4 @@ Sort: Median 7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir": 
 
 User: "Which concerts are going soft, with the box office still over 60 percent full of tickets?"
 
-`list_screen_columns` shows the primary columns open. One screen. Answer: "Values: city every city, category concerts (14, 15, 17, 18, 20, 52, 74), days to event 0 to 365, median fall 10%, primary remaining over 60%, rows 20. Median 7d down more than 10%, Tickets Δ7d up, Primary remaining over 60%: 58 events match, of 21,600 with a fresh primary reading." Then the rows, then "Resale priced 2026-09-29; primary read 2026-09-28 06:10 to 2026-09-29 21:40 UTC."
+`list_screen_columns` shows the primary columns open. One screen. Answer: "Values: city every city, category concerts (14, 15, 17, 18, 20, 52, 74), days to event 0 to 365, median fall 10%, primary remaining over 60%, rows 20. Median %Δ7d down more than 10%, Tickets Δ7d up, Primary remaining over 60%: 58 events match, of 21,600 with a fresh primary reading." Then the rows, then "Resale priced 2026-09-29; primary read 2026-09-28 06:10 to 2026-09-29 21:40 UTC."
