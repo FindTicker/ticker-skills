@@ -54,7 +54,7 @@ A fall steeper than 90% in a week is a data break (a week-old median in the thou
 3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at after the server's gates. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true).
    Done when you hold the match count and the count looked at.
 
-4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 365, median fall 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median 7d down more than 10%, Tickets Δ7d up". Then the counts ("3,804 events match, of 64,612 screened"), then a table of the rows: event (linked), date, city, Median, Median 7d, Lowest, Tickets, Tickets Δ7d. Close with the time of the numbers: the `last_price_snapshot_date` values on the rows ("priced 2026-09-28 and 2026-09-29").
+4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 365, median fall 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median %Δ7d down more than 10%, Tickets Δ7d up". Then the counts ("3,804 events match, of 64,612 screened"), then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Lowest, Tickets, Tickets Δ7d. Close with the time of the numbers: the `last_price_snapshot_date` values on the rows ("priced 2026-09-28 and 2026-09-29").
    Done when every row is in the table and the answer says when its prices were read.
 
 ## Reporting rules
@@ -70,4 +70,4 @@ A fall steeper than 90% in a week is a data break (a week-old median in the thou
 
 User: "What's getting cheaper in Chicago this month, down at least 20 percent?"
 
-One screen. Answer: "Values: city Chicago, Rosemont, Evanston, category every category, days to event 0 to 30, median fall 20%, rows 20. Median 7d down more than 20% while Tickets Δ7d went up: 41 events match, of 2,310 screened." Then the table, then "Prices read 2026-09-29."
+One screen. Answer: "Values: city Chicago, Rosemont, Evanston, category every category, days to event 0 to 30, median fall 20%, rows 20. Median %Δ7d down more than 20% while Tickets Δ7d went up: 41 events match, of 2,310 screened." Then the table, then "Prices read 2026-09-29."

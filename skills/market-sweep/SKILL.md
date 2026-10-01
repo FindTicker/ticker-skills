@@ -37,10 +37,10 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 3. **Run the seven screens.** For each of `hot-events`, `primary-gone-and-rising`, `last-week-squeeze`, `momentum`, `interest-rising`, `price-drop` and `cooling`: load the skill, take the leaves of its Parameters and fixed tables at their defaults, add this request's city and category leaves, and call `screen_events` once with its sort, `"limit": <rows per screen>`, `"count": true` and the columns `["e.event_name", "e.local_date", "v.city", "ea.median_price_current", "ea.median_price_pct_7d", "ea.last_price_snapshot_date"]`. Skip each skill's own plan check and report step. A skill that is not installed is skipped; say which.
    Done when you hold seven pages, or fewer with the skipped ones named.
 
-4. **Rank.** Count, for each `event_id`, how many heat screens and how many cold screens returned it. Rank by heat screens, then by Median 7d. An event on both a heat and a cold screen is mixed: list it apart.
+4. **Rank.** Count, for each `event_id`, how many heat screens and how many cold screens returned it. Rank by heat screens, then by Median %Δ7d. An event on both a heat and a cold screen is mixed: list it apart.
    Done when you hold the ranked events.
 
-5. **Report.** First line, the values used: "Values: city every city, category every category, rows per screen 25, rows 20." Then one line per screen with its match count (`total`; "1,000 or more" when `countCapped`). Then the ranked table: event (linked), date, city, Median, Median 7d, the screens that flagged it. Then the mixed events, then the top cold events. Close with the time of the numbers (the `last_price_snapshot_date` values).
+5. **Report.** First line, the values used: "Values: city every city, category every category, rows per screen 25, rows 20." Then one line per screen with its match count (`total`; "1,000 or more" when `countCapped`). Then the ranked table: event (linked), date, city, Median, Median %Δ7d, the screens that flagged it. Then the mixed events, then the top cold events. Close with the time of the numbers (the `last_price_snapshot_date` values).
    Done when the ranked table and the counts are in the answer.
 
 ## Reporting rules
