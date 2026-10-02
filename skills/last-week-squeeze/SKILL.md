@@ -48,7 +48,7 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
    Done when you hold both counts.
 
-4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 7, absorption 0.5, lowest rise 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "7 days or less to go, Absorption rate 7d 0.5 or more, Lowest 7d up more than 10%". Then the counts, then a table of the rows: event (linked), date, days to go, Lowest, Lowest 7d, Median, Absorption rate 7d, Tickets. Under the table: "Absorbed means listings that left the resale market: a sale, a withdrawal or an expiry count the same." Close with the time of the numbers (the `last_price_snapshot_date` values).
+4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 7, absorption 0.5, lowest rise 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "7 days or less to go, Absorption rate 7d 0.5 or more, Lowest %Δ7d up more than 10%". Then the counts, then a table of the rows: event (linked), date, days to go, Lowest, Lowest %Δ7d, Median, Absorption rate 7d, Tickets. Under the table: "Absorbed means listings that left the resale market: a sale, a withdrawal or an expiry count the same." Close with the time of the numbers (the `last_price_snapshot_date` values).
    Done when every row is in the table and the answer says when its prices were read.
 
 ## Reporting rules
@@ -64,4 +64,4 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 
 User: "Which NFL games this week are heating up?"
 
-One screen. Answer: "Values: city every city, category NFL, days to event 0 to 7, absorption 0.5, lowest rise 10%, rows 20. 7 days or less to go, Absorption rate 7d 0.5 or more, Lowest 7d up more than 10%: 6 events match, of 64,600 screened." Then the rows, the absorption line, and "Prices read 2026-09-29."
+One screen. Answer: "Values: city every city, category NFL, days to event 0 to 7, absorption 0.5, lowest rise 10%, rows 20. 7 days or less to go, Absorption rate 7d 0.5 or more, Lowest %Δ7d up more than 10%: 6 events match, of 64,600 screened." Then the rows, the absorption line, and "Prices read 2026-09-29."

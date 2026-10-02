@@ -47,7 +47,7 @@ Two dates of one act, side by side: what each costs, where each price is going, 
 5. **Read each trend** with `get_event_price_chart` `{"event_id": "<id>", "range": "<7d, 28d or 90d>", "render": false}`. Take the first and the last `median_price` in `rows` for each. `days_missing` lists real gaps: never fill them.
    Done when you can say rising, falling or flat for each date, with the dates compared.
 
-6. **Report.** First line, the values used: "Values: act <name>, dates <date, city> and <date, city>, history 28 days." Then one table, one column per date: date and venue, Median, Lowest, Lowest all-in, Median 7d, trend over the history, Tickets, Tickets Δ7d, tour score, days to go, priced as of. Then two lines: which date is cheaper to get into now, and which is moving faster against the rest of the tour. End with both event links.
+6. **Report.** First line, the values used: "Values: act <name>, dates <date, city> and <date, city>, history 28 days." Then one table, one column per date: date and venue, Median, Lowest, Lowest all-in, Median %Δ7d, trend over the history, Tickets, Tickets Δ7d, tour score, days to go, priced as of. Then two lines: which date is cheaper to get into now, and which is moving faster against the rest of the tour. End with both event links.
    Done when every number has its read date.
 
 ## Reporting rules
