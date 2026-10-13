@@ -65,7 +65,7 @@ def marketplace():
             {
                 "name": "ticker",
                 "source": "./",
-                "description": "Ticker's broker skills: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. The Ticker tools answer on your plan.",
+                "description": "Ticker's ticket-market skills: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. The Ticker tools answer on your plan.",
                 "version": "0.3.0",
                 "homepage": "https://findticker.com",
                 "skills": [f"./skills/{n}" for n in bundle(PLANS[-1])],
@@ -87,7 +87,7 @@ def free_readme():
     )
     return f"""# Ticker skills
 
-Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) MCP tools. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
+Skills that help an AI assistant research and monitor the ticket market with the [Ticker](https://findticker.com) MCP tools. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
 
 | Skill | What it does |
 |---|---|
@@ -140,7 +140,7 @@ def paid_readme(plan):
     remove = " ".join(f"~/.claude/skills/{b}" for b in below)
     return f"""# Ticker skills for the {plan} plan
 
-Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) MCP tools. This bundle holds the {len(names)} skills of the {plan} plan: its own and those of the {lower} {"plan" if len(below) == 1 else "plans"}. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
+Skills that help an AI assistant research and monitor the ticket market with the [Ticker](https://findticker.com) MCP tools. This bundle holds the {len(names)} skills of the {plan} plan: its own and those of the {lower} {"plan" if len(below) == 1 else "plans"}. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other clients that read that format.
 
 | Plan | Skill | What it does |
 |---|---|---|
