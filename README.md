@@ -1,6 +1,6 @@
 # Ticker skills
 
-Skills that teach an AI assistant a broker's daily work with the [Ticker](https://findticker.com) tools: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other apps that read that format.
+Skills that help an AI assistant research and monitor the ticket market with the [Ticker](https://findticker.com) tools: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other apps that read that format.
 
 Install all 24. Your Ticker plan decides what the tools answer, not which skills you have: a skill of a higher plan than yours tells you which plan opens it and runs the closest skill your plan has.
 
