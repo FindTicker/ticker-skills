@@ -10,7 +10,7 @@
       "name": "ticker",
       "source": "./",
       "description": "Research events, compare ticket prices, monitor availability and follow listed inventory with Ticker. Tool access follows your account plan.",
-      "version": "0.3.1",
+      "version": "0.4.0",
       "homepage": "https://findticker.com",
       "skills": [
         "./skills/city-under-price",

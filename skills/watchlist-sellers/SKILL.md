@@ -33,7 +33,7 @@ For each event on the account's watchlist, soonest first, how concentrated its r
 3. **Read the watchlist** with `list_watchlist` `{"sort": "utc_date", "order": "asc", "limit": 50}`. Keep the upcoming events, soonest first, up to "events". An empty watchlist: say so, and point to the `watch-event` skill to add one.
    Done when you hold the `event_id`s.
 
-4. **Read each event** with `get_event_seller_concentration` `{"event_id": "<id>"}`, one call per event. A null `concentration` means that event has no reading.
+4. **Read each event** with `get_event_sellers` `{"event_id": "<id>"}`, one call per event. A null `concentration` means that event has no reading.
    Done when every event has a reading or "no reading".
 
 5. **Report.** First line, the values used: "Values: events 8, dominated at 50%." Then one table: event (linked), date, sellers, tickets, largest seller's share, largest three's share, band, coverage, as of. Mark "concentrated" each event at or over "dominated at". Close with how many watched events meet that threshold.

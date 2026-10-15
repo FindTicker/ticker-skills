@@ -43,7 +43,7 @@ Read the values from the user's words ("the last week", "top 5 sections"); keep 
    On Max, add `"tm_lowest_aip_price_current", "tm_tickets_current", "tm_percent_remaining", "tm_asof_at"`. `primary_status` comes back on every read: if it is `cancelled`, `postponed` or `rescheduled`, tell the user first and stop unless they still want the rest.
    Done when you hold the headline prices and their read date.
 
-4. **Read the trend** with `get_event_price_chart` `{"event_id": "<id>", "range": "28d", "render": false}` (`"7d"` when the trend window is 7 days). 28 days fits every plan. Compare the latest `median_price` in `rows` with 7 days back and with the start of the window. `days_missing` lists real gaps: never fill them.
+4. **Read the trend** with `get_event_chart` `{"event_id": "<id>", "range": "28d", "render": false}` (`"7d"` when the trend window is 7 days). 28 days fits every plan. Compare the latest `median_price` in `rows` with 7 days back and with the start of the window. `days_missing` lists real gaps: never fill them.
    Done when you can say rising, falling or flat, with the two dates you compared.
 
 5. **Find the cheapest way in** with `get_event_sections` `{"event_id": "<id>", "include_history": false, "limit": 100}`. Each section carries one object per source: `vs` is resale; on Max, `tm_primary` is the box office and `tm_resale` its resale. Pick the cheapest sections by `min_price`, as many as "sections shown", and note which source holds each. When `truncated` is true, say the section list was partial (`sections_returned` of `sections_total`); do not page.

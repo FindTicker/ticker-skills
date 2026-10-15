@@ -34,7 +34,7 @@ For one act, the seller concentration of each upcoming date side by side: how ma
 3. **Find the dates** with ONE `search_events` call: `{"search": "<act name>", "status": "active", "limit": 100}`. Drop tribute acts and venues that share the name. Keep the upcoming dates inside the window, soonest first, up to "dates".
    Done when you hold the `event_id`s.
 
-4. **Read each date** with `get_event_seller_concentration` `{"event_id": "<id>"}`, one call per date. A null `concentration` means that date has no reading; keep it in the table as "no reading".
+4. **Read each date** with `get_event_sellers` `{"event_id": "<id>"}`, one call per date. A null `concentration` means that date has no reading; keep it in the table as "no reading".
    Done when every date has a reading or "no reading".
 
 5. **Report.** First line, the values used: "Values: act <name>, dates 6, days to event 0 to 365." Then one table: date, city, sellers, tickets, largest seller's share, largest three's share, band, coverage, as of. Close with two lines: the most concentrated date and the most spread one.

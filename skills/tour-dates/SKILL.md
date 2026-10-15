@@ -44,7 +44,7 @@ Two dates of one act, side by side: what each costs, where each price is going, 
    `price_self_z_7d_xs_z_tour_tte` compares this date's weekly move with the act's other dates at a similar distance; null means too few dates to compare.
    Done when both events have their headline numbers.
 
-5. **Read each trend** with `get_event_price_chart` `{"event_id": "<id>", "range": "<7d, 28d or 90d>", "render": false}`. Take the first and the last `median_price` in `rows` for each. `days_missing` lists real gaps: never fill them.
+5. **Read each trend** with `get_event_chart` `{"event_id": "<id>", "range": "<7d, 28d or 90d>", "render": false}`. Take the first and the last `median_price` in `rows` for each. `days_missing` lists real gaps: never fill them.
    Done when you can say rising, falling or flat for each date, with the dates compared.
 
 6. **Report.** First line, the values used: "Values: act <name>, dates <date, city> and <date, city>, history 28 days." Then one table, one column per date: date and venue, Median, Lowest, Lowest all-in, Median %Δ7d, trend over the history, Tickets, Tickets Δ7d, tour score, days to go, priced as of. Then two lines: which date is cheaper to get into now, and which is moving faster against the rest of the tour. End with both event links.

@@ -57,8 +57,8 @@ Read the values from the user's words ("hot events in Boston", "once a day", "do
 6. **Read back what it will send** with `get_view_alert_preview` `{"view_id": "<id>"}`. A new View shows 0: its first contents are baseline Matches. `paused: true` means the account has alert email switched off; say so.
    Done when you have told the user what the preview says.
 
-7. **Only if the user wants a channel:** `list_destinations`, then `set_view_target` `{"view_id", "delivery_target_id", "cadence": "instant" | "hourly" | "daily"}`. With no destination yet, the user adds one in the app or gives you the channel's posting URL for `create_destination`, which sends a live test message first.
-   Done when `list_view_targets` shows the destination on this View.
+7. **Only if the user wants a channel:** `list_destinations`, then `update_view` `{"view_id", "attach_destination": {"delivery_target_id", "cadence": "instant" | "hourly" | "daily"}}`. With no destination yet, the user adds one in the Ticker web app under Settings.
+   Done when `list_views` `{"view_id"}` shows the destination in the View's `destinations`.
 
 ## Reporting rules
 
