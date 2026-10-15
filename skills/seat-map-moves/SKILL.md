@@ -54,8 +54,8 @@ Every threshold of this skill is in this table.
 - A count is carried forward from a section's last reading: `observed_at` says how old it is. Flag a section whose reading is older than the window.
 - Taken is the share of a section's seats not open on the primary market now. A seat sold, held back, killed or not yet released counts the same: never write "sold" or "sold out".
 - A section that drained lost open seats at the box office; it does not say why.
-- Say the primary market and resale. Name no marketplace. Link the event with its `event_url`.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Link the event with its `event_url`.
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

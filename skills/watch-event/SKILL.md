@@ -57,9 +57,9 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
 - Quote thresholds in the user's terms ("the lowest price moves 10% in a day"), then the trigger key in brackets.
 - Never promise an alert fires at a price: triggers compare moves, and prices are read a few times a day.
 - Call the emails "the hourly email" or "the daily email"; never "digest", which names another feature.
-- Link the event with its `event_url`. Name no marketplace. Never write "sold".
+- Link the event with its `event_url`. Use the source labels returned by the tools; do not guess provider names. Never write "sold".
 - To stop watching, `unwatch_event` `{"event_id"}` removes the star.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

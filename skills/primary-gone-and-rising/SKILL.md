@@ -1,6 +1,6 @@
 ---
 name: primary-gone-and-rising
-description: "Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing. Use when only resale is left and the get-in keeps rising."
+description: "Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing. Use when the user asks about rising resale prices where primary availability is low."
 ---
 
 # Primary gone and rising
@@ -9,7 +9,7 @@ description: "Primary gone and rising on Ticker: the box office nearly empty, re
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the primary market (the box office) has almost nothing left, resale supply shrank this week and the cheapest resale ticket got dearer. Resale is the only way in, and it is tightening.
+Events where the primary market (the box office) has almost nothing left, resale supply shrank this week and the cheapest resale ticket got dearer. Report the primary availability and resale changes separately; low primary inventory does not establish that resale is the only purchase option.
 
 ## Parameters
 
@@ -58,10 +58,10 @@ Sort: Lowest %Δ7d, biggest rise first: `{"col": "ea.lowest_price_pct_7d", "dir"
                 "ea.tm_asof_at"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
-4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. Primary data covers only part of the events; say so with that number. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
+4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. Primary data covers only part of the events; say so with that number. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
    Done when you hold the match count and the primary coverage count.
 
 5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, primary remaining under 2%, lowest rise 5%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Primary remaining under 2%, Tickets Δ7d falling, Lowest %Δ7d up more than 5%". Then the counts ("230 events match, of 21,645 with a fresh primary reading"), then a table of the rows: event (linked), date, city, Lowest, Lowest %Δ7d, Median, Primary remaining, Tickets, Tickets Δ7d. Close with the time of the numbers: resale priced on the `last_price_snapshot_date` values, primary read between the earliest and the latest `tm_asof_at` on the page.
@@ -71,11 +71,11 @@ Sort: Lowest %Δ7d, biggest rise first: `{"col": "ea.lowest_price_pct_7d", "dir"
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- Say the primary market and resale. Name no marketplace.
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
 - Primary remaining 0 means the box office listed nothing at its last read. It does not say why: seats can be held back or not yet released. Write "Primary remaining 0%", never "sold out".
 - Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

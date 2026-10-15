@@ -9,7 +9,7 @@ description: "Resale above primary on Ticker: events where the lowest resale all
 
 **Usual cost:** 3 requests (screener runs): one count, and a list of one or two pages. `list_screen_columns` is free.
 
-Events where the cheapest resale ticket, fees included, costs more than a multiple of the cheapest ticket the primary market (the box office) still sells, fees included. The box office still has tickets, so a buyer can get in at the lower price.
+Events where the cheapest resale ticket, fees included, costs more than a multiple of the cheapest ticket the primary market (the box office) still sells, fees included. Compare the listed prices with their timestamps. Availability, seat location and purchase restrictions can differ between the two markets.
 
 ## Parameters
 
@@ -63,7 +63,7 @@ An event passes when some step S sits between its two prices: primary all-in at 
 3. **Build the two step legs**, the match leg and the list leg, one group per step, every value written out as a number (for S = 25 and M = 1.5: 37.5).
    Done when you hold both legs.
 
-4. **Count** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <match leg>]}, "count": true, "diagnostics": true, "limit": 1, "columns": ["e.event_name"]}`. `diagnostics.root.passed` is the match count (a floor). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same count once more. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
+4. **Count** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <match leg>]}, "count": true, "diagnostics": true, "limit": 1, "columns": ["e.event_name"]}`. `diagnostics.root.passed` is the match count (a floor). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. If `diagnostics.status` is `unavailable`, call the same count once more. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
    Done when you hold both counts.
 
 5. **List** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <list leg>]}, "limit": 60, "columns": ["e.event_name", "e.local_date", "ea.lowest_aip_price_current", "ea.tm_lowest_aip_price_current", "ea.tm_tickets_current", "ea.last_price_snapshot_date", "ea.tm_asof_at"]}`. If 60 rows came back, or `meta.truncated` is true, call once more with `"page": 2`. Never a third page.
@@ -81,12 +81,12 @@ An event passes when some step S sits between its two prices: primary all-in at 
 - Link each event with the `event_url` on its row; never search again to find it.
 - Both prices are all-in: what a buyer pays with fees.
 - The lowest primary price can be a child or a restricted-view ticket; the tools do not say which, so say "the lowest ticket the box office lists".
-- Say the primary market and resale. Name no marketplace. Never write "sold" or "tickets sold".
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves the fixed leaves, the parameter leaves and the match leg as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "I'm looking for spreads on NFL games: where is resale at least double the box office, fees in?"
+User: "Which NFL games have resale prices at least double the primary price, including fees?"
 
 `list_screen_columns` shows the primary columns open; one count, one or two list pages. Answer: "Values: city every city, category NFL, days to event 0 to 365, multiple 2, primary floor $10, rows 20. At least 38 events match, of 21,600 with a fresh primary reading. Ranked, where resale is 2.5 times primary or more:" then rows such as "Bills at Chiefs, resale $310 all-in against primary $96.40, 3.2 times, $214 gap, 1,204 primary tickets", then the two read times and the method line.

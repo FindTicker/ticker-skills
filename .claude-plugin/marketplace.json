@@ -9,8 +9,8 @@
     {
       "name": "ticker",
       "source": "./",
-      "description": "Ticker's ticket-market skills: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. The Ticker tools answer on your plan.",
-      "version": "0.3.0",
+      "description": "Research events, compare ticket prices, monitor availability and follow listed inventory with Ticker. Tool access follows your account plan.",
+      "version": "0.3.1",
       "homepage": "https://findticker.com",
       "skills": [
         "./skills/city-under-price",

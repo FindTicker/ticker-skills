@@ -1,6 +1,6 @@
 ---
 name: resale-below-primary
-description: "Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling. Use when resale beats face value."
+description: "Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling. Use when the user asks where the lowest listed resale price is below the primary price."
 ---
 
 # Resale below primary
@@ -9,7 +9,7 @@ description: "Resale below primary on Ticker: events where the lowest resale all
 
 **Usual cost:** 3 requests (screener runs): one count, and a list of one or two pages. `list_screen_columns` is free.
 
-Events where the cheapest resale ticket, fees included, costs less than the cheapest ticket the primary market (the box office) still sells, fees included. Resale undercuts the box office: a buyer should not pay the primary price, and a holder of primary tickets is under water.
+Events where the cheapest resale ticket, fees included, costs less than the cheapest ticket the primary market (the box office) still sells, fees included. Compare the listed prices with their timestamps. The lowest prices may cover different seats or restrictions; they do not establish a ticket holder's cost or profit.
 
 ## Parameters
 
@@ -63,7 +63,7 @@ An event passes when some step S sits between its two prices: primary all-in at 
 3. **Build the two step legs**, the match leg and the list leg, one group per step, every value written out as a number (for S = 25 and M = 1: 25; for M = 0.3: 7.5).
    Done when you hold both legs.
 
-4. **Count** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <match leg>]}, "count": true, "diagnostics": true, "limit": 1, "columns": ["e.event_name"]}`. `diagnostics.root.passed` is the match count (a floor). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same count once more. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
+4. **Count** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <match leg>]}, "count": true, "diagnostics": true, "limit": 1, "columns": ["e.event_name"]}`. `diagnostics.root.passed` is the match count (a floor). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. If `diagnostics.status` is `unavailable`, call the same count once more. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
    Done when you hold both counts.
 
 5. **List** with `screen_events`: `{"predicate": {"all": [<the fixed leaves>, <the parameter leaves>, <list leg>]}, "limit": 60, "columns": ["e.event_name", "e.local_date", "ea.lowest_aip_price_current", "ea.tm_lowest_aip_price_current", "ea.tm_tickets_current", "ea.last_price_snapshot_date", "ea.tm_asof_at"]}`. If 60 rows came back, or `meta.truncated` is true, call once more with `"page": 2`. Never a third page.
@@ -81,9 +81,9 @@ An event passes when some step S sits between its two prices: primary all-in at 
 - Link each event with the `event_url` on its row; never search again to find it.
 - Both prices are all-in: what a buyer pays with fees.
 - A high lowest primary price often means the box office has only its dearest seats left; say "the lowest ticket the box office lists".
-- Say the primary market and resale. Name no marketplace. Never write "sold" or "tickets sold".
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves the fixed leaves, the parameter leaves and the match leg as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

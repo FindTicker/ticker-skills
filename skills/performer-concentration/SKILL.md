@@ -1,6 +1,6 @@
 ---
 name: performer-concentration
-description: "Seller concentration across one act's upcoming dates on Ticker: which nights a few sellers control and which are spread out. Use when the user asks where sellers hold an act's tour, date by date."
+description: "Seller concentration across one act's upcoming dates on Ticker: how listed inventory is distributed among sellers on each date. Use when the user asks to compare seller concentration across an act's dates."
 ---
 
 # Concentration across an act
@@ -9,7 +9,7 @@ description: "Seller concentration across one act's upcoming dates on Ticker: wh
 
 **Usual cost:** up to 8 requests: the plan check, one search, one concentration read per date.
 
-For one act, the seller concentration of each upcoming date side by side: how many sellers, the largest one's share, and the band. A date that one seller dominates prices differently from a date many sellers compete on.
+For one act, the seller concentration of each upcoming date side by side: how many sellers, the largest one's share, and the band. Compare the distribution of listed inventory without inferring price control or seller motives.
 
 ## Parameters
 
@@ -21,7 +21,7 @@ For one act, the seller concentration of each upcoming date side by side: how ma
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. The seller tools answer null below Ultra, the same answer as an event with no reading, so this check comes first. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Concentration across an act reads seller concentration, which the Ultra plan opens: https://findticker.com/plans.
    ```
@@ -46,8 +46,8 @@ For one act, the seller concentration of each upcoming date side by side: how ma
 - Never name, rank or guess who a seller is. Use the labels the tool gives ("Seller D"); a label means nothing outside its event.
 - Tickets a seller holds are resale tickets on sale. A seller whose count fell may have had sales or pulled listings: never write "sold".
 - A low `coverage_pct` means the shares describe a small part of the house; say it beside them.
-- Name no marketplace. Link each event with its `event_url`.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use the source labels returned by the tools; do not guess provider names. Link each event with its `event_url`.
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

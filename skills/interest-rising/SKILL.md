@@ -1,6 +1,6 @@
 ---
 name: interest-rising
-description: "Interest rising on Ticker: events where shopper attention grew over the week and again today. Use when the user asks what people are starting to look at before prices move."
+description: "Interest rising on Ticker: events where shopper attention grew over the week and again today. Use when the user asks which events show a rising attention indicator."
 ---
 
 # Interest rising
@@ -9,7 +9,7 @@ description: "Interest rising on Ticker: events where shopper attention grew ove
 
 **Usual cost:** 2 requests: the plan check and one screener run.
 
-Events where Interest, the attention an event gets from shoppers, grew over the last 7 days and grew again over the last day. Attention often shows up before the price moves.
+Events where Interest, the attention an event gets from shoppers, grew over the last 7 days and grew again over the last day. Compare changes in the attention indicator without treating them as a forecast of prices or purchases.
 
 ## Parameters
 
@@ -56,10 +56,10 @@ Sort: Interest Δ7d, biggest rise first: `{"col": "ea.interest_d7", "dir": "desc
                 "ea.demand_asof_date", "ea.last_price_snapshot_date"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
-4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
+4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
    Done when you hold both counts.
 
 5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, interest rise 7 days 500, interest rise 1 day above 0, rows 20." Then one sentence names the screen in the app's words, with the values used: "Interest Δ7d up 500 or more, Interest Δ1d up". Then the counts, then a table of the rows: event (linked), date, city, Interest, Interest Δ1d, Interest Δ7d, Sales, Median, Median %Δ7d. Under the table: "Interest is a rolling level of shopper attention, not a count of people today; read the change as momentum." Close with the time of the numbers (the `last_price_snapshot_date` values).
@@ -69,10 +69,10 @@ Sort: Interest Δ7d, biggest rise first: `{"col": "ea.interest_d7", "dir": "desc
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- A null score means fewer than 30 peers: the row can not be ranked, and the screen leaves it out.
-- Name no marketplace. Never write "sold" or "tickets sold".
+- A null score means that comparison is unavailable. Do not invent a score or interpret null as zero.
+- Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

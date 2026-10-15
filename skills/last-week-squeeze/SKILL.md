@@ -9,7 +9,7 @@ description: "Last-week squeeze on Ticker: events in their final week where resa
 
 **Usual cost:** 1 request (one screener run).
 
-Events a week or less from the date where at least half of the resale market emptied out over the last 7 days and the cheapest ticket got dearer. Late demand is eating the supply: the get-in price is still moving up.
+Events a week or less from the date where at least half of the resale market emptied out over the last 7 days and the cheapest ticket got dearer. Report the price rise and reduction in listings separately. Listings can disappear through sales or withdrawals.
 
 ## Parameters
 
@@ -42,10 +42,10 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
                 "ea.absorption_rate_7d", "ea.tickets_current", "ea.last_price_snapshot_date"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server adds `absorption_data_quality` and `absorption_grain` to each row, and applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's coverage fields and eligible results. Add no eligibility filter of your own.
    Done when the page is back.
 
-3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
+3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
    Done when you hold both counts.
 
 4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 7, absorption 0.5, lowest rise 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "7 days or less to go, Absorption rate 7d 0.5 or more, Lowest %Δ7d up more than 10%". Then the counts, then a table of the rows: event (linked), date, days to go, Lowest, Lowest %Δ7d, Median, Absorption rate 7d, Tickets. Under the table: "Absorbed means listings that left the resale market: a sale, a withdrawal or an expiry count the same." Close with the time of the numbers (the `last_price_snapshot_date` values).
@@ -56,9 +56,9 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - An `absorption_data_quality` under 0.5 is a weak reading: mark those rows "(weak reading)".
-- Prices are resale list prices before fees. Name no marketplace. Never write "sold" or "tickets sold".
+- Prices are resale list prices before fees. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - Only when the user asks for alerts on this screen, or for the primary market (the box office), say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans). Then answer with what this screen gives. Do not offer either unasked.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

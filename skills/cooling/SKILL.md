@@ -1,6 +1,6 @@
 ---
 name: cooling
-description: "Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or which on-sales are soft."
+description: "Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or where resale prices fell while primary tickets remain available."
 ---
 
 # Cooling
@@ -9,7 +9,7 @@ description: "Cooling events on Ticker: median price falling, resale tickets gro
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the median resale price fell this week, more resale tickets came on sale, and the primary market (the box office) still has more than half the room to sell. Supply is ahead of demand on both sides: a list of events to stay out of, or to buy late.
+Events where the median resale price fell this week, more resale tickets came on sale, and the primary market (the box office) still has more than half the room to sell. Use the screen to compare falling resale prices with listed inventory and primary availability. It does not predict future prices.
 
 ## Parameters
 
@@ -58,10 +58,10 @@ Sort: Median %Δ7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir
                 "ea.tm_asof_at"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
-4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. Primary data covers only part of the events; say so with that number. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
+4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). In `diagnostics.legs`, the leg on `ea.tm_asof_at` has `passed`: how many events had a fresh primary reading, so how many this screen could look at. Primary data covers only part of the events; say so with that number. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true) and say the coverage count was not available on this run.
    Done when you hold the match count and the primary coverage count.
 
 5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, median fall 10%, primary remaining over 50%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median %Δ7d down more than 10%, Tickets Δ7d up, Primary remaining over 50%". Then the counts ("230 events match, of 21,645 with a fresh primary reading"), then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Lowest, Primary remaining, Tickets, Tickets Δ7d. Close with the time of the numbers: resale priced on the `last_price_snapshot_date` values, primary read between the earliest and the latest `tm_asof_at` on the page.
@@ -71,14 +71,14 @@ Sort: Median %Δ7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- Say the primary market and resale. Name no marketplace.
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
 - A fall steeper than 90% in a week is a data break, and Primary remaining above 100 is a wrong capacity figure: the leaves leave both out.
 - Never write "sold", "unsold" or "tickets sold": say "Primary remaining 64%".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "Which concerts are going soft, with the box office still over 60 percent full of tickets?"
+User: "Which concerts have falling resale prices and more than 60 percent primary availability?"
 
 `list_screen_columns` shows the primary columns open. One screen. Answer: "Values: city every city, category concerts (14, 15, 17, 18, 20, 52, 74), days to event 0 to 365, median fall 10%, primary remaining over 60%, rows 20. Median %Δ7d down more than 10%, Tickets Δ7d up, Primary remaining over 60%: 58 events match, of 21,600 with a fresh primary reading." Then the rows, then "Resale priced 2026-09-29; primary read 2026-09-28 06:10 to 2026-09-29 21:40 UTC."

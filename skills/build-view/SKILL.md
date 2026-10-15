@@ -65,9 +65,9 @@ Read the values from the user's words ("hot events in Boston", "once a day", "do
 - Tell the user, in plain words: what the View catches (in the app's column words), how many events it would hold today with the `last_price_snapshot_date` of the test, how often it emails, and the `view_url`.
 - A Match is an event entering the View. Never report an alert as sent unless `list_matches` shows `delivery_status: "sent"`.
 - Call the emails "the hourly email" or "the daily email"; never "digest", which names another feature.
-- Name no marketplace. Never write "sold".
+- Use the source labels returned by the tools; do not guess provider names. Never write "sold".
 - To remove a View, `delete_view` `{"view_id"}`.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

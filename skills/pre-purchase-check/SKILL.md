@@ -56,14 +56,14 @@ Read the values from the user's words ("the last week", "top 5 sections"); keep 
 
 - Quote each stamp as the tool gave it ("priced 2026-09-28", "as of 05:02 UTC"). Give the stamp, not an age: you do not know the current time.
 - Every number carries its read date: `last_price_snapshot_date` for daily prices, `tm_asof_at` for primary, `as_of` inside each section source.
-- Say the primary market and resale. Name sources only by their code (`vs`, `tm`, `tmr`), and name no marketplace.
+- Say the primary market and resale. Use the source labels returned by the tools, such as `vs`, `tm` and `tmr`; do not guess provider names.
 - All-in (`*_aip_*`) is the buyer's final price with fees. Label which one you quote.
 - Tickets that left the market are listings gone: never write "sold".
 - Use no seat-by-seat or live-section tool in this check.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
 User: "Should I buy Zach Bryan at Gillette now or wait?"
 
-`search_events` finds the event; the analytics read shows median $202, down 18.6% in 7 days (priced 2026-09-28), 4 days to go; the 28-day chart falls from $248; the cheapest sections are 139 and 141 at $76 resale. On Free the third line reads "The primary market's prices are read on the Max plan: https://findticker.com/plans." Verdict: "Resale has fallen for a week. Four days out, the risk of waiting is supply drying up, not price rising."
+`search_events` finds the event; the analytics read shows median $202, down 18.6% in 7 days (priced 2026-09-28), 4 days to go; the 28-day chart falls from $248; the cheapest sections are 139 and 141 at $76 resale. On Free the third line reads "The primary market's prices are read on the Max plan: https://findticker.com/plans." Verdict: "Resale has fallen for a week. There are four days to the event. Availability and prices can change; compare seat locations and restrictions before choosing."

@@ -1,6 +1,6 @@
 ---
 name: tour-dates
-description: "Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour. Use when the user asks which night of a tour to buy or sell."
+description: "Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour. Use when the user asks to compare ticket prices and availability across tour dates."
 ---
 
 # Two tour dates
@@ -9,7 +9,7 @@ description: "Two dates of one tour side by side on Ticker: price, trend, supply
 
 **Usual cost:** 6 requests: the plan check, one search, two analytics reads, two charts.
 
-Two dates of one act, side by side: what each costs, where each price is going, how much resale supply each has, and how each date's weekly move compares with the act's other dates. A broker picks the night to buy, or the night to list.
+Two dates of one act, side by side: what each costs, where each price is going, how much resale supply each has, and how each date's weekly move compares with the act's other dates. Compare dates for a visit, pricing decision or market report.
 
 ## Parameters
 
@@ -54,9 +54,9 @@ Two dates of one act, side by side: what each costs, where each price is going, 
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Prices are resale list prices before fees, except Lowest all-in. Label the all-in one.
-- Tickets is resale tickets on sale. Name no marketplace. Never write "sold".
+- Tickets is resale tickets on sale. Use the source labels returned by the tools; do not guess provider names. Never write "sold".
 - The decision is the user's: say which way the numbers lean, not what to do.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
