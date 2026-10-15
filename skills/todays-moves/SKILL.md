@@ -1,6 +1,6 @@
 ---
 name: todays-moves
-description: "Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick. Use when a broker asks what moved today or what their alerts caught."
+description: "Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick. Use when the user asks what changed in their saved Views or watched events."
 ---
 
 # Today's moves
@@ -9,7 +9,7 @@ description: "Today's moves on Ticker: which events entered your saved Views and
 
 **Usual cost:** 3 requests: your Views, the Matches, the watchlist.
 
-What the account's own alerts caught: every event that entered one of its saved Views, and every watched event that fired, since the start of today or a time the user picks. A broker reads it at the end of the day to decide what to act on.
+What the account's own alerts caught: every event that entered one of its saved Views, and every watched event that fired, since the start of today or a time the user picks. Use it to review changes in the events the account follows.
 
 ## Parameters
 
@@ -46,9 +46,9 @@ What the account's own alerts caught: every event that entered one of its saved 
 - Quote each time as the tool gave it, in UTC.
 - An alert went out only when `delivery_status` is `sent`. Any other value (`not_sent`, `pending`, `held`) is a Match that did not reach the inbox yet or will not; say which.
 - A Match is an event entering a View, not a sale and not a price.
-- Link each event with its `event_url` and each View with its `view_url`. Name no marketplace. Never write "sold".
+- Link each event with its `event_url` and each View with its `view_url`. Use the source labels returned by the tools; do not guess provider names. Never write "sold".
 - Call the emails "the hourly email" or "the daily email"; never "digest".
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

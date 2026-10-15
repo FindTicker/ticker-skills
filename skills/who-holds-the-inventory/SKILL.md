@@ -1,6 +1,6 @@
 ---
 name: who-holds-the-inventory
-description: "Who holds one event's resale inventory on Ticker: how many sellers, the largest one's share, and how that moved. Use when the user asks if a few sellers control an event."
+description: "Who holds one event's resale inventory on Ticker: how many sellers, the largest one's share, and how that moved. Use when the user asks how resale listings are distributed among sellers."
 ---
 
 # Who holds the inventory
@@ -9,7 +9,7 @@ description: "Who holds one event's resale inventory on Ticker: how many sellers
 
 **Usual cost:** 4 requests: the plan check, one search, the concentration, the hourly series.
 
-How concentrated one event's resale inventory is among the sellers behind it. A few sellers holding most of the tickets can move the price; many small sellers compete it down. Sellers stay anonymous: "Seller A" is a label for this event only, in the order sellers arrived.
+How concentrated one event's resale inventory is among the sellers behind it. Concentration describes the observed listings. It does not establish price control, total ticket ownership or seller intent. Use the anonymous seller labels returned by the tools; a label applies only within its event.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ How concentrated one event's resale inventory is among the sellers behind it. A 
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. The seller tools answer null below Ultra, the same answer as an event with no reading, so this check comes first. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Who holds the inventory reads seller concentration, which the Ultra plan opens: https://findticker.com/plans.
    ```
@@ -48,11 +48,11 @@ How concentrated one event's resale inventory is among the sellers behind it. A 
 - Never name, rank or guess who a seller is. Use the labels the tool gives ("Seller D"); a label means nothing outside its event.
 - Tickets a seller holds are resale tickets on sale. A seller whose count fell may have had sales or pulled listings: never write "sold".
 - A low `coverage_pct` means the shares describe a small part of the house; say it beside them.
-- Name no marketplace. Link each event with its `event_url`.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use the source labels returned by the tools; do not guess provider names. Link each event with its `event_url`.
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "Is one seller sitting on most of the Arsenal v Hull tickets?"
+User: "How concentrated are the resale listings for Arsenal v Hull?"
 
-`list_views` shows no cap; `search_events` finds the match; the concentration reads 17 sellers on 9,512 tickets, the largest at 69% and the largest three at 93%, shape dominated, coverage 99.9%. Answer: "Values: event Arsenal vs Hull City, Emirates Stadium, 2026-11-07, window 48 hours. Yes: one seller holds 69% of the tickets on sale and three hold 93%, so this event is dominated. Seller D is the large one, with 6,551 tickets at 22:00 UTC."
+`list_views` shows no cap; `search_events` finds the match; the concentration reads 17 sellers on 9,512 tickets, the largest at 69% and the largest three at 93%, shape dominated, coverage 99.9%. Answer: "Values: event Arsenal vs Hull City, Emirates Stadium, 2026-11-07, window 48 hours. One seller accounts for 69% of the attributed resale listings and three account for 93%. Seller D is the large one, with 6,551 tickets at 22:00 UTC."

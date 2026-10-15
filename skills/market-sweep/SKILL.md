@@ -1,6 +1,6 @@
 ---
 name: market-sweep
-description: "Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked. Use when a broker asks for the day's full market read."
+description: "Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked. Use when the user asks for an overview of changes across the ticket market."
 ---
 
 # Market sweep
@@ -9,7 +9,7 @@ description: "Market sweep on Ticker: the screens of the lower plans run over th
 
 **Usual cost:** 8 requests: the plan check and seven screener runs.
 
-Seven screens at once over the whole market, and one ranked list: the events that the most screens flag. Heat screens: hot events, primary gone and rising, last-week squeeze, momentum, interest rising. Cold screens: price drop, cooling. An event that three heat screens flag is a stronger call than one that one screen flags.
+Seven screens at once over the whole market, and one ranked list: the events that the most screens flag. Heat screens: hot events, primary gone and rising, last-week squeeze, momentum, interest rising. Cold screens: price drop, cooling. Report which screens each event matches. Overlapping filters are not independent evidence of demand or a price forecast.
 
 ## Parameters
 
@@ -48,8 +48,8 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - A screen's page is its top rows, not every match: say "in the top 25 of" beside each count.
-- Say the primary market and resale. Name no marketplace. Never write "sold", "sold out" or "tickets sold".
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold", "sold out" or "tickets sold".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

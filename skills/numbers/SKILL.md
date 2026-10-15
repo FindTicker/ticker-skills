@@ -1,9 +1,9 @@
 ---
 name: numbers
-description: "How Ticker's numbers are made: sources, read times, and what taken, absorbed and Gone mean. Use when the user asks how fresh a number is, where it comes from, or whether a count means sales."
+description: "Understand Ticker's readings: price bases, observation times, and what taken, absorbed and Gone mean. Use when the user asks how fresh a number is, where it comes from, or whether a count means sales."
 ---
 
-# How Ticker's numbers are made
+# Understand Ticker's readings
 
 **Plan:** Free
 
@@ -31,13 +31,13 @@ Read both from the user's words. With no event, answer from the reference alone 
 
 ## Words
 
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Reference
 
-**Sources and plans.** Two sides of the market: primary (the box office) and resale. Tools name sources by code: `vs` and `tp` resale, `tm` primary, `tmr` primary's own resale, `gt` and `sg` resale quoted all-in. Free reads `vs`. Pro adds `tp`. Daily price history is full depth on every plan through these tools. Max adds `tm`, `tmr`, `gt` and `sg`. Ultra adds one more source when it lands, and seller concentration. A source above the plan is refused by name or left out of the answer. The tools sometimes call a side of the market a "book"; in the answer, say the primary market and resale. Name no marketplace; say primary or resale, or the code.
+**Sources and plans.** Ticker reports primary-market and resale readings separately. Use the source code and price basis returned by the tool. Available sources and history depend on the account's plan: https://findticker.com/plans. A plan restriction is not missing data. Respect `plan_required`, locked-field and withheld-field responses; do not infer coverage from an empty result.
 
-**Stamps.** How often a number is read differs by event (priority 1 events are read most often), so never assume a cadence: read the stamp.
+**Stamps.** Freshness varies by event and reading. Quote the observation timestamp; do not assume a collection cadence.
 
 | Number | Grain | Stamp |
 |---|---|---|
@@ -46,7 +46,7 @@ Read both from the user's words. With no event, answer from the reference alone 
 | Live seats per section (Max) | latest seat reading | `as_of` |
 | Interest, Sales | daily | `demand_asof_date` |
 | Performer rank | daily | `rank_asof_date` |
-| Absorbed listings | daily, can lag about two days while it settles | `absorption_asof_date` |
+| Absorbed listings | daily, subject to revision | `absorption_asof_date` |
 
 A row whose `last_price_snapshot_date` is more than a day old is not a move today. `partial_row: true` means a hollow row: its nulls are unknown, not zero.
 
@@ -58,11 +58,11 @@ A row whose `last_price_snapshot_date` is more than a day old is not a move toda
 - Taken: the share of a section's seats not open on the primary market now. A seat sold, held back, killed or not yet released counts the same.
 - Absorbed, delisted, `sold_or_pulled`: listings that left the resale market, sold or withdrawn; the price beside them is an asking price.
 - Primary remaining 0: the box office listed nothing at its last read. It does not say why.
-- Interest and Sales: rolling-window levels of shoppers and sales pace. Read the change as momentum; never "X tickets sold today".
+- Interest and Sales: marketplace-provided rolling-window indicators of attention and sales activity. Read the change as momentum; never "X tickets sold today".
 
 **Seat states (seat map, Max).** Four dots. Available: on sale now. Gone or Repriced in the last hour. Gone: a seat we saw go off sale, at any age, while the newest read of the whole venue does not list it; the hover gives the age ("Gone, 16h ago"). No history: a seat we never saw on sale. The age of the newest read of the whole venue is how fresh the map is. In a seat's history, gone is a seat that left and never came back: sold or pulled, the log does not say which.
 
-**Scores.** A self z-score compares an event's move with its own normal swing; a peer score (`_xs_z_subcat_tte`) compares it with events of the same sub-category at a similar distance from the date; a tour score (`_xs_z_tour_tte`) with the same act's other dates. `data_quality_score` under 0.5 means thin history.
+**Scores.** A self z-score compares an event's move with its own normal swing; a peer score (`_xs_z_subcat_tte`) compares it with events of the same sub-category at a similar distance from the date; a tour score (`_xs_z_tour_tte`) with the same act's other dates. Treat `data_quality_score` as history sufficiency, not a guarantee of correctness. Use the tool's definition and missing-data warnings.
 
 **Views and Matches.** A View is a saved screen; a Match is one event entering it. Baseline Matches, recorded when a View learns its contents, are never alerted. An alert went out only when `delivery_status` is `sent`.
 

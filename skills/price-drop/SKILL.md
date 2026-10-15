@@ -1,6 +1,6 @@
 ---
 name: price-drop
-description: "Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up. Use when the user asks what is getting cheaper, where prices are falling, or where to buy low."
+description: "Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up. Use when the user asks what is getting cheaper, where prices are falling, or to compare lower-priced events."
 ---
 
 # Price drop
@@ -9,7 +9,7 @@ description: "Price-drop screen on Ticker: events whose median price fell over t
 
 **Usual cost:** 1 request (one screener run).
 
-Events whose median resale price fell this week while more resale tickets came on sale. Sellers are adding supply into a softer market: a buyer's list, and a warning for anyone holding tickets.
+Events whose median resale price fell this week while more resale tickets came on sale. Compare the observed price change and listed inventory. A rise in listings does not establish why tickets were added or predict future prices.
 
 ## Parameters
 
@@ -48,10 +48,10 @@ A fall steeper than 90% in a week is a data break (a week-old median in the thou
                 "ea.tickets_delta_7d", "ea.last_price_snapshot_date"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median) and drops stale rows. Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
-3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at after the server's gates. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true).
+3. **Read the counts.** `diagnostics.root.passed` is how many events match; `total` stops at 1,000, so prefer `root.passed`. `diagnostics.rows_evaluated` is how many events the screen looked at after the server's gates. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total` ("1,000 or more" when `countCapped` is true).
    Done when you hold the match count and the count looked at.
 
 4. **Report.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: city every city, category every category, days to event 0 to 365, median fall 10%, rows 20." Then one sentence names the screen in the app's words, with the values used: "Median %Δ7d down more than 10%, Tickets Δ7d up". Then the counts ("3,804 events match, of 64,612 screened"), then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Lowest, Tickets, Tickets Δ7d. Close with the time of the numbers: the `last_price_snapshot_date` values on the rows ("priced 2026-09-28 and 2026-09-29").
@@ -62,9 +62,9 @@ A fall steeper than 90% in a week is a data break (a week-old median in the thou
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row. Every row carries `event_id` and `event_url`; never search again to find them.
 - Prices are resale list prices before fees. Tickets is resale tickets on sale, not the box office's stock.
-- Name no marketplace. Never write "sold" or "tickets sold": a ticket that left the market may have been withdrawn.
+- Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold": a ticket that left the market may have been withdrawn.
 - Only when the user asks for alerts on this screen, or for the primary market (the box office), say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans). Then answer with what this screen gives. Do not offer either unasked.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

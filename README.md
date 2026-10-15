@@ -1,14 +1,16 @@
 # Ticker skills
 
-Skills that help an AI assistant research and monitor the ticket market with the [Ticker](https://findticker.com) tools: screens that give a list to act on today, one-event checks, alerts, and who holds the inventory. Each skill is one folder under `skills/` with a `SKILL.md` in the open [Agent Skills](https://agentskills.io) format, so the same files work in Claude, Codex, Cursor, GitHub Copilot, Gemini CLI and the other apps that read that format.
+Research events, compare ticket prices and monitor the ticket market with the [Ticker](https://findticker.com) tools. Use these workflows to plan a visit, compare tour dates, follow demand indicators, review pricing or track listed inventory.
 
-Install all 24. Your Ticker plan decides what the tools answer, not which skills you have: a skill of a higher plan than yours tells you which plan opens it and runs the closest skill your plan has.
+Each skill is a folder with a `SKILL.md` in the [Agent Skills](https://agentskills.io) format. Install the skills you want, or all 24. The Ticker tools enforce your account's plan and permissions.
+
+## Skills
 
 | Plan | Skill | What it does |
 |---|---|---|
 | Free | `city-under-price` | Events in one city on Ticker, in a date window, that a buyer can get into under a price, fees included |
 | Free | `last-week-squeeze` | Last-week squeeze on Ticker: events in their final week where resale listings are being absorbed and the lowest price is climbing |
-| Free | `numbers` | How Ticker's numbers are made: sources, read times, and what taken, absorbed and Gone mean |
+| Free | `numbers` | Understand Ticker's readings: price bases, observation times, and what taken, absorbed and Gone mean |
 | Free | `pre-purchase-check` | Pre-purchase check on one event with Ticker: price trend, cheapest sections, primary against resale |
 | Free | `price-drop` | Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up |
 | Free | `sale-calendar` | On-sale and presale calendar on Ticker for one city or one act: which events go on sale or open a presale in the coming days |
@@ -24,50 +26,52 @@ Install all 24. Your Ticker plan decides what the tools answer, not which skills
 | Max | `resale-above-primary` | Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's while the box office still has tickets |
 | Max | `resale-below-primary` | Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling |
 | Max | `seat-map-moves` | Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day |
-| Ultra | `hot-and-concentrated` | Hot events on Ticker checked for who holds them: the hot-events screen, then each event's seller concentration |
+| Ultra | `hot-and-concentrated` | Hot events on Ticker with seller concentration: the hot-events screen, then each event's seller concentration |
 | Ultra | `market-sweep` | Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked |
-| Ultra | `performer-concentration` | Seller concentration across one act's upcoming dates on Ticker: which nights a few sellers control and which are spread out |
-| Ultra | `seller-moves` | Seller moves on Ticker: which sellers of one event are unloading or loading tickets, hour by hour, over a window you pick |
-| Ultra | `watchlist-sellers` | Seller concentration across your watched events on Ticker: which of the events you watch a few sellers control |
+| Ultra | `performer-concentration` | Seller concentration across one act's upcoming dates on Ticker: how listed inventory is distributed among sellers on each date |
+| Ultra | `seller-moves` | Seller moves on Ticker: changes in resale listings attributed to each seller over a window you pick |
+| Ultra | `watchlist-sellers` | Seller concentration across your watched events on Ticker: how listed inventory is distributed among sellers for the events you watch |
 | Ultra | `who-holds-the-inventory` | Who holds one event's resale inventory on Ticker: how many sellers, the largest one's share, and how that moved |
 
-Every skill has a Parameters table at the top of its file: a city, a category, days to the event, a threshold, how many rows. Ask in plain words ("hot events in Boston, median up over 15 percent") and the skill says back the values it used. A value outside its range is refused with the range.
+Each skill lists its parameters and reports the values used. Ask in plain words, such as "concerts in Boston this month under $100 including fees" or "compare prices across these tour dates". You can change the screen's parameters within its documented ranges.
 
 ## Install
 
-Every skill works through the Ticker MCP server, `https://api.findticker.com/mcp`. You sign in with your Ticker account the first time. There is no key to paste.
+Connect the Ticker MCP server at `https://api.findticker.com/mcp` and sign in with your Ticker account. No API key is needed for this connection.
 
 ### Claude Code
 
-```
+```sh
 claude plugin marketplace add FindTicker/ticker-skills
 claude plugin install ticker@ticker
 ```
 
-That installs one plugin, `ticker`: all 24 skills and the Ticker server. Start Claude Code, run `/mcp`, and sign in to Ticker. The skills show as `ticker:price-drop`, `ticker:hot-events` and so on. Inside Claude Code, `/plugin marketplace add FindTicker/ticker-skills` and `/plugin install ticker@ticker` do the same.
+This installs the skills and Ticker MCP connection. Run `/mcp` to sign in. Skills appear as `ticker:price-drop`, `ticker:pre-purchase-check` and the other names above.
 
-### Claude (claude.ai and the desktop app)
+### Claude
 
-Open Customize, Plugins, Add, Add marketplace, and enter `FindTicker/ticker-skills`. Add the `ticker` plugin, then open its Connectors tab, connect Ticker and sign in. The plugin also reaches Claude Code on the same account.
+Follow the [Claude setup guide](https://findticker.com/docs/mcp/claude) to connect Ticker. For plugin installation, add `FindTicker/ticker-skills` as a marketplace in your app's plugin settings where supported, then install `ticker` and connect your account.
 
-### Codex, Cursor, GitHub Copilot, Gemini CLI and others
+### Codex, Cursor, GitHub Copilot, Gemini CLI and other compatible apps
 
-```
+```sh
 npx skills add FindTicker/ticker-skills
 ```
 
-The [skills CLI](https://github.com/vercel-labs/skills) asks which skills to install and for which apps. Then add the Ticker MCP server in that app's MCP settings.
+Choose the skills and apps in the installer, then add the Ticker MCP server in your app's MCP settings.
 
 ### ChatGPT
 
-ChatGPT has no way to install skills. Connect the Ticker MCP server instead, and the Ticker tools work on their own: https://docs.findticker.com/docs/connect
+Connect Ticker using the [ChatGPT setup guide](https://findticker.com/docs/mcp/chatgpt). Ticker's tools work through the connection; these skill files require a client that supports Agent Skills.
 
-Every app, step by step: https://docs.findticker.com/docs/skills
+[Connection and installation guides](https://findticker.com/docs/skills) cover the supported apps.
 
-## How the skills were tested
+## Reading the results
 
-Each skill was run end to end by a real assistant against the real Ticker tools, from one user prompt, with only these skills installed, as a test account of each plan, before it was published here.
+Quote the reading time and price basis alongside values. Primary and resale prices can refer to different seats or restrictions. A listing that disappeared may have sold or been withdrawn; it is not a confirmed sale. Concentration describes observed listings, not seller identity or intent.
+
+Examples illustrate the workflow. Use the tool's current response for values, availability and plan access. Ticker helps you compare observations; it does not guarantee future prices or purchase outcomes.
 
 ## License
 
-Source-available: free to install and use with a Ticker account. See [`LICENSE.md`](LICENSE.md).
+Source-available for use with a Ticker account. See [LICENSE.md](LICENSE.md).

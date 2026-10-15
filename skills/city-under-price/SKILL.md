@@ -43,7 +43,7 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
                 "ea.last_price_snapshot_date"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
 3. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). If `diagnostics.status` is `unavailable`, use `total`.
@@ -57,10 +57,10 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - Lowest all-in is what a buyer pays at checkout with fees; say "all-in" beside it. The other prices are before fees.
-- Small events with fewer than 25 listings are left out by the server's floor; say so if the user asks why a small show is missing.
-- Name no marketplace. Never write "sold".
+- The results cover the server's eligible events, not every event in the city. Explain missing coverage without inventing a reason for a missing show.
+- Use the source labels returned by the tools; do not guess provider names. Never write "sold".
 - Only when the user asks for alerts, or for the box office's own prices, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and the primary market's prices start on the Max plan (https://findticker.com/plans). Do not offer either unasked.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

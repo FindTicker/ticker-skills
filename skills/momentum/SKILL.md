@@ -1,6 +1,6 @@
 ---
 name: momentum
-description: "Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before. Use when a broker asks what is breaking out or has momentum."
+description: "Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before. Use when the user asks where prices and listed inventory are changing together."
 ---
 
 # Momentum
@@ -9,7 +9,7 @@ description: "Momentum screen on Ticker: events whose weekly price move is unusu
 
 **Usual cost:** 2 requests: the plan check and one screener run.
 
-Events whose price moved this week far more than events of the same kind at the same distance from the date, while resale tickets started leaving faster over the last three days than over the two weeks before. Two signals agree: price and supply.
+Events whose price moved this week far more than events of the same kind at the same distance from the date, while resale tickets started leaving faster over the last three days than over the two weeks before. Compare the price change with the change in listed inventory; neither establishes why listings left the market.
 
 ## Parameters
 
@@ -56,23 +56,23 @@ Sort: Price z (peer), highest first: `{"col": "ea.price_self_z_7d_xs_z_subcat_tt
                 "ea.tickets_current", "ea.last_price_snapshot_date"],
     "count": true, "diagnostics": true, "limit": <rows>}
    ```
-   The server applies its own floor (at least 25 listings and a $40 median). Add no floor of your own.
+   Use the server's eligible results and coverage diagnostics. Add no eligibility filter of your own.
    Done when the page is back.
 
-4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable` (it has a 6-second budget), call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
+4. **Read the counts.** `diagnostics.root.passed` is how many events match (`total` stops at 1,000). `diagnostics.rows_evaluated` is how many events the screen looked at. If `diagnostics.status` is `unavailable`, call the same screen once more with `"limit": 1`, `"columns": ["e.event_name"]` and `"diagnostics": true`. If it is unavailable again, give `total`.
    Done when you hold both counts.
 
-5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, price score 2, pace score -1, rows 20." Then one sentence names the screen in the app's words, with the values used: "Price z (peer) 2 or more, Pace z (peer) -1 or less". Then the counts, then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Price z (peer), Pace z (peer), Tickets. Under the table, two lines: "Price z (peer): how unusual this week's price move is next to events of the same genre or league at the same distance from the date; 2 is unusual, and the score stops at 12." "Pace z (peer): whether tickets started leaving faster over the last 3 days than over the 2 weeks before, against the same peers; negative is faster." Close with the time of the numbers (the `last_price_snapshot_date` values).
+5. **Report.** First line, the values used: "Values: city every city, category every category, days to event 0 to 365, price score 2, pace score -1, rows 20." Then one sentence names the screen in the app's words, with the values used: "Price z (peer) 2 or more, Pace z (peer) -1 or less". Then the counts, then a table of the rows: event (linked), date, city, Median, Median %Δ7d, Price z (peer), Pace z (peer), Tickets. Under the table, two lines: "Price z (peer): how unusual this week's price move is next to events of the same genre or league at the same distance from the date; larger positive values are more unusual." "Pace z (peer): whether tickets started leaving faster over the last 3 days than over the 2 weeks before, against the same peers; negative is faster." Close with the time of the numbers (the `last_price_snapshot_date` values).
    Done when every row is in the table and the answer says when its numbers were read.
 
 ## Reporting rules
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- A null score means fewer than 30 peers: the row can not be ranked, and the screen leaves it out.
-- Name no marketplace. Never write "sold" or "tickets sold".
+- A null score means that comparison is unavailable. Do not invent a score or interpret null as zero.
+- Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 

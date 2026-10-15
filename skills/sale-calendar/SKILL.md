@@ -9,7 +9,7 @@ description: "On-sale and presale calendar on Ticker for one city or one act: wh
 
 **Usual cost:** 1 request (one search or one screener run).
 
-The public on-sale dates and the first presale dates coming up for one act, or for every event in one city. A broker plans the week around these.
+The public on-sale dates and the first presale dates coming up for one act, or for every event in one city. Use the dates to plan a purchase, follow an event or coordinate event research.
 
 ## Parameters
 
@@ -54,7 +54,7 @@ Every threshold of this skill is in this table.
 - The city screen sees only events Ticker already prices; an event not yet listed on resale can be missing. Say so once.
 - Link each event with its `event_url`. Name no marketplace, and quote no presale code or presale name.
 - The named presale windows of an event (their names and every window) are read on the Max plan: https://findticker.com/plans. Say so only when the user asks for them.
-- Say primary market and resale, never "book", even where a tool's text does. Name a higher plan only with this skill's plan sentence; never write "upgrade" or "unlock".
+- Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
