@@ -7,7 +7,7 @@ description: "Watch an event on Ticker with the alert the user wants: star it, a
 
 **Plan:** Pro
 
-**Usual cost:** 5 requests: search, watchlist, plan check, the watch, the defaults. `list_watch_triggers` is free.
+**Usual cost:** 4 requests: search, watchlist, plan check, the watch.
 
 Watched events and saved Views share one allowance: Free 1, Pro 25, Max 100, Ultra no cap. A plan over its allowance still stars the event, but only its newest watches alert; the result says which ones stopped. On Free the one slot goes to the newest star.
 
@@ -16,7 +16,7 @@ Watched events and saved Views share one allowance: Free 1, Pro 25, Max 100, Ult
 | Parameter | Default | Range | Sets |
 |---|---|---|---|
 | event | none: ask for one | one event: an act, team or venue name, with a date when the act plays more than once | the `search_events` call |
-| move | 10% | the `pct_move` range `list_watch_triggers` gives (5 to 100 today) | `pct_move` `threshold` |
+| move | 10% | the `pct_move` range `watch_event`'s `triggers` input gives (5 to 100 today) | `pct_move` `threshold` |
 | price | lowest | lowest or median | `pct_move` `metric` |
 | window | 1 day | 1 day or 7 days | `pct_move` `window` (`1d` or `7d`) |
 | alerts off | none | on-sale, presale, event week and low inventory (one switch, `lifecycle`); unusual move (`price_z`) | `{"enabled": false}` on each |
@@ -29,7 +29,7 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
 1. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC, and an evening show in the Americas falls on the next UTC day. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
-2. **Read the trigger catalogue** with `list_watch_triggers` `{}` (free). Each trigger has a `key`, its `params` with `min`, `max` and `default`, and sometimes a `caveat`. A value outside the range is clamped, not refused, so check the range before you write.
+2. **Read the trigger catalogue** in `watch_event`'s `triggers` input. Each key says what it alerts on, whether it is on by default, its `params` with their range and default, and sometimes a caveat. A value outside the range is refused and nothing is written, so check the range before you write.
    Done when you know which keys and params express the user's wish.
 
 3. **Map the wish to triggers.** Common asks:
@@ -40,16 +40,16 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
    Turn off with `{"enabled": false}` every default trigger the user said they do not want. Name every trigger you arm and every one you turn off.
    Done when you hold one `triggers` object.
 
-4. **Check the watchlist and the plan.** Call `list_watchlist` `{"search": "<event name>"}`: if the event is already watched, `watch_event` would return the old watch unchanged, so use `update_watch` `{"event_id", "triggers"}` instead. Then call `list_views` `{"limit": 1}`: `views_cap` 0 means the Free plan. On Free, write this sentence, exactly as written, before you write the watch:
+4. **Check the watchlist and the plan.** Call `list_watchlist` `{"search": "<event name>"}`: if the event is already watched, `watch_event` changes that watch, and only the triggers you pass change. Then call `list_views` `{"limit": 1}`: `views_cap` 0 means the Free plan. On Free, write this sentence, exactly as written, before you write the watch:
    ```text
    On the Free plan one watched event alerts at a time, and a new watch takes that slot; the Pro plan keeps 25: https://findticker.com/plans.
    ```
-   Done when you know whether to create or update, and the plan's rule is said.
+   Done when you know whether the event is watched already, and the plan's rule is said.
 
-5. **Write it** with `watch_event` `{"event_id": "<id>", "triggers": {...}, "notification_mode": "instant"}`, or `update_watch` from step 4. `notification_mode` takes `instant` (an email as each alert fires), `digest` (alerts wait for the hourly email or the daily email) or `muted` (recorded, never emailed). Take what the user asked for; `instant` when they did not say.
+5. **Write it** with `watch_event` `{"event_id": "<id>", "triggers": {...}, "notification_mode": "instant"}`; on a watched event it changes the watch. `notification_mode` takes `instant` (an email as each alert fires), `digest` (alerts wait for the hourly email or the daily email) or `muted` (recorded, never emailed). Take what the user asked for; `instant` when they did not say.
    Done when the result is back. Read `alerts_live`: false means this watch is starred but not alerting. Read `dormanted`: every event listed there stopped alerting to make room; tell the user by name.
 
-6. **Say where alerts go.** Alerts are emailed to the account. `get_watch_defaults` shows the destinations a new watch also delivers to; `list_destinations` names them. Do not change the defaults unless asked: `set_watch_defaults` is account-wide.
+6. **Say where alerts go.** Alerts are emailed to the account; `list_destinations` names the channels it also has. The defaults a new watch starts with are set in the Ticker web app under Settings.
    Done when you have told the user: the event, each armed trigger with its threshold, the delivery mode, and where it goes.
 
 ## Reporting rules
@@ -65,4 +65,4 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
 
 User: "Watch the Cowboys Thursday game and ping me if the lowest price drops more than 10% in a day. No presale or event-week emails."
 
-`search_events` finds the game; `list_watch_triggers` shows `pct_move` threshold 5 to 100; `list_watchlist` shows it is not watched; `list_views` shows a cap of 25; `watch_event` with `{"pct_move": {"enabled": true, "params": {"metric": "lowest", "window": "1d", "threshold": 10}}, "lifecycle": {"enabled": false}}`. Answer: "Watching Buccaneers at Cowboys, Oct 8. Armed: lowest price moves 10% in a day, either way (pct_move); unusual price move stays on at the default (price_z). Off: on-sale, presale, event week and low inventory (lifecycle). Alerts are emailed as they fire."
+`search_events` finds the game; the `triggers` input shows `pct_move` threshold 5 to 100; `list_watchlist` shows it is not watched; `list_views` shows a cap of 25; `watch_event` with `{"pct_move": {"enabled": true, "params": {"metric": "lowest", "window": "1d", "threshold": 10}}, "lifecycle": {"enabled": false}}`. Answer: "Watching Buccaneers at Cowboys, Oct 8. Armed: lowest price moves 10% in a day, either way (pct_move); unusual price move stays on at the default (price_z). Off: on-sale, presale, event week and low inventory (lifecycle). Alerts are emailed as they fire."

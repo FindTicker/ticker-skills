@@ -36,10 +36,10 @@ Every threshold of this skill is in this table.
 3. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
-4. **Read the house now** with `get_event_sections_at` `{"event_id": "<id>"}`. `at` in the answer is now, to the second. `available: false` means the event has no per-section readings: say so and stop.
+4. **Read the house now** with `get_event_sections_live` `{"event_id": "<id>", "view": "at"}`. `at` in the answer is now, to the second. `available: false` means the event has no per-section readings: say so and stop.
    Done when you hold `at`, `total` and each section's `open_count`.
 
-5. **Read the house before** with `get_event_sections_at` `{"event_id": "<id>", "at": "<at minus the window, ISO 8601>"}`. Subtract, section by section: open now minus open then. A negative number drained, a positive one filled (seats released or returned). A section absent at one of the two times had no reading then; leave it out of the ranking and say how many you left out.
+5. **Read the house before** with `get_event_sections_live` `{"event_id": "<id>", "view": "at", "at": "<at minus the window, ISO 8601>"}`. Subtract, section by section: open now minus open then. A negative number drained, a positive one filled (seats released or returned). A section absent at one of the two times had no reading then; leave it out of the ranking and say how many you left out.
    Done when you hold the change per section and for the whole house.
 
 6. **Read the moving sections** with `get_event_sections_live` `{"event_id": "<id>", "sections": [<the drained sections to show>]}`: `capacity`, `percent_taken`, `min_price` and `as_of` for each.

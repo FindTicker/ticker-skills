@@ -34,7 +34,7 @@ The hot-events screen (median rising, the box office almost empty, resale ticket
 3. **Run the hot-events screen.** Load the `hot-events` skill and run its screen with this request's screen parameters and `rows` set to "events checked". Skip its plan check: the plan is Ultra.
    Done when you hold the top events with their `event_id`s and the match count.
 
-4. **Read each event** with `get_event_seller_concentration` `{"event_id": "<id>"}`, one call per event. A null `concentration` means that event has no reading.
+4. **Read each event** with `get_event_sellers` `{"event_id": "<id>"}`, one call per event. A null `concentration` means that event has no reading.
    Done when every checked event has a reading or "no reading".
 
 5. **Report.** First line, the values used: "Values: <the hot-events values>, events checked 6, dominated at 50%." Then the hot-events counts, then one table: event (linked), Median %Δ7d, Primary remaining, Tickets Δ7d, sellers, largest seller's share, band, coverage. Mark "concentrated" each event whose `top1_share` is at or over "dominated at". Close with the time of the numbers: resale priced, primary read, and the concentration `as_of` range.

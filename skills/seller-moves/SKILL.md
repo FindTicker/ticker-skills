@@ -16,7 +16,7 @@ For one event, compare the resale ticket counts attributed to each seller at the
 | Parameter | Default | Range | Sets |
 |---|---|---|---|
 | event | none: ask for one | one event: an act, team or venue name, with a date when the act plays more than once | the `search_events` call |
-| window | 72 hours | 6 to 168 hours | the `hours` of `get_event_seller_series` |
+| window | 72 hours | 6 to 168 hours | the `hours` of `get_event_sellers` view series |
 | sellers shown | 5 | 3 to 8 | how many labels the answer names across decreases and increases |
 
 ## Steps
@@ -34,7 +34,7 @@ For one event, compare the resale ticket counts attributed to each seller at the
 3. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
-4. **Read the series** with `get_event_seller_series` `{"event_id": "<id>", "hours": <window>}`. `series` null on Ultra means the event has no reading: say so and stop. Take the first hour whose `distinct_sellers` is not null, and the last hour. For each label in `tickets`, the change is its tickets at the last hour minus at the first (a null at the first hour means the line had not begun: count it from 0). Tickets held by sellers without a line of their own are `attributed_tickets` minus the sum of the lines.
+4. **Read the series** with `get_event_sellers` `{"event_id": "<id>", "view": "series", "hours": <window>}`. `series` null on Ultra means the event has no reading: say so and stop. Take the first hour whose `distinct_sellers` is not null, and the last hour. For each label in `tickets`, the change is its tickets at the last hour minus at the first (a null at the first hour means the line had not begun: count it from 0). Tickets held by sellers without a line of their own are `attributed_tickets` minus the sum of the lines.
    Done when you hold each label's change and the whole event's change.
 
 5. **Report.** First line, the values used: "Values: event <name, date>, window 72 hours, sellers shown 5." Then the event: sellers and attributed tickets at the first and the last hour. Then one table: label, tickets at the start, tickets at the end, change, peak in the window, with the largest decreases first, then the largest increases. One closing line reports the change in the largest seller's listed count. Stamps: the first and last `hour`, and `as_of`.

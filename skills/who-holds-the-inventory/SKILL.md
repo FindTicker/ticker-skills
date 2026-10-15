@@ -16,7 +16,7 @@ How concentrated one event's resale inventory is among the sellers behind it. Co
 | Parameter | Default | Range | Sets |
 |---|---|---|---|
 | event | none: ask for one | one event: an act, team or venue name, with a date when the act plays more than once | the `search_events` call |
-| window | 48 hours | 6 to 168 hours | the `hours` of `get_event_seller_series` |
+| window | 48 hours | 6 to 168 hours | the `hours` of `get_event_sellers` view series |
 
 ## Steps
 
@@ -33,10 +33,10 @@ How concentrated one event's resale inventory is among the sellers behind it. Co
 3. **Find the event.** Use an `event_id` you already have. Otherwise call `search_events` with `search` set to ONE name: the act, the team or the venue, never two together and never the whole title. Add `status: "active"`, and when the user named a date, `date_from` and `date_to` as full ISO date-times (`2026-10-02T00:00:00Z`), with `date_to` one day after the named date: the filter reads UTC. Pick the row by its `local_date` and venue; if two rows fit, ask.
    Done when you hold one `event_id`.
 
-4. **Read the concentration** with `get_event_seller_concentration` `{"event_id": "<id>"}`. `concentration` null on Ultra means the event has no reading: say so and stop.
+4. **Read the concentration** with `get_event_sellers` `{"event_id": "<id>"}`. `concentration` null on Ultra means the event has no reading: say so and stop.
    Done when you hold the reading.
 
-5. **Read how it moved** with `get_event_seller_series` `{"event_id": "<id>", "hours": <window>}`. Take the first hour with a reading and the last: `distinct_sellers` and `attributed_tickets` at each, and the largest line in `sellers` by `peak_tickets`.
+5. **Read how it moved** with `get_event_sellers` `{"event_id": "<id>", "view": "series", "hours": <window>}`. Take the first hour with a reading and the last: `distinct_sellers` and `attributed_tickets` at each, and the largest line in `sellers` by `peak_tickets`.
    Done when you hold the start and the end of the window, or `series` is null (then report the concentration alone).
 
 6. **Report.** First line, the values used: "Values: event <name, date>, window 48 hours." Then: how many sellers hold inventory (`sellers_active`) and how many tickets they hold (`attributed_tickets`); the largest seller's share (`top1_share`) and the largest three's (`top3_share`), as percents; the band (`shape`: spread, concentrated or dominated); `coverage_pct`; the move over the window (sellers and tickets at the first and the last hour, and the label that held the most); the stamp `as_of`. Close with the event link.
