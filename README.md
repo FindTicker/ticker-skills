@@ -23,7 +23,7 @@ Each skill is a folder with a `SKILL.md` in the [Agent Skills](https://agentskil
 | Max | `cooling` | Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room |
 | Max | `hot-events` | Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling |
 | Max | `primary-gone-and-rising` | Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing |
-| Max | `resale-above-primary` | Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's while the box office still has tickets |
+| Max | `resale-above-primary` | Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's lowest all-in |
 | Max | `resale-below-primary` | Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling |
 | Max | `seat-map-moves` | Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day |
 | Ultra | `hot-and-concentrated` | Hot events on Ticker with seller concentration: the hot-events screen, then each event's seller concentration |
