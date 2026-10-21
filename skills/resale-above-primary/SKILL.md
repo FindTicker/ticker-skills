@@ -1,6 +1,6 @@
 ---
 name: resale-above-primary
-description: "Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's while the box office still has tickets. Use for primary-to-resale price spreads."
+description: "Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's lowest all-in. Use when the user asks whether buying from the box office beats resale, or how far resale runs above face value."
 ---
 
 # Resale above primary
