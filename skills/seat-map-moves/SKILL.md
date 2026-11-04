@@ -1,6 +1,6 @@
 ---
 name: seat-map-moves
-description: "Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day. Use when the user asks where an event is moving or which sections are going."
+description: "Seat map moves on Ticker: which sections of one event drained or filled at the primary market over the last day. Use when the user asks where an event is moving or which sections are going."
 ---
 
 # Seat map moves
@@ -9,7 +9,7 @@ description: "Seat map moves on Ticker: which sections of one event drained or f
 
 **Usual cost:** 4 requests: one search, two reads of the house, one read of the moving sections. `list_screen_columns` is free.
 
-The primary market's (the box office's) open seats in each section of one event, now and a set number of hours ago. The difference says where the house is draining and where seats came back. Read on the seat map of events that carry per-seat data.
+The primary market's open seats in each section of one event, now and a set number of hours ago. The difference says where the house is draining and where seats came back. Read on the seat map of events that carry per-seat data.
 
 ## Parameters
 
@@ -53,7 +53,7 @@ Every threshold of this skill is in this table.
 - Quote each stamp as the tool gave it, in UTC. Give the stamp, not an age.
 - A count is carried forward from a section's last reading: `observed_at` says how old it is. Flag a section whose reading is older than the window.
 - Taken is the share of a section's seats not open on the primary market now. A seat sold, held back, killed or not yet released counts the same: never write "sold" or "sold out".
-- A section that drained lost open seats at the box office; it does not say why.
+- A section that drained lost open seats at the primary market; it does not say why.
 - Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Link the event with its `event_url`.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
@@ -61,4 +61,4 @@ Every threshold of this skill is in this table.
 
 User: "Where is the Usher show in Indianapolis moving today?"
 
-`search_events` finds the show; the house reads 13,420 open seats 24 hours ago and 13,303 now. Answer: "Values: event Usher and Chris Brown, Lucas Oil Stadium, 2026-10-31, window 24 hours, sections shown 5. The box office went from 13,420 to 13,303 open seats (-117). Drained most: 143 (-9, 74% taken, from $209.50), 323 (-6) ..." then the stamps.
+`search_events` finds the show; the house reads 13,420 open seats 24 hours ago and 13,303 now. Answer: "Values: event Usher and Chris Brown, Lucas Oil Stadium, 2026-10-31, window 24 hours, sections shown 5. The primary market went from 13,420 to 13,303 open seats (-117). Drained most: 143 (-9, 74% taken, from $209.50), 323 (-6) ..." then the stamps.

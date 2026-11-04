@@ -57,7 +57,7 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 - Link each event with the `event_url` on its row; never search again to find it.
 - An `absorption_data_quality` under 0.5 is a weak reading: mark those rows "(weak reading)".
 - Prices are resale list prices before fees. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
-- Only when the user asks for alerts on this screen, or for the primary market (the box office), say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans). Then answer with what this screen gives. Do not offer either unasked.
+- Only when the user asks for alerts on this screen, or for the primary market, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans). Then answer with what this screen gives. Do not offer either unasked.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

@@ -1,6 +1,6 @@
 ---
 name: cooling
-description: "Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or where resale prices fell while primary tickets remain available."
+description: "Cooling events on Ticker: median price falling, resale tickets growing, the primary market still holding most of the room. Use when the user asks what is cooling off or where resale prices fell while primary tickets remain available."
 ---
 
 # Cooling
@@ -9,7 +9,7 @@ description: "Cooling events on Ticker: median price falling, resale tickets gro
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the median resale price fell this week, more resale tickets came on sale, and the primary market (the box office) still has more than half the room to sell. Use the screen to compare falling resale prices with listed inventory and primary availability. It does not predict future prices.
+Events where the median resale price fell this week, more resale tickets came on sale, and the primary market still has more than half the room to sell. Use the screen to compare falling resale prices with listed inventory and primary availability. It does not predict future prices.
 
 ## Parameters
 

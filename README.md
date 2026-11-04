@@ -20,12 +20,12 @@ Each skill is a folder with a `SKILL.md` in the [Agent Skills](https://agentskil
 | Pro | `todays-moves` | Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick |
 | Pro | `tour-dates` | Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour |
 | Pro | `watch-event` | Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go |
-| Max | `cooling` | Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room |
-| Max | `hot-events` | Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling |
-| Max | `primary-gone-and-rising` | Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing |
-| Max | `resale-above-primary` | Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's lowest all-in |
-| Max | `resale-below-primary` | Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling |
-| Max | `seat-map-moves` | Seat map moves on Ticker: which sections of one event drained or filled at the box office over the last day |
+| Max | `cooling` | Cooling events on Ticker: median price falling, resale tickets growing, the primary market still holding most of the room |
+| Max | `hot-events` | Hot events on Ticker: median price rising, the primary market almost empty, resale tickets falling |
+| Max | `primary-gone-and-rising` | Primary gone and rising on Ticker: the primary market nearly empty, resale tickets falling, the lowest price climbing |
+| Max | `resale-above-primary` | Resale above primary on Ticker: events where the lowest resale all-in price is far above the primary market's lowest all-in |
+| Max | `resale-below-primary` | Resale below primary on Ticker: events where the lowest resale all-in is under the primary market's lowest all-in, primary still selling |
+| Max | `seat-map-moves` | Seat map moves on Ticker: which sections of one event drained or filled at the primary market over the last day |
 | Ultra | `hot-and-concentrated` | Hot events on Ticker with seller concentration: the hot-events screen, then each event's seller concentration |
 | Ultra | `market-sweep` | Market sweep on Ticker: the screens of the lower plans run over the whole market at once, and the events several screens flag, ranked |
 | Ultra | `performer-concentration` | Seller concentration across one act's upcoming dates on Ticker: how listed inventory is distributed among sellers on each date |

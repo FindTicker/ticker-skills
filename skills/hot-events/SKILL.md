@@ -1,6 +1,6 @@
 ---
 name: hot-events
-description: "Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling. Use when the user asks what is hot or where prices and listed inventory are changing."
+description: "Hot events on Ticker: median price rising, the primary market almost empty, resale tickets falling. Use when the user asks what is hot or where prices and listed inventory are changing."
 ---
 
 # Hot events
@@ -9,7 +9,7 @@ description: "Hot events on Ticker: median price rising, the box office almost e
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the median resale price rose this week, the primary market (the box office) has little left, and resale supply is shrinking. These are observed price and availability changes; they do not establish why listings left the market or predict the next price move.
+Events where the median resale price rose this week, the primary market has little left, and resale supply is shrinking. These are observed price and availability changes; they do not establish why listings left the market or predict the next price move.
 
 ## Parameters
 
@@ -72,7 +72,7 @@ Sort: Median %Δ7d, biggest rise first: `{"col": "ea.median_price_pct_7d", "dir"
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
-- Primary remaining is the share of the room still on sale at the box office. It can read above 100 when the capacity figure is wrong; flag any such row.
+- Primary remaining is the share of the room still on sale at the primary market. It can read above 100 when the capacity figure is wrong; flag any such row.
 - Never write "sold", "sold out" or "tickets sold": say "Primary remaining 0.4%".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.

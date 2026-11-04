@@ -59,7 +59,7 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 - Lowest all-in is what a buyer pays at checkout with fees; say "all-in" beside it. The other prices are before fees.
 - The results cover the server's eligible events, not every event in the city. Explain missing coverage without inventing a reason for a missing show.
 - Use the source labels returned by the tools; do not guess provider names. Never write "sold".
-- Only when the user asks for alerts, or for the box office's own prices, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and the primary market's prices start on the Max plan (https://findticker.com/plans). Do not offer either unasked.
+- Only when the user asks for alerts, or for the primary market's own prices, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and the primary market's prices start on the Max plan (https://findticker.com/plans). Do not offer either unasked.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
