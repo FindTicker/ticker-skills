@@ -1,6 +1,6 @@
 ---
 name: resale-below-primary
-description: "Resale below primary on Ticker: events where the lowest resale all-in is under the box office's lowest all-in, box office still selling. Use when the user asks where the lowest listed resale price is below the primary price."
+description: "Resale below primary on Ticker: events where the lowest resale all-in is under the primary market's lowest all-in, primary still selling. Use when the user asks where the lowest listed resale price is below the primary price."
 ---
 
 # Resale below primary
@@ -9,7 +9,7 @@ description: "Resale below primary on Ticker: events where the lowest resale all
 
 **Usual cost:** 3 requests (screener runs): one count, and a list of one or two pages. `list_screen_columns` is free.
 
-Events where the cheapest resale ticket, fees included, costs less than the cheapest ticket the primary market (the box office) still sells, fees included. Compare the listed prices with their timestamps. The lowest prices may cover different seats or restrictions; they do not establish a ticket holder's cost or profit.
+Events where the cheapest resale ticket, fees included, costs less than the cheapest ticket the primary market still sells, fees included. Compare the listed prices with their timestamps. The lowest prices may cover different seats or restrictions; they do not establish a ticket holder's cost or profit.
 
 ## Parameters
 
@@ -80,13 +80,13 @@ An event passes when some step S sits between its two prices: primary all-in at 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - Both prices are all-in: what a buyer pays with fees.
-- A high lowest primary price often means the box office has only its dearest seats left; say "the lowest ticket the box office lists".
+- A high lowest primary price often means the primary market has only its dearest seats left; say "the lowest ticket the primary market lists".
 - Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves the fixed leaves, the parameter leaves and the match leg as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "Where is resale cheaper than the box office in Los Angeles?"
+User: "Where is resale cheaper than the primary market in Los Angeles?"
 
 `list_screen_columns` shows the primary columns open; one count, one or two list pages. Answer: "Values: city Los Angeles, Inglewood, Anaheim, Pasadena, category every category, days to event 0 to 365, under by 0%, primary floor $10, rows 20. At least 214 events match, of 1,480 with a fresh primary reading. Ranked, where resale is under 30% of primary:" then rows such as "Usher and Chris Brown, resale $48 all-in against primary $307.53, 84% under, $260 gap, 251 primary tickets", then the two read times and the method line.

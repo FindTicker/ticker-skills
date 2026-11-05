@@ -9,7 +9,7 @@ description: "Hot events on Ticker with seller concentration: the hot-events scr
 
 **Usual cost:** up to 9 requests: the plan check, one screener run, one concentration read per event checked.
 
-The hot-events screen (median rising, the box office almost empty, resale tickets falling), and for each of its top events, how concentrated the resale inventory is. Report concentration alongside price and inventory changes. These readings do not establish price control, withheld supply or the cause of a price move.
+The hot-events screen (median rising, the primary market almost empty, resale tickets falling), and for each of its top events, how concentrated the resale inventory is. Report concentration alongside price and inventory changes. These readings do not establish price control, withheld supply or the cause of a price move.
 
 ## Parameters
 
@@ -47,7 +47,7 @@ The hot-events screen (median rising, the box office almost empty, resale ticket
 - Tickets a seller holds are resale tickets on sale. A seller whose count fell may have had sales or pulled listings: never write "sold".
 - A low `coverage_pct` means the shares describe a small part of the house; say it beside them.
 - Use the source labels returned by the tools; do not guess provider names. Link each event with its `event_url`.
-- Primary remaining is the share of the room still on sale at the box office. Never write "sold out".
+- Primary remaining is the share of the room still on sale at the primary market. Never write "sold out".
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

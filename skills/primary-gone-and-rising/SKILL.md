@@ -1,6 +1,6 @@
 ---
 name: primary-gone-and-rising
-description: "Primary gone and rising on Ticker: the box office nearly empty, resale tickets falling, the lowest price climbing. Use when the user asks about rising resale prices where primary availability is low."
+description: "Primary gone and rising on Ticker: the primary market nearly empty, resale tickets falling, the lowest price climbing. Use when the user asks about rising resale prices where primary availability is low."
 ---
 
 # Primary gone and rising
@@ -9,7 +9,7 @@ description: "Primary gone and rising on Ticker: the box office nearly empty, re
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the primary market (the box office) has almost nothing left, resale supply shrank this week and the cheapest resale ticket got dearer. Report the primary availability and resale changes separately; low primary inventory does not establish that resale is the only purchase option.
+Events where the primary market has almost nothing left, resale supply shrank this week and the cheapest resale ticket got dearer. Report the primary availability and resale changes separately; low primary inventory does not establish that resale is the only purchase option.
 
 ## Parameters
 
@@ -72,13 +72,13 @@ Sort: Lowest %Δ7d, biggest rise first: `{"col": "ea.lowest_price_pct_7d", "dir"
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
-- Primary remaining 0 means the box office listed nothing at its last read. It does not say why: seats can be held back or not yet released. Write "Primary remaining 0%", never "sold out".
+- Primary remaining 0 means the primary market listed nothing at its last read. It does not say why: seats can be held back or not yet released. Write "Primary remaining 0%", never "sold out".
 - Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "Where is the box office empty for NBA games and resale still climbing?"
+User: "Where is the primary market empty for NBA games and resale still climbing?"
 
 `list_screen_columns` shows the primary columns open. One screen. Answer: "Values: city every city, category NBA, days to event 0 to 365, primary remaining under 2%, lowest rise 5%, rows 20. Primary remaining under 2%, Tickets Δ7d falling, Lowest %Δ7d up more than 5%: 12 events match, of 21,600 with a fresh primary reading." Then the rows, then "Resale priced 2026-09-29; primary read 2026-09-28 06:10 to 2026-09-29 21:40 UTC."

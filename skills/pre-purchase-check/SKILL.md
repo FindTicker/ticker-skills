@@ -9,7 +9,7 @@ description: "Pre-purchase check on one event with Ticker: price trend, cheapest
 
 **Usual cost:** 4 requests: search, analytics, chart, sections. `list_screen_columns` is free.
 
-One event, read before a person buys: where the price is going, the cheapest way in by section, and, on Max, the primary market (the box office) beside resale. A Free account reads one resale source, and this check reads at most 28 days of history; that is enough. Max adds the primary market.
+One event, read before a person buys: where the price is going, the cheapest way in by section, and, on Max, the primary market beside resale. A Free account reads one resale source, and this check reads at most 28 days of history; that is enough. Max adds the primary market.
 
 ## Parameters
 
@@ -46,7 +46,7 @@ Read the values from the user's words ("the last week", "top 5 sections"); keep 
 4. **Read the trend** with `get_event_chart` `{"event_id": "<id>", "range": "28d", "render": false}` (`"7d"` when the trend window is 7 days). 28 days fits every plan. Compare the latest `median` in `series` with 7 days back and with the start of the window. A date with no point has no reading: never fill it.
    Done when you can say rising, falling or flat, with the two dates you compared.
 
-5. **Find the cheapest way in** with `get_event_sections` `{"event_id": "<id>", "include_history": false, "limit": 100}`. Each section carries one object per source: `vs` is resale; on Max, `tm_primary` is the box office and `tm_resale` its resale. Pick the cheapest sections by `min_price`, as many as "sections shown", and note which source holds each. When `truncated` is true, say the section list was partial (`sections_returned` of `sections_total`); do not page.
+5. **Find the cheapest way in** with `get_event_sections` `{"event_id": "<id>", "include_history": false, "limit": 100}`. Each section carries one object per source: `vs` is resale; on Max, `tm_primary` is the primary market and `tm_resale` its resale. Pick the cheapest sections by `min_price`, as many as "sections shown", and note which source holds each. When `truncated` is true, say the section list was partial (`sections_returned` of `sections_total`); do not page.
    Done when you can name the cheapest section, its price and its source.
 
 6. **Give the verdict.** First line, the values used (a skill of a higher plan that handed over to this one puts its plan sentence above it): "Values: event <name, date>, trend window 28 days, sections shown 3." Then four lines: trend, cheapest way in, primary against resale, and one risk (few days to go, thin supply, a `data_quality_score` under 0.5, an old read). On Max, primary against resale compares `tm_lowest_aip_price_current` with `lowest_aip_price_current`, both all-in. Below Max, that line is the plan sentence of step 1. Say which way the numbers lean; the decision is the user's. End with the event link.

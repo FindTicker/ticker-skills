@@ -1,6 +1,6 @@
 ---
 name: resale-above-primary
-description: "Resale above primary on Ticker: events where the lowest resale all-in price is far above the box office's lowest all-in. Use when the user asks whether buying from the box office beats resale, or how far resale runs above face value."
+description: "Resale above primary on Ticker: events where the lowest resale all-in price is far above the primary market's lowest all-in. Use when the user asks whether buying on the primary market beats resale, or how far resale runs above face value."
 ---
 
 # Resale above primary
@@ -9,7 +9,7 @@ description: "Resale above primary on Ticker: events where the lowest resale all
 
 **Usual cost:** 3 requests (screener runs): one count, and a list of one or two pages. `list_screen_columns` is free.
 
-Events where the cheapest resale ticket, fees included, costs more than a multiple of the cheapest ticket the primary market (the box office) still sells, fees included. Compare the listed prices with their timestamps. Availability, seat location and purchase restrictions can differ between the two markets.
+Events where the cheapest resale ticket, fees included, costs more than a multiple of the cheapest ticket the primary market still sells, fees included. Compare the listed prices with their timestamps. Availability, seat location and purchase restrictions can differ between the two markets.
 
 ## Parameters
 
@@ -80,7 +80,7 @@ An event passes when some step S sits between its two prices: primary all-in at 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - Both prices are all-in: what a buyer pays with fees.
-- The lowest primary price can be a child or a restricted-view ticket; the tools do not say which, so say "the lowest ticket the box office lists".
+- The lowest primary price can be a child or a restricted-view ticket; the tools do not say which, so say "the lowest ticket the primary market lists".
 - Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves the fixed leaves, the parameter leaves and the match leg as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
