@@ -44,8 +44,8 @@ For each event on the account's watchlist, soonest first, how concentrated its r
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Never name, rank or guess who a seller is. Use the labels the tool gives ("Seller D"); a label means nothing outside its event.
 - Tickets a seller holds are resale tickets on sale. A seller whose count fell may have had sales or pulled listings: never write "sold".
-- A low `coverage_pct` means the shares describe a small part of the house; say it beside them.
-- Use the source labels returned by the tools; do not guess provider names. Link each event with its `event_url`.
+- A low `coverage_pct` means the shares describe a small part of the venue; say it beside them.
+- Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Link each event with its `event_url`.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

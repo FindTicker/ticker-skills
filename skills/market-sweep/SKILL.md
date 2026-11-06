@@ -9,7 +9,7 @@ description: "Market sweep on Ticker: the screens of the lower plans run over th
 
 **Usual cost:** 8 requests: the plan check and seven screener runs.
 
-Seven screens at once over the whole market, and one ranked list: the events that the most screens flag. Heat screens: hot events, primary gone and rising, last-week squeeze, momentum, interest rising. Cold screens: price drop, cooling. Report which screens each event matches. Overlapping filters are not independent evidence of demand or a price forecast.
+Seven screens at once over the whole market, and one ranked list: the events that the most screens flag. Heat screens: hot events, sold through and rising, final-week demand, momentum, interest rising. Cold screens: price drop, cooling. Report which screens each event matches. Overlapping filters are not independent evidence of demand or a price forecast.
 
 ## Parameters
 
@@ -34,7 +34,7 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 2. **Read the parameters** from the user's words ("in Texas cities", "NFL only"); keep the default for the rest. A value outside its range: do not run; say the range and ask for a value inside it.
    Done when every parameter has a value inside its range.
 
-3. **Run the seven screens.** For each of `hot-events`, `primary-gone-and-rising`, `last-week-squeeze`, `momentum`, `interest-rising`, `price-drop` and `cooling`: load the skill, take the leaves of its Parameters and fixed tables at their defaults, add this request's city and category leaves, and call `screen_events` once with its sort, `"limit": <rows per screen>`, `"count": true` and the columns `["e.event_name", "e.local_date", "v.city", "ea.median_price_current", "ea.median_price_pct_7d", "ea.last_price_snapshot_date"]`. Skip each skill's own plan check and report step. A skill that is not installed is skipped; say which.
+3. **Run the seven screens.** For each of `hot-events`, `sold-through-and-rising`, `final-week-demand`, `momentum`, `interest-rising`, `price-drop` and `cooling`: load the skill, take the leaves of its Parameters and fixed tables at their defaults, add this request's city and category leaves, and call `screen_events` once with its sort, `"limit": <rows per screen>`, `"count": true` and the columns `["e.event_name", "e.local_date", "v.city", "ea.median_price_current", "ea.median_price_pct_7d", "ea.last_price_snapshot_date"]`. Skip each skill's own plan check and report step. A skill that is not installed is skipped; say which.
    Done when you hold seven pages, or fewer with the skipped ones named.
 
 4. **Rank.** Count, for each `event_id`, how many heat screens and how many cold screens returned it. Rank by heat screens, then by Median %Δ7d. An event on both a heat and a cold screen is mixed: list it apart.
@@ -48,11 +48,11 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - A screen's page is its top rows, not every match: say "in the top 25 of" beside each count.
-- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names. Never write "sold", "sold out" or "tickets sold".
+- Say the primary market and resale. Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold", "sold out" or "tickets sold".
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
 User: "Give me the full read of the market today."
 
-`list_views` shows no cap; seven screens. Answer: "Values: city every city, category every category, rows per screen 25, rows 20." Then the seven counts, then "Flagged by three heat screens: Steelers at Browns (hot events, primary gone and rising, last-week squeeze)." and the rest of the table.
+`list_views` shows no cap; seven screens. Answer: "Values: city every city, category every category, rows per screen 25, rows 20." Then the seven counts, then "Flagged by three heat screens: Steelers at Browns (hot events, sold through and rising, final-week demand)." and the rest of the table.

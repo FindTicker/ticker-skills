@@ -1,6 +1,6 @@
 ---
 name: hot-events
-description: "Hot events on Ticker: median price rising, the box office almost empty, resale tickets falling. Use when the user asks what is hot or where prices and listed inventory are changing."
+description: "Hot events on Ticker: median price rising, little left on the primary market, resale tickets falling. Use when the user asks what is hot or where prices and listed inventory are changing."
 ---
 
 # Hot events
@@ -9,7 +9,7 @@ description: "Hot events on Ticker: median price rising, the box office almost e
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the median resale price rose this week, the primary market (the box office) has little left, and resale supply is shrinking. These are observed price and availability changes; they do not establish why listings left the market or predict the next price move.
+Events where the median resale price rose this week, the primary market has little left, and resale supply is shrinking. These are observed price and availability changes; they do not establish why listings left the market or predict the next price move.
 
 ## Parameters
 
@@ -40,10 +40,10 @@ Sort: Median %Δ7d, biggest rise first: `{"col": "ea.median_price_pct_7d", "dir"
 
 1. **Check the plan** with `list_screen_columns` `{}`. The answer is long (over 200 columns); you need only the rows for `ea.tm_percent_remaining` and `ea.tm_asof_at`. If either has `locked: true`, or a later screen answers that one of them "is locked on your plan", the account's plan does not read the primary market. Start the answer with this sentence, exactly as written:
    ```text
-   Hot events reads the primary market, which the Max plan opens: https://findticker.com/plans. Here is last-week squeeze, the closest screen on your plan.
+   Hot events reads the primary market, which the Max plan opens: https://findticker.com/plans. Here is final-week demand, the closest screen on your plan.
    ```
-   Then load the `last-week-squeeze` skill and run it with this request's city, category, days to event and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to. Show no primary number: never guess one and never take one from the web.
-   Done when you know the plan reads the primary market, or you have handed over to `last-week-squeeze`.
+   Then load the `final-week-demand` skill and run it with this request's city, category, days to event and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to. Show no primary number: never guess one and never take one from the web.
+   Done when you know the plan reads the primary market, or you have handed over to `final-week-demand`.
 
 2. **Read the parameters** from the user's words ("in Boston", "over 15 percent", "next two weeks", "top 10"); keep the default for the rest. Leave out the leaf of a parameter left at "every". A value outside its range: do not run; say the range and ask for a value inside it.
    Done when every parameter has a value inside its range.
@@ -71,8 +71,8 @@ Sort: Median %Δ7d, biggest rise first: `{"col": "ea.median_price_pct_7d", "dir"
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
-- Primary remaining is the share of the room still on sale at the box office. It can read above 100 when the capacity figure is wrong; flag any such row.
+- Say the primary market and resale. Describe numbers by market (primary market or resale), not by source code, and do not guess provider names.
+- Primary remaining is the share of the room still on sale on the primary market. It can read above 100 when the capacity figure is wrong; flag any such row.
 - Never write "sold", "sold out" or "tickets sold": say "Primary remaining 0.4%".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.

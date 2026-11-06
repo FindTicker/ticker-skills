@@ -23,9 +23,9 @@ Two dates of one act, side by side: what each costs, where each price is going, 
 
 1. **Check the plan** with `list_views` `{"limit": 1}`. `views_cap` 0 means the Free plan. On Free, start the answer with this sentence, exactly as written:
    ```text
-   Two tour dates is a Pro skill: https://findticker.com/plans. Here is pre-purchase check, the closest skill on your plan.
+   Two tour dates is a Pro skill: https://findticker.com/plans. Here is event check, the closest skill on your plan.
    ```
-   Then load the `pre-purchase-check` skill and run it on the first of the two dates (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
+   Then load the `event-check` skill and run it on the first of the two dates (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
    Done when you know the plan is Pro or higher, or you have handed over.
 
 2. **Read the parameters** from the user's words ("Boston and Philly", "the two Chicago nights", "over 90 days"); keep the default for the rest. A value outside its range: do not run; say the range ("History takes 7 to 90 days.") and ask for a value inside it.
@@ -47,19 +47,19 @@ Two dates of one act, side by side: what each costs, where each price is going, 
 5. **Read each trend** with `get_event_chart` `{"event_id": "<id>", "range": "<7d, 28d or 90d>", "render": false}`. Take the first and the last `median` in `series` for each. A date with no point has no reading: never fill it.
    Done when you can say rising, falling or flat for each date, with the dates compared.
 
-6. **Report.** First line, the values used: "Values: act <name>, dates <date, city> and <date, city>, history 28 days." Then one table, one column per date: date and venue, Median, Lowest, Lowest all-in, Median %Δ7d, trend over the history, Tickets, Tickets Δ7d, tour score, days to go, priced as of. Then two lines: which date is cheaper to get into now, and which is moving faster against the rest of the tour. End with both event links.
+6. **Report.** First line, the values used: "Values: act <name>, dates <date, city> and <date, city>, history 28 days." Then one table, one column per date: date and venue, Median, Lowest, Lowest all-in, Median %Δ7d, trend over the history, Tickets, Tickets Δ7d, tour score, days to go, priced as of. Then two lines: which date has the lower lowest price now, and which is moving faster against the rest of the tour. End with both event links.
    Done when every number has its read date.
 
 ## Reporting rules
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Prices are resale list prices before fees, except Lowest all-in. Label the all-in one.
-- Tickets is resale tickets on sale. Use the source labels returned by the tools; do not guess provider names. Never write "sold".
+- Tickets is resale tickets on sale. Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold".
 - The decision is the user's: say which way the numbers lean, not what to do.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
-User: "Zach Bryan in Foxborough or in Philly, which night is the better buy?"
+User: "How do Zach Bryan's Foxborough and Philly nights compare on price?"
 
-`list_views` shows a cap of 25; one search finds both nights; two analytics reads and two 28-day charts. Answer: "Values: act Zach Bryan, dates 2026-10-02 Foxborough and 2026-10-06 Philadelphia, history 28 days." Then the side-by-side table, then "Foxborough is $40 cheaper to get into; Philadelphia is rising faster than the rest of the tour (tour score 1.8)."
+`list_views` shows a cap of 25; one search finds both nights; two analytics reads and two 28-day charts. Answer: "Values: act Zach Bryan, dates 2026-10-02 Foxborough and 2026-10-06 Philadelphia, history 28 days." Then the side-by-side table, then "Foxborough's lowest price is $40 lower; Philadelphia is rising faster than the rest of the tour (tour score 1.8)."

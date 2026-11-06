@@ -1,6 +1,6 @@
 ---
 name: cooling
-description: "Cooling events on Ticker: median price falling, resale tickets growing, the box office still holding most of the room. Use when the user asks what is cooling off or where resale prices fell while primary tickets remain available."
+description: "Cooling events on Ticker: median price falling, resale tickets growing, the primary market still holding most of the room. Use when the user asks what is cooling off or where resale prices fell while primary tickets remain available."
 ---
 
 # Cooling
@@ -9,7 +9,7 @@ description: "Cooling events on Ticker: median price falling, resale tickets gro
 
 **Usual cost:** 1 request (one screener run). `list_screen_columns` is free.
 
-Events where the median resale price fell this week, more resale tickets came on sale, and the primary market (the box office) still has more than half the room to sell. Use the screen to compare falling resale prices with listed inventory and primary availability. It does not predict future prices.
+Events where the median resale price fell this week, more resale tickets came on sale, and the primary market still has more than half the room to sell. Use the screen to compare falling resale prices with listed inventory and primary availability. It does not predict future prices.
 
 ## Parameters
 
@@ -71,7 +71,7 @@ Sort: Median %Δ7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- Say the primary market and resale. Use the source labels returned by the tools; do not guess provider names.
+- Say the primary market and resale. Describe numbers by market (primary market or resale), not by source code, and do not guess provider names.
 - A fall steeper than 90% in a week is a data break, and Primary remaining above 100 is a wrong capacity figure: the leaves leave both out.
 - Never write "sold", "unsold" or "tickets sold": say "Primary remaining 64%".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.

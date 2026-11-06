@@ -35,7 +35,7 @@ Read both from the user's words. With no event, answer from the reference alone 
 
 ## Reference
 
-**Sources and plans.** Ticker reports primary-market and resale readings separately. Use the source code and price basis returned by the tool. Available sources and history depend on the account's plan: https://findticker.com/plans. A plan restriction is not missing data. Respect `plan_required`, locked-field and withheld-field responses; do not infer coverage from an empty result.
+**Sources and plans.** Ticker reports primary-market and resale readings separately. Describe each reading by market (primary market or resale) and price basis, not by source code. Available sources and history depend on the account's plan: https://findticker.com/plans. A plan restriction is not missing data. Respect `plan_required`, locked-field and withheld-field responses; do not infer coverage from an empty result.
 
 **Stamps.** Freshness varies by event and reading. Quote the observation timestamp; do not assume a collection cadence.
 
@@ -50,14 +50,14 @@ Read both from the user's words. With no event, answer from the reference alone 
 
 A row whose `last_price_snapshot_date` is more than a day old is not a move today. `partial_row: true` means a hollow row: its nulls are unknown, not zero.
 
-**Prices.** List prices exclude fees; all-in (`*_aip_*`) is the buyer's final price. On an analytics row, median, lowest, p25 and p75 are over the listings of the day's latest reading. On a daily chart row, median and p25/p75 are the mean of that day's readings and lowest is the day's low. Never blend a primary and a resale series.
+**Prices.** List prices exclude fees; all-in (`*_aip_*`) is the price with fees. On an analytics row, median, lowest, p25 and p75 are over the listings of the day's latest reading. On a daily chart row, median and p25/p75 are the mean of that day's readings and lowest is the day's low. Never blend a primary and a resale series.
 
-**Remaining.** Primary remaining is the share of the room still on sale at the box office; Secondary remaining is the share listed on resale. Both can read above 100 when the capacity figure is wrong.
+**Remaining.** Primary remaining is the share of the room still on sale on the primary market; Secondary remaining is the share listed on resale. Both can read above 100 when the capacity figure is wrong.
 
 **Words that must not become "sold".**
 - Taken: the share of a section's seats not open on the primary market now. A seat sold, held back, killed or not yet released counts the same.
 - Absorbed, delisted, `sold_or_pulled`: listings that left the resale market, sold or withdrawn; the price beside them is an asking price.
-- Primary remaining 0: the box office listed nothing at its last read. It does not say why.
+- Primary remaining 0: the primary market listed nothing at its last read. It does not say why.
 - Interest and Sales: marketplace-provided rolling-window indicators of attention and sales activity. Read the change as momentum; never "X tickets sold today".
 
 **Seat states (seat map, Max).** Four dots. Available: on sale now. Gone or Repriced in the last hour. Gone: a seat we saw go off sale, at any age, while the newest read of the whole venue does not list it; the hover gives the age ("Gone, 16h ago"). No history: a seat we never saw on sale. The age of the newest read of the whole venue is how fresh the map is. In a seat's history, gone is a seat that left and never came back: sold or pulled, the log does not say which.
