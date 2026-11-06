@@ -1,6 +1,6 @@
 ---
 name: sale-calendar
-description: "On-sale and presale calendar on Ticker for one city or one act: which events go on sale or open a presale in the coming days. Use when the user asks when tickets go on sale or when a presale starts."
+description: "On-sale and presale calendar on Ticker for one city or one act: the upcoming on-sale and presale dates in the coming days. Use when the user asks when an event goes on sale, or for upcoming presales in a city or for an act."
 ---
 
 # Sale calendar
@@ -9,7 +9,7 @@ description: "On-sale and presale calendar on Ticker for one city or one act: wh
 
 **Usual cost:** 1 request (one search or one screener run).
 
-The public on-sale dates and the first presale dates coming up for one act, or for every event in one city. Use the dates to plan a purchase, follow an event or coordinate event research.
+The public on-sale dates and the first presale dates coming up for one act, or for every event in one city. Use the calendar to follow an event's market: what opens when, and afterwards how the market moved around those dates.
 
 ## Parameters
 

@@ -9,7 +9,7 @@ description: "Hot events on Ticker with seller concentration: the hot-events scr
 
 **Usual cost:** up to 9 requests: the plan check, one screener run, one concentration read per event checked.
 
-The hot-events screen (median rising, the box office almost empty, resale tickets falling), and for each of its top events, how concentrated the resale inventory is. Report concentration alongside price and inventory changes. These readings do not establish price control, withheld supply or the cause of a price move.
+The hot-events screen (median rising, little left on the primary market, resale tickets falling), and for each of its top events, how concentrated the resale inventory is. Report concentration alongside price and inventory changes. These readings do not establish price control, withheld supply or the cause of a price move.
 
 ## Parameters
 
@@ -45,9 +45,9 @@ The hot-events screen (median rising, the box office almost empty, resale ticket
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Never name, rank or guess who a seller is. Use the labels the tool gives ("Seller D"); a label means nothing outside its event.
 - Tickets a seller holds are resale tickets on sale. A seller whose count fell may have had sales or pulled listings: never write "sold".
-- A low `coverage_pct` means the shares describe a small part of the house; say it beside them.
-- Use the source labels returned by the tools; do not guess provider names. Link each event with its `event_url`.
-- Primary remaining is the share of the room still on sale at the box office. Never write "sold out".
+- A low `coverage_pct` means the shares describe a small part of the venue; say it beside them.
+- Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Link each event with its `event_url`.
+- Primary remaining is the share of the room still on sale on the primary market. Never write "sold out".
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

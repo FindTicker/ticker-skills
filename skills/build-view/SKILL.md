@@ -33,7 +33,7 @@ Read the values from the user's words ("hot events in Boston", "once a day", "do
    Done when you know the plan holds Views and there is no twin, or the user chose.
 
 2. **Build the predicate.**
-   - **A screen skill** (any installed skill with a `## The screen` table, such as `price-drop`): load that skill and take the leaves of its `## The screen` table as they are. For the two resale-against-primary screens, take the three leaves and the match leg. Change no threshold unless the user asks. A screen that reads the primary market needs Max: call `list_screen_columns` `{}` and, if `ea.tm_percent_remaining` or `ea.tm_lowest_aip_price_current` has `locked: true`, write "This screen reads the primary market, which the Max plan opens: https://findticker.com/plans." and stop.
+   - **A screen skill** (any installed skill with a `## The screen` table, such as `price-drop`): load that skill and take the leaves of its `## The screen` table as they are. For `resale-vs-face`, take its fixed leaves, its parameter leaves and the leaf of one direction. Change no threshold unless the user asks. A screen that reads the primary market needs Max: call `list_screen_columns` `{}` and, if `ea.tm_percent_remaining` or `ea.tm_lowest_aip_price_current` has `locked: true`, write "This screen reads the primary market, which the Max plan opens: https://findticker.com/plans." and stop.
    - **Anything else:** read the columns with `list_screen_columns` `{}` and pick from it, never from memory. Price drop: `ea.median_price_pct_1d` `<=` -10 (a one-day % change), or `ea.price_self_z_1d` `<=` -2 (unusual for this event's own swings). Listing collapse: `ea.listings_delta_7d` together with `ea.median_price_pct_7d`; never `ea.inventory_velocity_1d`, a one-day ratio. Scope: `e.sub_category_id` for a league or genre, `p.name` `contains` for a named act or team, `v.city` for a place, `ea.days_to_event` `between` for a window.
    Always keep the freshness leaf `{"col": "ea.last_price_snapshot_date", "op": ">=", "val": {"days_ago": 1}}`: a stale row is never a move.
    Done when you hold one predicate in the DSL (`{"all": [...]}`).
@@ -65,7 +65,7 @@ Read the values from the user's words ("hot events in Boston", "once a day", "do
 - Tell the user, in plain words: what the View catches (in the app's column words), how many events it would hold today with the `last_price_snapshot_date` of the test, how often it emails, and the `view_url`.
 - A Match is an event entering the View. Never report an alert as sent unless `list_matches` shows `delivery_status: "sent"`.
 - Call the emails "the hourly email" or "the daily email"; never "digest", which names another feature.
-- Use the source labels returned by the tools; do not guess provider names. Never write "sold".
+- Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold".
 - To remove a View, `delete_view` `{"view_id"}`.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 

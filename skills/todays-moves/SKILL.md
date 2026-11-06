@@ -46,7 +46,7 @@ What the account's own alerts caught: every event that entered one of its saved 
 - Quote each time as the tool gave it, in UTC.
 - An alert went out only when `delivery_status` is `sent`. Any other value (`not_sent`, `pending`, `held`) is a Match that did not reach the inbox yet or will not; say which.
 - A Match is an event entering a View, not a sale and not a price.
-- Link each event with its `event_url` and each View with its `view_url`. Use the source labels returned by the tools; do not guess provider names. Never write "sold".
+- Link each event with its `event_url` and each View with its `view_url`. Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold".
 - Call the emails "the hourly email" or "the daily email"; never "digest".
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 

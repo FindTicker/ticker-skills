@@ -39,9 +39,9 @@ Sort: Interest Δ7d, biggest rise first: `{"col": "ea.interest_d7", "dir": "desc
 
 1. **Check the plan** with `list_views` `{"limit": 1}`. `views_cap` 0 means the Free plan. On Free, start the answer with this sentence, exactly as written:
    ```text
-   Interest rising is a Pro skill: https://findticker.com/plans. Here is last-week squeeze, the closest skill on your plan.
+   Interest rising is a Pro skill: https://findticker.com/plans. Here is final-week demand, the closest skill on your plan.
    ```
-   Then load the `last-week-squeeze` skill and run it with this request's city, category and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
+   Then load the `final-week-demand` skill and run it with this request's city, category and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
    Done when you know the plan is Pro or higher, or you have handed over.
 
 2. **Read the parameters** from the user's words ("in Boston", "a price score of 3", "next two weeks", "top 10"); keep the default for the rest. Leave out the leaf of a parameter left at "every". A value outside its range: do not run; say the range and ask for a value inside it.
@@ -70,7 +70,7 @@ Sort: Interest Δ7d, biggest rise first: `{"col": "ea.interest_d7", "dir": "desc
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
 - A null score means that comparison is unavailable. Do not invent a score or interpret null as zero.
-- Use the source labels returned by the tools; do not guess provider names. Never write "sold" or "tickets sold".
+- Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold" or "tickets sold".
 - To get these events as alerts, the `build-view` skill saves this screen as a View.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 

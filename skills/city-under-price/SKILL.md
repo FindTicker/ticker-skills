@@ -1,6 +1,6 @@
 ---
 name: city-under-price
-description: "Events in one city on Ticker, in a date window, that a buyer can get into under a price, fees included. Use when the user asks what is on in a city this weekend or this month under a budget."
+description: "Events in one city on Ticker, in a date window, with a lowest resale price at or under a set price, fees included. Use when the user asks what is on in a city this weekend or this month at a price point."
 ---
 
 # City under a price
@@ -9,7 +9,7 @@ description: "Events in one city on Ticker, in a date window, that a buyer can g
 
 **Usual cost:** 1 request (one screener run).
 
-Every event in one city, inside a date window, whose cheapest resale ticket costs no more than the user's price with fees included. The cheapest ways in come first.
+Every event in one city, inside a date window, whose lowest resale price with fees is at or under the user's price. Lowest prices come first.
 
 ## Parameters
 
@@ -56,14 +56,14 @@ Fixed leaf, always in the screen: Priced as of, within a day: `{"col": "ea.last_
 
 - Quote each stamp as the tool gave it. Give the stamp, not an age: you do not know the current time.
 - Link each event with the `event_url` on its row; never search again to find it.
-- Lowest all-in is what a buyer pays at checkout with fees; say "all-in" beside it. The other prices are before fees.
+- Lowest all-in is the lowest listed price with fees; say "all-in" beside it. The other prices are before fees.
 - The results cover the server's eligible events, not every event in the city. Explain missing coverage without inventing a reason for a missing show.
-- Use the source labels returned by the tools; do not guess provider names. Never write "sold".
-- Only when the user asks for alerts, or for the box office's own prices, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and the primary market's prices start on the Max plan (https://findticker.com/plans). Do not offer either unasked.
+- Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold".
+- Only when the user asks for alerts, or for the primary market's own prices, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and the primary market's prices start on the Max plan (https://findticker.com/plans). Do not offer either unasked.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example
 
 User: "What can I see in Chicago in the next two weeks for under 40 bucks?"
 
-Values: city Chicago, Rosemont, Evanston; days to event 0 to 14; price cap $40. One screen. Answer: "Values: city Chicago, Rosemont, Evanston, days to event 0 to 14, price cap $40 all-in, category every category, rows 20. 38 events match." Then the table, cheapest first, then "Prices read 2026-09-29."
+Values: city Chicago, Rosemont, Evanston; days to event 0 to 14; price cap $40. One screen. Answer: "Values: city Chicago, Rosemont, Evanston, days to event 0 to 14, price cap $40 all-in, category every category, rows 20. 38 events match." Then the table, lowest price first, then "Prices read 2026-09-29."
