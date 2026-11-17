@@ -25,7 +25,7 @@ Read the values from the user's words ("the last week", "top 5 sections"); keep 
 
 1. **Check the plan** with `list_screen_columns` `{}`. If `ea.tm_lowest_aip_price_current` has `locked: true`, this account does not read the primary market: skip every primary field below, and in the answer write this sentence, exactly as written:
    ```text
-   The primary market's prices are read on the Max plan: https://findticker.com/plans.
+   The primary market's prices are read on the Max plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    Never guess a primary price and never take one from the web.
    Done when you know whether the plan reads the primary market.
@@ -73,4 +73,4 @@ Read the values from the user's words ("the last week", "top 5 sections"); keep 
 
 User: "How is Zach Bryan at Gillette priced right now?"
 
-`search_events` finds the event; the analytics read shows median $202, down 18.6% in 7 days (priced 2026-09-28), 4 days to go; the 28-day chart falls from $248; the lowest-priced sections are 139 and 141 at $76 resale. On Free the third line reads "The primary market's prices are read on the Max plan: https://findticker.com/plans." Answer: "The median resale price has fallen for a week, from $248 to $202. Sections 139 and 141 list from $76. Resale supply grew 9% over the week, with four days to the event."
+`search_events` finds the event; the analytics read shows median $202, down 18.6% in 7 days (priced 2026-09-28), 4 days to go; the 28-day chart falls from $248; the lowest-priced sections are 139 and 141 at $76 resale. On Free the third line reads "The primary market's prices are read on the Max plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill." Answer: "The median resale price has fallen for a week, from $248 to $202. Sections 139 and 141 list from $76. Resale supply grew 9% over the week, with four days to the event."

@@ -53,7 +53,7 @@ Every threshold of this skill is in this table.
 - An empty `onsale_date` means unknown, not "on sale now". Only about a third of events carry one.
 - The city screen sees only events Ticker already prices; an event not yet listed on resale can be missing. Say so once.
 - Link each event with its `event_url`. Name no marketplace, and quote no presale code or presale name.
-- The named presale windows of an event (their names and every window) are read on the Max plan: https://findticker.com/plans. Say so only when the user asks for them.
+- The named presale windows of an event (their names and every window) are read on the Max plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Say so only when the user asks for them.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

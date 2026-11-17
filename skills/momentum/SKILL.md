@@ -38,7 +38,7 @@ Sort: Price z (peer), highest first: `{"col": "ea.price_self_z_7d_xs_z_subcat_tt
 
 1. **Check the plan** with `list_views` `{"limit": 1}`. `views_cap` 0 means the Free plan. On Free, start the answer with this sentence, exactly as written:
    ```text
-   Momentum is a Pro skill: https://findticker.com/plans. Here is final-week demand, the closest skill on your plan.
+   Momentum is a Pro skill: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is final-week demand, the closest skill on your plan.
    ```
    Then load the `final-week-demand` skill and run it with this request's city, category and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
    Done when you know the plan is Pro or higher, or you have handed over.

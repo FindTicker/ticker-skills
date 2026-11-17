@@ -63,7 +63,7 @@ A fall steeper than 90% in a week is a data break (a week-old median in the thou
 - Link each event with the `event_url` on its row. Every row carries `event_id` and `event_url`; never search again to find them.
 - Prices are resale list prices before fees. Tickets is resale tickets on sale, not the primary market's stock.
 - Describe numbers by market (primary market or resale), not by source code, and do not guess provider names. Never write "sold" or "tickets sold": a ticket that left the market may have been withdrawn.
-- Only when the user asks for alerts on this screen, or for the primary market, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans). Then answer with what this screen gives. Do not offer either unasked.
+- Only when the user asks for alerts on this screen, or for the primary market, say in one sentence which plan opens it: saved Views that alert start on the Pro plan, and screens that read the primary market start on the Max plan (https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill). Then answer with what this screen gives. Do not offer either unasked.
 - Use "primary market" and "resale" in answers. Explain a plan requirement when it blocks the task; avoid unsolicited plan recommendations.
 
 ## Example

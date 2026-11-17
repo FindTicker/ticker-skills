@@ -40,7 +40,7 @@ Sort: Median %Δ7d, steepest fall first: `{"col": "ea.median_price_pct_7d", "dir
 
 1. **Check the plan** with `list_screen_columns` `{}`. The answer is long (over 200 columns); you need only the rows for `ea.tm_percent_remaining` and `ea.tm_asof_at`. If either has `locked: true`, or a later screen answers that one of them "is locked on your plan", the account's plan does not read the primary market. Start the answer with this sentence, exactly as written:
    ```text
-   Cooling reads the primary market, which the Max plan opens: https://findticker.com/plans. Here is price drop, the closest screen on your plan.
+   Cooling reads the primary market, which the Max plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is price drop, the closest screen on your plan.
    ```
    Then load the `price-drop` skill and run it with this request's city, category, days to event and rows (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to. Show no primary number: never guess one and never take one from the web.
    Done when you know the plan reads the primary market, or you have handed over to `price-drop`.

@@ -25,7 +25,7 @@ Every threshold of this skill is in this table.
 
 1. **Check the plan** with `list_screen_columns` `{}`. The answer is long (over 200 columns); you need only the row for `ea.tm_percent_remaining`. If it has `locked: true`, the account's plan does not read the primary market's seat map. Start the answer with this sentence, exactly as written:
    ```text
-   Seat map moves reads the primary market's seat map, which the Max plan opens: https://findticker.com/plans. Here is event check, the closest skill on your plan.
+   Seat map moves reads the primary market's seat map, which the Max plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is event check, the closest skill on your plan.
    ```
    Then load the `event-check` skill and run it on the same event (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to. Call no seat or live-section tool below Max.
    Done when you know the plan reads the primary market, or you have handed over.

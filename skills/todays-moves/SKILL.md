@@ -23,7 +23,7 @@ What the account's own alerts caught: every event that entered one of its saved 
 
 1. **Check the plan and read the Views** with `list_views`, alone, and wait for its answer before any other call: `{"limit": 100}`. `views_cap` 0 means the Free plan: start the answer with this sentence, exactly as written, and stop:
    ```text
-   Today's moves reads your saved Views and watched events, which start on the Pro plan: https://findticker.com/plans.
+   Today's moves reads your saved Views and watched events, which start on the Pro plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    That sentence is the whole answer: call no other tool.
    Otherwise note each View's `id` and `name`.
