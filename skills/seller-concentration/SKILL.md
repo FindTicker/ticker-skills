@@ -22,7 +22,7 @@ How much of one event's resale inventory the largest sellers hold, shown anonymo
 
 1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
-   Seller concentration is read on the Ultra plan: https://findticker.com/plans.
+   Seller concentration is read on the Ultra plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    That sentence is the whole answer: call no other tool.
    Done when you know the plan is Ultra, or you have written the sentence.

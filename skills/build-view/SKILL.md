@@ -26,14 +26,14 @@ Read the values from the user's words ("hot events in Boston", "once a day", "do
 
 1. **Check the plan and look for a twin** with `list_views`, alone, and wait for its answer before any other call: `{"limit": 100}`. `views_cap` 0 means the Free plan: write this sentence, exactly as written, and stop:
    ```text
-   Saved Views start on the Pro plan: https://findticker.com/plans.
+   Saved Views start on the Pro plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    That sentence is the whole answer: call no other tool.
    When `counts.all` already equals `views_cap`, tell the user the plan's Views are all in use before you create one. A View with the same aim or the same predicate already exists: offer `update_view` on it instead of a second one, and stop there unless the user wants both.
    Done when you know the plan holds Views and there is no twin, or the user chose.
 
 2. **Build the predicate.**
-   - **A screen skill** (any installed skill with a `## The screen` table, such as `price-drop`): load that skill and take the leaves of its `## The screen` table as they are. For `resale-vs-face`, take its fixed leaves, its parameter leaves and the leaf of one direction. Change no threshold unless the user asks. A screen that reads the primary market needs Max: call `list_screen_columns` `{}` and, if `ea.tm_percent_remaining` or `ea.tm_lowest_aip_price_current` has `locked: true`, write "This screen reads the primary market, which the Max plan opens: https://findticker.com/plans." and stop.
+   - **A screen skill** (any installed skill with a `## The screen` table, such as `price-drop`): load that skill and take the leaves of its `## The screen` table as they are. For `resale-vs-face`, take its fixed leaves, its parameter leaves and the leaf of one direction. Change no threshold unless the user asks. A screen that reads the primary market needs Max: call `list_screen_columns` `{}` and, if `ea.tm_percent_remaining` or `ea.tm_lowest_aip_price_current` has `locked: true`, write "This screen reads the primary market, which the Max plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill." and stop.
    - **Anything else:** read the columns with `list_screen_columns` `{}` and pick from it, never from memory. Price drop: `ea.median_price_pct_1d` `<=` -10 (a one-day % change), or `ea.price_self_z_1d` `<=` -2 (unusual for this event's own swings). Listing collapse: `ea.listings_delta_7d` together with `ea.median_price_pct_7d`; never `ea.inventory_velocity_1d`, a one-day ratio. Scope: `e.sub_category_id` for a league or genre, `p.name` `contains` for a named act or team, `v.city` for a place, `ea.days_to_event` `between` for a window.
    Always keep the freshness leaf `{"col": "ea.last_price_snapshot_date", "op": ">=", "val": {"days_ago": 1}}`: a stale row is never a move.
    Done when you hold one predicate in the DSL (`{"all": [...]}`).

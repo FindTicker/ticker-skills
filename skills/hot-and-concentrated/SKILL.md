@@ -23,7 +23,7 @@ The hot-events screen (median rising, little left on the primary market, resale 
 
 1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written:
    ```text
-   Hot and concentrated reads seller concentration, which the Ultra plan opens: https://findticker.com/plans. Here is hot events, the closest skill on your plan.
+   Hot and concentrated reads seller concentration, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is hot events, the closest skill on your plan.
    ```
    Then load the `hot-events` skill and run it with this request's parameters (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
    Done when you know the plan is Ultra, or you have written the sentence.

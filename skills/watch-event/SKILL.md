@@ -42,7 +42,7 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
 
 4. **Check the watchlist and the plan.** Call `list_watchlist` `{"search": "<event name>"}`: if the event is already watched, `watch_event` changes that watch, and only the triggers you pass change. Then call `list_views` `{"limit": 1}`: `views_cap` 0 means the Free plan. On Free, write this sentence, exactly as written, before you write the watch:
    ```text
-   On the Free plan one watched event alerts at a time, and a new watch takes that slot; the Pro plan keeps 25: https://findticker.com/plans.
+   On the Free plan one watched event alerts at a time, and a new watch takes that slot; the Pro plan keeps 25: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    Done when you know whether the event is watched already, and the plan's rule is said.
 

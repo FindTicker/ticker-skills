@@ -35,7 +35,7 @@ Read both from the user's words. With no event, answer from the reference alone 
 
 ## Reference
 
-**Sources and plans.** Ticker reports primary-market and resale readings separately. Describe each reading by market (primary market or resale) and price basis, not by source code. Available sources and history depend on the account's plan: https://findticker.com/plans. A plan restriction is not missing data. Respect `plan_required`, locked-field and withheld-field responses; do not infer coverage from an empty result.
+**Sources and plans.** Ticker reports primary-market and resale readings separately. Describe each reading by market (primary market or resale) and price basis, not by source code. Available sources and history depend on the account's plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. A plan restriction is not missing data. Respect `plan_required`, locked-field and withheld-field responses; do not infer coverage from an empty result.
 
 **Stamps.** Freshness varies by event and reading. Quote the observation timestamp; do not assume a collection cadence.
 

@@ -1,6 +1,6 @@
 # Ticker skills
 
-Research events, follow ticket prices and demand, and read the resale market with the [Ticker](https://findticker.com) tools: price trends, tour dates side by side, resale vs face value, demand signals and listed inventory.
+Research events, follow ticket prices and demand, and read the resale market with the [Ticker](https://findticker.com/?utm_source=github&utm_medium=readme) tools: price trends, tour dates side by side, resale vs face value, demand signals and listed inventory.
 
 Each skill is a folder with a `SKILL.md` in the [Agent Skills](https://agentskills.io) format. Install the skills you want, or all 23. The Ticker tools enforce your account's plan and permissions.
 
@@ -62,7 +62,7 @@ This installs the skills and Ticker MCP connection. Run `/mcp` to sign in. Skill
 
 ### Claude
 
-Follow the [Claude setup guide](https://findticker.com/docs/mcp/claude) to connect Ticker. For plugin installation, add `FindTicker/ticker-skills` as a marketplace in your app's plugin settings where supported, then install `ticker` and connect your account.
+Follow the [Claude setup guide](https://findticker.com/docs/mcp/claude?utm_source=github&utm_medium=readme) to connect Ticker. For plugin installation, add `FindTicker/ticker-skills` as a marketplace in your app's plugin settings where supported, then install `ticker` and connect your account.
 
 ### Codex, Cursor, GitHub Copilot, Gemini CLI and other compatible apps
 
@@ -74,9 +74,9 @@ Choose the skills and apps in the installer, then add the Ticker MCP server in y
 
 ### ChatGPT
 
-Connect Ticker using the [ChatGPT setup guide](https://findticker.com/docs/mcp/chatgpt). Ticker's tools work through the connection; these skill files require a client that supports Agent Skills.
+Connect Ticker using the [ChatGPT setup guide](https://findticker.com/docs/mcp/chatgpt?utm_source=github&utm_medium=readme). Ticker's tools work through the connection; these skill files require a client that supports Agent Skills.
 
-[Connection and installation guides](https://findticker.com/docs/skills) cover the supported apps.
+[Connection and installation guides](https://findticker.com/docs/skills?utm_source=github&utm_medium=readme) cover the supported apps.
 
 ## Reading the results
 

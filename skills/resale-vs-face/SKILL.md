@@ -42,7 +42,7 @@ Sort: soonest event first, `{"col": "ea.days_to_event", "dir": "asc"}`. The list
 
 1. **Check the plan** with `list_screen_columns` `{}`. The answer is long (over 200 columns); you need only the rows for `ea.resale_to_primary_aip_ratio`, `ea.tm_lowest_aip_price_current` and `ea.tm_asof_at`. If any has `locked: true`, or a later screen answers that one of them "is locked on your plan", the account's plan does not read the primary market. Start the answer with this sentence, exactly as written, and stop:
    ```text
-   Resale vs face compares resale with face value on the primary market, which the Max plan opens: https://findticker.com/plans. No screen on your plan makes this comparison.
+   Resale vs face compares resale with face value on the primary market, which the Max plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. No screen on your plan makes this comparison.
    ```
    That sentence is the whole answer: call no other tool, and show no primary number.
    Done when you know the plan reads the primary market, or you have written the sentence and stopped.
