@@ -10,7 +10,7 @@
       "name": "ticker",
       "source": "./",
       "description": "Research events, follow ticket prices and demand, and read the resale market with Ticker. Tool access follows your account plan.",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "homepage": "https://findticker.com",
       "skills": [
         "./skills/city-under-price",

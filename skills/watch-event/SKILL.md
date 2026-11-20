@@ -5,11 +5,11 @@ description: "Watch an event on Ticker with the alert the user wants: star it, a
 
 # Watch an event
 
-**Plan:** Pro
+**Plan:** Max
 
 **Usual cost:** 4 requests: search, watchlist, plan check, the watch.
 
-Watched events and saved Views share one allowance: Free 1, Pro 25, Max 100, Ultra no cap. A plan over its allowance still stars the event, but only its newest watches alert; the result says which ones stopped. On Free the one slot goes to the newest star.
+Watched events and saved Views share one allowance: Free 1, Max 100, Ultra no cap. A plan over its allowance still stars the event, but only its newest watches alert; the result says which ones stopped. On Free the one slot goes to the newest star.
 
 ## Parameters
 
@@ -42,7 +42,7 @@ Read the values from the user's words ("15 percent", "the median", "over a week"
 
 4. **Check the watchlist and the plan.** Call `list_watchlist` `{"search": "<event name>"}`: if the event is already watched, `watch_event` changes that watch, and only the triggers you pass change. Then call `list_views` `{"limit": 1}`: `views_cap` 0 means the Free plan. On Free, write this sentence, exactly as written, before you write the watch:
    ```text
-   On the Free plan one watched event alerts at a time, and a new watch takes that slot; the Pro plan keeps 25: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
+   On the Free plan one watched event alerts at a time, and a new watch takes that slot; the Max plan keeps 100: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
    Done when you know whether the event is watched already, and the plan's rule is said.
 

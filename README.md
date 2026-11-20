@@ -14,12 +14,12 @@ Each skill is a folder with a `SKILL.md` in the [Agent Skills](https://agentskil
 | Free | `numbers` | Understand Ticker's readings: price bases, observation times, and what taken, absorbed and Gone mean |
 | Free | `price-drop` | Price-drop screen on Ticker: events whose median price fell over the week while resale tickets pile up |
 | Free | `sale-calendar` | On-sale and presale calendar on Ticker for one city or one act: the upcoming on-sale and presale dates in the coming days |
-| Pro | `build-view` | Build a saved View on Ticker that alerts when events enter a screen, tested on today's market, at the right cadence |
-| Pro | `interest-rising` | Interest rising on Ticker: events where shopper attention grew over the week and again today |
-| Pro | `momentum` | Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before |
-| Pro | `todays-moves` | Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick |
-| Pro | `tour-dates` | Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour |
-| Pro | `watch-event` | Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go |
+| Max | `build-view` | Build a saved View on Ticker that alerts when events enter a screen, tested on today's market, at the right cadence |
+| Max | `interest-rising` | Interest rising on Ticker: events where shopper attention grew over the week and again today |
+| Max | `momentum` | Momentum screen on Ticker: events whose weekly price move is unusual next to their peers while tickets leave faster than before |
+| Max | `todays-moves` | Today's moves on Ticker: which events entered your saved Views and which watched events fired, since a time you pick |
+| Max | `tour-dates` | Two dates of one tour side by side on Ticker: price, trend, supply and how each moves against the rest of the tour |
+| Max | `watch-event` | Watch an event on Ticker with the alert the user wants: star it, arm triggers at the right thresholds, say where alerts go |
 | Max | `cooling` | Cooling events on Ticker: median price falling, resale tickets growing, the primary market still holding most of the room |
 | Max | `hot-events` | Hot events on Ticker: median price rising, little left on the primary market, resale tickets falling |
 | Max | `resale-vs-face` | Resale vs face value on Ticker: how the lowest resale price of each event compares with face value on the primary market, above or below, as price context |
