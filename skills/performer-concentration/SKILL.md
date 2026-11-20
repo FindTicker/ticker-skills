@@ -21,7 +21,7 @@ For one act, the seller concentration of each upcoming date side by side: how ma
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Concentration across an act reads seller concentration, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
@@ -53,4 +53,4 @@ For one act, the seller concentration of each upcoming date side by side: how ma
 
 User: "Across Usher and Chris Brown's next shows, where do a few sellers hold most of the tickets?"
 
-`list_views` shows no cap; one search finds the dates; four concentration reads. Answer: "Values: act Usher and Chris Brown, dates 4, days to event 0 to 365." Then the table, and "Most concentrated: Columbia, 2026-10-29 (largest seller 35%, three 70%). Most spread: Indianapolis, 2026-10-31."
+`list_views` shows a cap of 500; one search finds the dates; four concentration reads. Answer: "Values: act Usher and Chris Brown, dates 4, days to event 0 to 365." Then the table, and "Most concentrated: Columbia, 2026-10-29 (largest seller 35%, three 70%). Most spread: Indianapolis, 2026-10-31."

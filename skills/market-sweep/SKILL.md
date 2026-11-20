@@ -24,7 +24,7 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan: start the answer with this sentence, exactly as written:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan: start the answer with this sentence, exactly as written:
    ```text
    Market sweep runs seven screens in one answer, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is hot events, the closest skill on your plan.
    ```
@@ -55,4 +55,4 @@ Each screen runs with its own skill's defaults. The thresholds live in those ski
 
 User: "Give me the full read of the market today."
 
-`list_views` shows no cap; seven screens. Answer: "Values: city every city, category every category, rows per screen 25, rows 20." Then the seven counts, then "Flagged by three heat screens: Steelers at Browns (hot events, sold through and rising, final-week demand)." and the rest of the table.
+`list_views` shows a cap of 500; seven screens. Answer: "Values: city every city, category every category, rows per screen 25, rows 20." Then the seven counts, then "Flagged by three heat screens: Steelers at Browns (hot events, sold through and rising, final-week demand)." and the rest of the table.

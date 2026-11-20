@@ -20,7 +20,7 @@ For each event on the account's watchlist, soonest first, how concentrated its r
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Watchlist sellers reads seller concentration, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
@@ -52,4 +52,4 @@ For each event on the account's watchlist, soonest first, how concentrated its r
 
 User: "Which events I'm watching have the most concentrated resale listings?"
 
-`list_views` shows no cap; the watchlist holds 5 upcoming events; five concentration reads. Answer: "Values: events 8, dominated at 50%." Then the table, and "2 of your 5 watched events meet the concentration threshold."
+`list_views` shows a cap of 500; the watchlist holds 5 upcoming events; five concentration reads. Answer: "Values: events 8, dominated at 50%." Then the table, and "2 of your 5 watched events meet the concentration threshold."

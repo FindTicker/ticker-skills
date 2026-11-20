@@ -5,7 +5,7 @@ description: "Two dates of one tour side by side on Ticker: price, trend, supply
 
 # Two tour dates
 
-**Plan:** Pro
+**Plan:** Max
 
 **Usual cost:** 6 requests: the plan check, one search, two analytics reads, two charts.
 
@@ -23,10 +23,10 @@ Two dates of one act, side by side: what each costs, where each price is going, 
 
 1. **Check the plan** with `list_views` `{"limit": 1}`. `views_cap` 0 means the Free plan. On Free, start the answer with this sentence, exactly as written:
    ```text
-   Two tour dates is a Pro skill: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is event check, the closest skill on your plan.
+   Two tour dates is a Max skill: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is event check, the closest skill on your plan.
    ```
    Then load the `event-check` skill and run it on the first of the two dates (if it is not installed, stop here). The plan sentence stays the first line of the whole answer, above the values line of the skill you hand over to.
-   Done when you know the plan is Pro or higher, or you have handed over.
+   Done when you know the plan is Max or higher, or you have handed over.
 
 2. **Read the parameters** from the user's words ("Boston and Philly", "the two Chicago nights", "over 90 days"); keep the default for the rest. A value outside its range: do not run; say the range ("History takes 7 to 90 days.") and ask for a value inside it.
    Done when you hold the act, two dates or cities, and the history.
