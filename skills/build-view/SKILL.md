@@ -9,7 +9,7 @@ description: "Build a saved View on Ticker that alerts when events enter a scree
 
 **Usual cost:** 4 requests: the Views list, one test screen, the create, the preview. `list_screen_columns` is free.
 
-A View is a saved screen that runs on a schedule. A Match is one event entering it. When a View is created it records what it already holds as baseline Matches, which are never alerted: alerts start with the next market change. Saved Views and watched events share one allowance: Free 0 Views, Max 100, Ultra no cap. A View with a primary-market leaf (`ea.tm_*`) needs Max.
+A View is a saved screen that runs on a schedule. A Match is one event entering it. When a View is created it records what it already holds as baseline Matches, which are never alerted: alerts start with the next market change. Saved Views and watched events share one allowance: Free 0 Views, Max 100, Ultra 500. A View with a primary-market leaf (`ea.tm_*`) needs Max.
 
 ## Parameters
 

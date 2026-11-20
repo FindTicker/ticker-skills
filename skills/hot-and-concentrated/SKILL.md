@@ -21,7 +21,7 @@ The hot-events screen (median rising, little left on the primary market, resale 
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written:
    ```text
    Hot and concentrated reads seller concentration, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill. Here is hot events, the closest skill on your plan.
    ```
@@ -54,4 +54,4 @@ The hot-events screen (median rising, little left on the primary market, resale 
 
 User: "Which events with rising prices have concentrated resale listings?"
 
-`list_views` shows no cap; the hot-events screen returns 230 matches; six concentration reads. Answer: "Values: city every city, category every category, days to event 0 to 365, median rise 10%, primary remaining under 10%, events checked 6, dominated at 50%." Then the table with two events above the concentration threshold.
+`list_views` shows a cap of 500; the hot-events screen returns 230 matches; six concentration reads. Answer: "Values: city every city, category every category, days to event 0 to 365, median rise 10%, primary remaining under 10%, events checked 6, dominated at 50%." Then the table with two events above the concentration threshold.

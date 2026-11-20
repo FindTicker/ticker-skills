@@ -21,7 +21,7 @@ For one event, compare the resale ticket counts attributed to each seller at the
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Seller moves reads seller concentration, which the Ultra plan opens: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
@@ -53,4 +53,4 @@ For one event, compare the resale ticket counts attributed to each seller at the
 
 User: "How have resale listings changed by seller for Zach Bryan at Gillette this week?"
 
-`list_views` shows no cap; one search; the 168-hour series. Answer: "Values: event Zach Bryan, Gillette Stadium, 2026-10-02, window 168 hours, sellers shown 5. Sellers went from 82 to 66 and attributed tickets from 17,440 to 18,523. Largest decreases: Seller J -671 (peak 10,667), Seller B -410, Seller A -234. Largest increase: Seller L +652."
+`list_views` shows a cap of 500; one search; the 168-hour series. Answer: "Values: event Zach Bryan, Gillette Stadium, 2026-10-02, window 168 hours, sellers shown 5. Sellers went from 82 to 66 and attributed tickets from 17,440 to 18,523. Largest decreases: Seller J -671 (peak 10,667), Seller B -410, Seller A -234. Largest increase: Seller L +652."

@@ -20,7 +20,7 @@ How much of one event's resale inventory the largest sellers hold, shown anonymo
 
 ## Steps
 
-1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` null means no cap: the Ultra plan. A number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
+1. **Check the plan first**, before any other tool, with `list_views` `{"limit": 1}`. `views_cap` 500 or more, or null, means the Ultra plan. A lower number means a lower plan. Treat a plan_required or locked response as a plan restriction. A null reading alone does not establish a plan restriction. Below Ultra, start the answer with this sentence, exactly as written, and stop:
    ```text
    Seller concentration is read on the Ultra plan: https://findticker.com/plans?utm_source=ticker_skills&utm_medium=skill.
    ```
@@ -55,4 +55,4 @@ How much of one event's resale inventory the largest sellers hold, shown anonymo
 
 User: "How concentrated are the resale listings for Arsenal v Hull?"
 
-`list_views` shows no cap; `search_events` finds the match; the concentration reads 17 sellers on 9,512 tickets, the largest at 69% and the largest three at 93%, shape dominated, coverage 99.9%. Answer: "Values: event Arsenal vs Hull City, Emirates Stadium, 2026-11-07, window 48 hours. One seller accounts for 69% of the attributed resale listings and three account for 93%. Seller D is the large one, with 6,551 tickets at 22:00 UTC."
+`list_views` shows a cap of 500; `search_events` finds the match; the concentration reads 17 sellers on 9,512 tickets, the largest at 69% and the largest three at 93%, shape dominated, coverage 99.9%. Answer: "Values: event Arsenal vs Hull City, Emirates Stadium, 2026-11-07, window 48 hours. One seller accounts for 69% of the attributed resale listings and three account for 93%. Seller D is the large one, with 6,551 tickets at 22:00 UTC."

@@ -9,7 +9,7 @@ description: "Watch an event on Ticker with the alert the user wants: star it, a
 
 **Usual cost:** 4 requests: search, watchlist, plan check, the watch.
 
-Watched events and saved Views share one allowance: Free 1, Max 100, Ultra no cap. A plan over its allowance still stars the event, but only its newest watches alert; the result says which ones stopped. On Free the one slot goes to the newest star.
+Watched events and saved Views share one allowance: Free 1, Max 100, Ultra 500. A plan over its allowance still stars the event, but only its newest watches alert; the result says which ones stopped. On Free the one slot goes to the newest star.
 
 ## Parameters
 
